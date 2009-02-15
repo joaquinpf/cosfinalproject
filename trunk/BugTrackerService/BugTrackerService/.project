@@ -3,6 +3,7 @@
 	<name>BugTrackerService</name>
 	<comment></comment>
 	<projects>
+		<project>CommonLibs</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
