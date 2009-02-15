@@ -1,0 +1,9 @@
+#Sat Dec 27 17:50:36 GST 2008
+eclipse.preferences.version=1
+encoding//src/wsbugtracker/Bug.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerService.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerServiceBindingImpl.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerServiceBindingSkeleton.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerServiceBindingStub.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerServiceFull.java=UTF-8
+encoding//src/wsbugtracker/BugTrackerServiceFullLocator.java=UTF-8
