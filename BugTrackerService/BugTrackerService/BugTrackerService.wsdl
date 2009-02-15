@@ -176,7 +176,7 @@
 
 	<wsdl:service name="BugTrackerServiceFull">
 		<wsdl:port binding="impl:BugTrackerServiceBinding" name="BugTrackerService">
-			<soap:address location="http://localhost:8080/WebServiceProject/services/BugTrackerService"/>
+			<soap:address location="http://localhost:8080/BugTrackerWSProject/services/BugTrackerService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
