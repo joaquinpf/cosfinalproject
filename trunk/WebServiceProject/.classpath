@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v5.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CommonLibs"/>
+	<classpathentry kind="lib" path="/CommonLibs/aopalliance.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/axis.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-beanutils-bean-collections.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-beanutils-core.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-jci-core-1.0.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-logging-adapters-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/commons-logging-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/soap.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-aop.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-context-support.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-context.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-core.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/spring-web.jar"/>
+	<classpathentry kind="lib" path="/CommonLibs/wsdl4j.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
