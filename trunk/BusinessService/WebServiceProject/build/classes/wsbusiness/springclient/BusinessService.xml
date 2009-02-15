@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="app" class="wsbusiness.springclient.BusinessServiceClient">
+    	<property name="wsbusiness"><ref local="service"/></property>
+   	</bean>
+
+	<bean id="service" class="wsbusiness.springclient.MyJaxRpcPortProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface">
+            <value>wsbusiness.springclient.BusinessServiceIF</value>
+        </property>
+        <property name="wsdlDocumentUrl">
+            <value>http://localhost:8080/WebServiceProject/services/BusinessService?wsdl</value>
+        </property>
+        <property name="namespaceUri">
+            <value>http://wsbusiness</value>
+        </property>
+        <property name="serviceName">
+            <value>BusinessServiceFull</value>
+        </property>
+        <property name="portName">
+            <value>BusinessService</value>
+        </property>
+    </bean>	
+
+</beans>
