@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:impl="http://wsbugtracker" xmlns:intf="http://wsbugtracker" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://wsbugtracker">
+	
+    <wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="http://wsbugtracker">
+			
+		<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+		<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+		
+			<element name="submitBug">
+				<complexType>
+					<sequence>
+						<element name="description" type="xsd:string"/>
+						<element name="type" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="submitBugResponse">
+				<complexType>
+					<sequence>
+						<element name="submitBugReturn" type="impl:Bug"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="Bug">
+				<sequence>
+					<element name="description" type="xsd:string"/>
+					<element name="type" type="xsd:string"/>
+					<element name="number" type="xsd:int"/>
+				</sequence>
+			</complexType>
+			
+			<element name="closeBug">
+				<complexType>
+					<sequence>
+						<element name="number" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="closeBugResponse">
+				<complexType>
+					<sequence>
+						<element name="closeBugReturn" type="impl:Bug"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getBug">
+				<complexType>
+					<sequence>
+						<element name="number" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getBugResponse">
+				<complexType>
+					<sequence>
+						<element name="getBugReturn" type="impl:Bug"/>
+					</sequence>
+				</complexType>
+			</element>
+		
+			<element name="getBugsByType">
+				<complexType>
+					<sequence>
+						<element name="type" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getBugsByTypeResponse">
+				<complexType>
+					<sequence>
+						<element name="getBugsByTypeReturn" type="impl:ArrayOfInt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="ArrayOfInt">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="int[]"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+		</schema>
+	</wsdl:types>
+	
+	<wsdl:message name="submitBugRequest">
+		<wsdl:part element="impl:submitBug" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="submitBugResponse">
+		<wsdl:part element="impl:submitBugResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="closeBugRequest">
+		<wsdl:part element="impl:closeBug" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="closeBugResponse">
+		<wsdl:part element="impl:closeBugResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getBugRequest">
+		<wsdl:part element="impl:getBug" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getBugResponse">
+		<wsdl:part element="impl:getBugResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getBugsByTypeRequest">
+		<wsdl:part element="impl:getBugsByType" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getBugsByTypeResponse">
+		<wsdl:part element="impl:getBugsByTypeResponse" name="parameters"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="BugTrackerService">
+		<wsdl:operation name="submitBug">
+			<wsdl:input message="impl:submitBugRequest" name="submitBugRequest"/>
+			<wsdl:output message="impl:submitBugResponse" name="submitBugResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="closeBug">
+			<wsdl:input message="impl:closeBugRequest" name="closeBugRequest"/>
+			<wsdl:output message="impl:closeBugResponse" name="closeBugResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getBug">
+			<wsdl:input message="impl:getBugRequest" name="getBugRequest"/>
+			<wsdl:output message="impl:getBugResponse" name="getBugResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getBugsByType">
+			<wsdl:input message="impl:getBugsByTypeRequest" name="getBugsByTypeRequest"/>
+			<wsdl:output message="impl:getBugsByTypeResponse" name="getBugsByTypeResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="BugTrackerServiceBinding" type="impl:BugTrackerService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="submitBug">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="submitBugRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="submitBugResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="closeBug">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="closeBugRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="closeBugResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBug">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getBugRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getBugResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBugsByType">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getBugsByTypeRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getBugsByTypeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="BugTrackerServiceFull">
+		<wsdl:port binding="impl:BugTrackerServiceBinding" name="BugTrackerService">
+			<soap:address location="http://localhost:8080/WebServiceProject/services/BugTrackerService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
