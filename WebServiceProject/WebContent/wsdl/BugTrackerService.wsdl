@@ -26,7 +26,9 @@
 				<sequence>
 					<element name="description" type="xsd:string"/>
 					<element name="type" type="xsd:string"/>
+					<element name="owner" type="xsd:string"/>
 					<element name="number" type="xsd:int"/>
+					<element name="project" type="xsd:int"/>
 				</sequence>
 			</complexType>
 			
@@ -59,7 +61,21 @@
 					</sequence>
 				</complexType>
 			</element>
-		
+			
+			<element name="getBugsByProject">
+				<complexType>
+					<sequence>
+						<element name="project" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getBugsByProjectResponse">
+				<complexType>
+					<sequence>
+						<element name="getBugsByTypeReturn" type="impl:ArrayOfInt"/>
+					</sequence>
+				</complexType>
+			</element>
 			<element name="getBugsByType">
 				<complexType>
 					<sequence>
@@ -80,6 +96,28 @@
 						<attribute ref="soapenc:arrayType" wsdl:arrayType="int[]"/>
 					</restriction>
 				</complexContent>
+			</complexType>
+			
+			<element name="addUser">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addUserResponse">
+				<complexType>
+					<sequence>
+						<element name="addUserReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<complexType name="Auth">
+				<sequence>
+					<element name="username" type="xsd:string"/>
+					<element name="pass" type="xsd:string"/>
+				</sequence>
 			</complexType>
 		</schema>
 	</wsdl:types>
@@ -108,6 +146,18 @@
 	<wsdl:message name="getBugsByTypeResponse">
 		<wsdl:part element="impl:getBugsByTypeResponse" name="parameters"/>
 	</wsdl:message>
+	<wsdl:message name="getBugsByProjectRequest">
+		<wsdl:part element="impl:getBugsByProject" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getBugsByProjectResponse">
+		<wsdl:part element="impl:getBugsByProjectResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserRequest">
+		<wsdl:part element="impl:addUser" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserResponse">
+		<wsdl:part element="impl:addUserResponse" name="parameters"/>
+	</wsdl:message>
 	
 	<wsdl:portType name="BugTrackerService">
 		<wsdl:operation name="submitBug">
@@ -125,6 +175,14 @@
 		<wsdl:operation name="getBugsByType">
 			<wsdl:input message="impl:getBugsByTypeRequest" name="getBugsByTypeRequest"/>
 			<wsdl:output message="impl:getBugsByTypeResponse" name="getBugsByTypeResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getBugsByProject">
+			<wsdl:input message="impl:getBugsByProjectRequest" name="getBugsByProjectRequest"/>
+			<wsdl:output message="impl:getBugsByProjectResponse" name="getBugsByProjectResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addUser">
+			<wsdl:input message="impl:addUserRequest" name="addUserRequest"/>
+			<wsdl:output message="impl:addUserResponse" name="addUserResponse"/>
 		</wsdl:operation>
 	</wsdl:portType>
 
@@ -163,6 +221,24 @@
 				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output name="getBugsByTypeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBugsByProject">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getBugsByProjectRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getBugsByProjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="addUserRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addUserResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>

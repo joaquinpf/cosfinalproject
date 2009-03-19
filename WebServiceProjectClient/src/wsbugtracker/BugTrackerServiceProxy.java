@@ -68,5 +68,17 @@ public class BugTrackerServiceProxy implements wsbugtracker.BugTrackerService {
     return bugTrackerService.getBugsByType(type);
   }
   
+  public int addUser(wsbugtracker.Auth user) throws java.rmi.RemoteException{
+    if (bugTrackerService == null)
+      _initBugTrackerServiceProxy();
+    return bugTrackerService.addUser(user);
+  }
+  
+  public int[] getBugsByProject(java.lang.String project) throws java.rmi.RemoteException{
+    if (bugTrackerService == null)
+      _initBugTrackerServiceProxy();
+    return bugTrackerService.getBugsByProject(project);
+  }
+  
   
 }
