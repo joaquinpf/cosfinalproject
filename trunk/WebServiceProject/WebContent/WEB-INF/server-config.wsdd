@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -24,11 +24,11 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:service name="BusinessService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="BusinessService"/>
-  <ns1:parameter name="className" value="wsbusiness.BusinessServiceBindingSkeleton"/>
-  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://wsbusiness"/>
+  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
+  <ns1:parameter name="className" value="wsbusiness.BusinessServiceBindingSkeleton"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://wsbusiness"/>
   <ns1:parameter name="wsdlServiceElement" value="BusinessServiceFull"/>
   <ns2:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns1:ArrayOfString" xmlns:ns1="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
@@ -42,19 +42,32 @@
  </ns1:service>
  <ns1:service name="BugTrackerService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="wsdlPortType" value="BugTrackerService"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://wsbugtracker"/>
-  <ns1:parameter name="wsdlServicePort" value="BugTrackerService"/>
+  <ns1:parameter name="wsdlPortType" value="BugTrackerService"/>
   <ns1:parameter name="className" value="wsbugtracker.BugTrackerServiceBindingSkeleton"/>
+  <ns1:parameter name="wsdlServicePort" value="BugTrackerService"/>
+  <ns1:parameter name="schemaQualified" value="http://wsbugtracker"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://wsbugtracker"/>
   <ns1:parameter name="wsdlServiceElement" value="BugTrackerServiceFull"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:Bug" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wsbugtracker.Bug" xmlns:ns3="http://wsbugtracker"/>
-  <ns1:arrayMapping innerType="xsd:int" languageSpecificType="java:int[]" qname="ns4:ArrayOfInt" xmlns:ns4="http://wsbugtracker" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:Auth" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wsbugtracker.Auth" xmlns:ns3="http://wsbugtracker"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns4:Bug" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wsbugtracker.Bug" xmlns:ns4="http://wsbugtracker"/>
+  <ns1:arrayMapping innerType="xsd:int" languageSpecificType="java:int[]" qname="ns5:ArrayOfInt" xmlns:ns5="http://wsbugtracker" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
  </ns1:service>
  <ns1:service name="Version" provider="java:RPC">
   <ns1:parameter name="allowedMethods" value="getVersion"/>
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="ProjectTeamService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:parameter name="allowedMethods" value="*"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="ProjectTeamService"/>
+  <ns1:parameter name="className" value="wsprojectteam.ProjectTeamServiceBindingSkeleton"/>
+  <ns1:parameter name="wsdlServicePort" value="ProjectTeamService"/>
+  <ns1:parameter name="schemaQualified" value="http://wsprojectteam"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://wsprojectteam"/>
+  <ns1:parameter name="wsdlServiceElement" value="ProjectTeamServiceFull"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns6:Auth" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wsprojectteam.Auth" xmlns:ns6="http://wsprojectteam"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns7:ArrayOfString" xmlns:ns7="http://wsprojectteam" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

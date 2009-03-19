@@ -12,4 +12,6 @@ public interface BugTrackerService extends java.rmi.Remote {
     public wsbugtracker.Bug closeBug(int number) throws java.rmi.RemoteException;
     public wsbugtracker.Bug getBug(int number) throws java.rmi.RemoteException;
     public int[] getBugsByType(java.lang.String type) throws java.rmi.RemoteException;
+    public int[] getBugsByProject(java.lang.String project) throws java.rmi.RemoteException;
+    public int addUser(wsbugtracker.Auth user) throws java.rmi.RemoteException;
 }

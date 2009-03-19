@@ -1,59 +1,59 @@
 /**
- * BugTrackerServiceFullLocator.java
+ * ProjectTeamServiceFullLocator.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package wsbugtracker;
+package wsprojectteam;
 
-public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service implements wsbugtracker.BugTrackerServiceFull {
+public class ProjectTeamServiceFullLocator extends org.apache.axis.client.Service implements wsprojectteam.ProjectTeamServiceFull {
 
-    public BugTrackerServiceFullLocator() {
+    public ProjectTeamServiceFullLocator() {
     }
 
 
-    public BugTrackerServiceFullLocator(org.apache.axis.EngineConfiguration config) {
+    public ProjectTeamServiceFullLocator(org.apache.axis.EngineConfiguration config) {
         super(config);
     }
 
-    public BugTrackerServiceFullLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
+    public ProjectTeamServiceFullLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
         super(wsdlLoc, sName);
     }
 
-    // Use to get a proxy class for BugTrackerService
-    private java.lang.String BugTrackerService_address = "http://localhost:8080/WebServiceProject/services/BugTrackerService";
+    // Use to get a proxy class for ProjectTeamService
+    private java.lang.String ProjectTeamService_address = "http://localhost:8080/WebServiceProject/services/ProjectTeamService";
 
-    public java.lang.String getBugTrackerServiceAddress() {
-        return BugTrackerService_address;
+    public java.lang.String getProjectTeamServiceAddress() {
+        return ProjectTeamService_address;
     }
 
     // The WSDD service name defaults to the port name.
-    private java.lang.String BugTrackerServiceWSDDServiceName = "BugTrackerService";
+    private java.lang.String ProjectTeamServiceWSDDServiceName = "ProjectTeamService";
 
-    public java.lang.String getBugTrackerServiceWSDDServiceName() {
-        return BugTrackerServiceWSDDServiceName;
+    public java.lang.String getProjectTeamServiceWSDDServiceName() {
+        return ProjectTeamServiceWSDDServiceName;
     }
 
-    public void setBugTrackerServiceWSDDServiceName(java.lang.String name) {
-        BugTrackerServiceWSDDServiceName = name;
+    public void setProjectTeamServiceWSDDServiceName(java.lang.String name) {
+        ProjectTeamServiceWSDDServiceName = name;
     }
 
-    public wsbugtracker.BugTrackerService getBugTrackerService() throws javax.xml.rpc.ServiceException {
+    public wsprojectteam.ProjectTeamService getProjectTeamService() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
-            endpoint = new java.net.URL(BugTrackerService_address);
+            endpoint = new java.net.URL(ProjectTeamService_address);
         }
         catch (java.net.MalformedURLException e) {
             throw new javax.xml.rpc.ServiceException(e);
         }
-        return getBugTrackerService(endpoint);
+        return getProjectTeamService(endpoint);
     }
 
-    public wsbugtracker.BugTrackerService getBugTrackerService(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public wsprojectteam.ProjectTeamService getProjectTeamService(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            wsbugtracker.BugTrackerServiceBindingStub _stub = new wsbugtracker.BugTrackerServiceBindingStub(portAddress, this);
-            _stub.setPortName(getBugTrackerServiceWSDDServiceName());
+            wsprojectteam.ProjectTeamServiceBindingStub _stub = new wsprojectteam.ProjectTeamServiceBindingStub(portAddress, this);
+            _stub.setPortName(getProjectTeamServiceWSDDServiceName());
             return _stub;
         }
         catch (org.apache.axis.AxisFault e) {
@@ -61,8 +61,8 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
         }
     }
 
-    public void setBugTrackerServiceEndpointAddress(java.lang.String address) {
-        BugTrackerService_address = address;
+    public void setProjectTeamServiceEndpointAddress(java.lang.String address) {
+        ProjectTeamService_address = address;
     }
 
     /**
@@ -72,9 +72,9 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (wsbugtracker.BugTrackerService.class.isAssignableFrom(serviceEndpointInterface)) {
-                wsbugtracker.BugTrackerServiceBindingStub _stub = new wsbugtracker.BugTrackerServiceBindingStub(new java.net.URL(BugTrackerService_address), this);
-                _stub.setPortName(getBugTrackerServiceWSDDServiceName());
+            if (wsprojectteam.ProjectTeamService.class.isAssignableFrom(serviceEndpointInterface)) {
+                wsprojectteam.ProjectTeamServiceBindingStub _stub = new wsprojectteam.ProjectTeamServiceBindingStub(new java.net.URL(ProjectTeamService_address), this);
+                _stub.setPortName(getProjectTeamServiceWSDDServiceName());
                 return _stub;
             }
         }
@@ -94,8 +94,8 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
             return getPort(serviceEndpointInterface);
         }
         java.lang.String inputPortName = portName.getLocalPart();
-        if ("BugTrackerService".equals(inputPortName)) {
-            return getBugTrackerService();
+        if ("ProjectTeamService".equals(inputPortName)) {
+            return getProjectTeamService();
         }
         else  {
             java.rmi.Remote _stub = getPort(serviceEndpointInterface);
@@ -105,7 +105,7 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://wsbugtracker", "BugTrackerServiceFull");
+        return new javax.xml.namespace.QName("http://wsprojectteam", "ProjectTeamServiceFull");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://wsbugtracker", "BugTrackerService"));
+            ports.add(new javax.xml.namespace.QName("http://wsprojectteam", "ProjectTeamService"));
         }
         return ports.iterator();
     }
@@ -123,8 +123,8 @@ public class BugTrackerServiceFullLocator extends org.apache.axis.client.Service
     */
     public void setEndpointAddress(java.lang.String portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
         
-if ("BugTrackerService".equals(portName)) {
-            setBugTrackerServiceEndpointAddress(address);
+if ("ProjectTeamService".equals(portName)) {
+            setProjectTeamServiceEndpointAddress(address);
         }
         else 
 { // Unknown Port Name

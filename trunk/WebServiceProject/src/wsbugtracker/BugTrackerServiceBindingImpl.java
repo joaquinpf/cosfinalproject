@@ -24,4 +24,12 @@ public class BugTrackerServiceBindingImpl implements wsbugtracker.BugTrackerServ
         return null;
     }
 
+	public int[] getBugsByProject(java.lang.String project) throws java.rmi.RemoteException {
+        return null;
+    }
+
+	public int addUser(wsbugtracker.Auth user) throws java.rmi.RemoteException {
+        return -3;
+    }
+
 }

@@ -22,6 +22,14 @@
       <parameter name="typeMappingVersion" value="1.2"/>
       <parameter name="allowedMethods" value="*"/>
 
+      <typeMapping
+        xmlns:ns="http://wsbugtracker"
+        qname="ns:Auth"
+        type="java:wsbugtracker.Auth"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
       <arrayMapping
         xmlns:ns="http://wsbugtracker"
         qname="ns:ArrayOfInt"

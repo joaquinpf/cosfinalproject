@@ -12,7 +12,11 @@ public class Bug  implements java.io.Serializable {
 
     private java.lang.String type;
 
+    private java.lang.String owner;
+
     private int number;
+
+    private int project;
 
     public Bug() {
     }
@@ -20,10 +24,14 @@ public class Bug  implements java.io.Serializable {
     public Bug(
            java.lang.String description,
            java.lang.String type,
-           int number) {
+           java.lang.String owner,
+           int number,
+           int project) {
            this.description = description;
            this.type = type;
+           this.owner = owner;
            this.number = number;
+           this.project = project;
     }
 
 
@@ -68,6 +76,26 @@ public class Bug  implements java.io.Serializable {
 
 
     /**
+     * Gets the owner value for this Bug.
+     * 
+     * @return owner
+     */
+    public java.lang.String getOwner() {
+        return owner;
+    }
+
+
+    /**
+     * Sets the owner value for this Bug.
+     * 
+     * @param owner
+     */
+    public void setOwner(java.lang.String owner) {
+        this.owner = owner;
+    }
+
+
+    /**
      * Gets the number value for this Bug.
      * 
      * @return number
@@ -84,6 +112,26 @@ public class Bug  implements java.io.Serializable {
      */
     public void setNumber(int number) {
         this.number = number;
+    }
+
+
+    /**
+     * Gets the project value for this Bug.
+     * 
+     * @return project
+     */
+    public int getProject() {
+        return project;
+    }
+
+
+    /**
+     * Sets the project value for this Bug.
+     * 
+     * @param project
+     */
+    public void setProject(int project) {
+        this.project = project;
     }
 
     private java.lang.Object __equalsCalc = null;
@@ -104,7 +152,11 @@ public class Bug  implements java.io.Serializable {
             ((this.type==null && other.getType()==null) || 
              (this.type!=null &&
               this.type.equals(other.getType()))) &&
-            this.number == other.getNumber();
+            ((this.owner==null && other.getOwner()==null) || 
+             (this.owner!=null &&
+              this.owner.equals(other.getOwner()))) &&
+            this.number == other.getNumber() &&
+            this.project == other.getProject();
         __equalsCalc = null;
         return _equals;
     }
@@ -122,7 +174,11 @@ public class Bug  implements java.io.Serializable {
         if (getType() != null) {
             _hashCode += getType().hashCode();
         }
+        if (getOwner() != null) {
+            _hashCode += getOwner().hashCode();
+        }
         _hashCode += getNumber();
+        _hashCode += getProject();
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -146,8 +202,20 @@ public class Bug  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("owner");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://wsbugtracker", "owner"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("number");
         elemField.setXmlName(new javax.xml.namespace.QName("http://wsbugtracker", "number"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("project");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://wsbugtracker", "project"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

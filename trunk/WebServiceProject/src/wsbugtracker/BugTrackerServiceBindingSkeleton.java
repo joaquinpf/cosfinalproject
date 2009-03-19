@@ -79,6 +79,30 @@ public class BugTrackerServiceBindingSkeleton implements wsbugtracker.BugTracker
             _myOperations.put("getBugsByType", new java.util.ArrayList());
         }
         ((java.util.List)_myOperations.get("getBugsByType")).add(_oper);
+        _params = new org.apache.axis.description.ParameterDesc [] {
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+        };
+        _oper = new org.apache.axis.description.OperationDesc("getBugsByProject", _params, new javax.xml.namespace.QName("http://wsbugtracker", "getBugsByTypeReturn"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://wsbugtracker", "ArrayOfInt"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wsbugtracker", "getBugsByProject"));
+        _oper.setSoapAction("");
+        _myOperationsList.add(_oper);
+        if (_myOperations.get("getBugsByProject") == null) {
+            _myOperations.put("getBugsByProject", new java.util.ArrayList());
+        }
+        ((java.util.List)_myOperations.get("getBugsByProject")).add(_oper);
+        _params = new org.apache.axis.description.ParameterDesc [] {
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "user"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://wsbugtracker", "Auth"), wsbugtracker.Auth.class, false, false), 
+        };
+        _oper = new org.apache.axis.description.OperationDesc("addUser", _params, new javax.xml.namespace.QName("http://wsbugtracker", "addUserReturn"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wsbugtracker", "addUser"));
+        _oper.setSoapAction("");
+        _myOperationsList.add(_oper);
+        if (_myOperations.get("addUser") == null) {
+            _myOperations.put("addUser", new java.util.ArrayList());
+        }
+        ((java.util.List)_myOperations.get("addUser")).add(_oper);
     }
 
     public BugTrackerServiceBindingSkeleton() {
@@ -109,6 +133,18 @@ public class BugTrackerServiceBindingSkeleton implements wsbugtracker.BugTracker
     public int[] getBugsByType(java.lang.String type) throws java.rmi.RemoteException
     {
         int[] ret = impl.getBugsByType(type);
+        return ret;
+    }
+
+    public int[] getBugsByProject(java.lang.String project) throws java.rmi.RemoteException
+    {
+        int[] ret = impl.getBugsByProject(project);
+        return ret;
+    }
+
+    public int addUser(wsbugtracker.Auth user) throws java.rmi.RemoteException
+    {
+        int ret = impl.addUser(user);
         return ret;
     }
 
