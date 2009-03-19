@@ -1,0 +1,6 @@
+<object type="map" id="0">
+  <object type="entry">
+    <object type="string" value="a" id="1" />
+    <object idref="1" />
+  </object>
+</object>
