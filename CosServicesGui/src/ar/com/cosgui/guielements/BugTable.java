@@ -28,6 +28,8 @@ public class BugTable extends JTable {
 		model.addColumn("Description");
 		model.addColumn("Status");
 		model.addColumn("Owner");
+		model.addColumn("type");
+		model.addColumn("project");
 		
 		setCombobox();
  
@@ -38,6 +40,10 @@ public class BugTable extends JTable {
 		column = getColumnModel().getColumn(2); 
 		column.setPreferredWidth(4);
 		column = getColumnModel().getColumn(3);
+		column.setPreferredWidth(4);
+		column = getColumnModel().getColumn(4); 
+		column.setPreferredWidth(4);
+		column = getColumnModel().getColumn(5);
 		column.setPreferredWidth(4);
 		
 		setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -59,11 +65,7 @@ public class BugTable extends JTable {
 	
 	@SuppressWarnings("unchecked")
 	public Class getColumnClass (int columna) { 
-		try{ 
-			return Object.class;
-		} catch (Exception e) { 
-			return Object.class; 
-		} 
+		return Object.class; 
 	}
 	
     public boolean isCellEditable(int rowIndex, int vColIndex) {

@@ -19,8 +19,8 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 
-	public String addMemberToProject(String description, String group,
-			String project, String name) throws RemoteException {
+	public String addMemberToProject(String group,
+			String project, String name, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -40,9 +40,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 
-	public Bug submitBug(String description, String type)
-			throws RemoteException {
-		// TODO Auto-generated method stub
+	public Bug submitBug(String description, String type, String project) {
 		return null;
 	}
 }
