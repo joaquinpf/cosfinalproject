@@ -1,4 +1,4 @@
-package wsbugtracker;
+package wsprojectteam;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -6,10 +6,67 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
+import wsprojectteam.Auth;
+import wsprojectteam.Project;
+
 
 public class DataBase {
-	private static ArrayList<Bug> bugs = new ArrayList<Bug>();
+	private static Hashtable<String,Project> projects = new Hashtable<String,Project>();
 	private static Hashtable<String,Auth> users = new Hashtable<String,Auth>();
+	
+    public String[] getProjects(){
+    	
+    }
+    
+    public String[] getProjectsForUser(Auth user){
+    	
+    }
+    
+    public boolean addProject(String description, String name){
+    	Project p = new Project();
+    	p.setDescription(description);
+    	p.setName(name);
+    	projects.put(name,p);
+    	return true;
+    }
+    
+    public String addGroupToProject(String description, String project, String name){
+    	
+    }
+    
+    public boolean addMemberToProject(String description, String group, String project, Auth user){
+    	if(validUser(user)==true && validProject(project)==true){
+    		projects.get(project).addMember(group, user.getUsername());
+    		return true;
+    	}
+		return false;
+    }
+    
+	private boolean validProject(String project) {
+		if(projects.containsKey(project)){
+			return true;
+		}
+		return false;
+	}
+	private static boolean validUser(Auth user){
+		if(users.containsKey(user.getUsername()) == true){
+			if(users.get(user.getUsername()).getPass().equals(user.getPass())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static int addUser(Auth user) {
+		int valid = 0;
+		if (users.containsKey(user.getUsername()) == false) {
+			users.put(user.getUsername(),user);
+			valid = 1;
+		}
+		return valid;
+	}
+	
+	
 	
     public static Bug submitBug(String description, String type, 
     		String owner, String project) {
@@ -80,22 +137,4 @@ public class DataBase {
 			return null;
 	}
 	*/
-	
-	private static boolean validUser(Auth user){
-		if(users.containsKey(user.getUsername()) == true){
-			if(users.get(user.getUsername()).getPass().equals(user.getPass())){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static int addUser(Auth user) {
-		int valid = 0;
-		if (users.containsKey(user.getUsername()) == false) {
-			users.put(user.getUsername(),user);
-			valid = 1;
-		}
-		return valid;
-	}
 }

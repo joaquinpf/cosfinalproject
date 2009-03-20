@@ -15,7 +15,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
 	}
 
-	public int addUser(String user, String pass) throws RemoteException {
+	public int addUser(String user, String pass) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -25,12 +25,12 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 
-	public Bug getBug(int number) throws RemoteException {
+	public Bug getBug(int number) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int[] getBugsByProject(String project) throws RemoteException {
+	public int[] getBugsByProject(String project) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,5 +1,17 @@
 package ar.com.cosgui.guielements;
 
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
+import wsbugtracker.Bug;
+
+import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
+import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,8 +35,30 @@ public class MainFrame extends javax.swing.JFrame {
     /** Creates new form MainFrame */
     public MainFrame() {
         initComponents();
+        initTable();
     }
 
+    private void initTable(){
+    	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+    	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+    	
+    	String[] projs = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass());
+    	ArrayList<Bug> bugs = new ArrayList<Bug>();
+    	
+    	for(int i=0; i<projs.length;i++){
+    		int[] projectBugs = bug.getBugsByProject(projs[i]);
+    		for(int j=0; i<projectBugs.length;i++){
+    			bugs.add(bug.getBug(projectBugs[j]));
+    		}
+    	}
+    	
+    	DefaultTableModel d = (DefaultTableModel) jTable1.getModel();
+    	
+    	for(Bug b : bugs) {
+    		//TODO
+    	}
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

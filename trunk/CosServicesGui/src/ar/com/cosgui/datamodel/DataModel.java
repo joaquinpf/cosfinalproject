@@ -65,5 +65,12 @@ public class DataModel {
 	public String getActiveUser() {
 		return activeUser;
 	}
+
+	public String getActiveUserPass() {
+		if(activeUser != null)
+			return users.get(activeUser);
+		else
+			return null;
+	}
     
 }

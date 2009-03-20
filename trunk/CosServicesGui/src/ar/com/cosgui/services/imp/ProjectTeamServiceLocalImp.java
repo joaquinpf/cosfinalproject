@@ -31,7 +31,7 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 
-	public int addUser(String user, String pass) throws RemoteException {
+	public int addUser(String user, String pass) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -41,8 +41,7 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 
-	public String[] getProjectsForUser(wsprojectteam.Auth user, String user2)
-			throws RemoteException {
+	public String[] getProjectsForUser(String user, String pass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
