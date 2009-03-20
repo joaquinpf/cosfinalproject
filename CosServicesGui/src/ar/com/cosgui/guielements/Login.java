@@ -1,3 +1,17 @@
+package ar.com.cosgui.guielements;
+
+
+
+import java.rmi.RemoteException;
+
+import wsbugtracker.Auth;
+import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
+import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -145,6 +159,18 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jTextField4.setText(DataModel.INSTANCE.addUser(jTextField2.getText(), jTextField3.getText()));        // TODO add your handling code here:
+
+        BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+        ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+        
+        try {
+			bug.addUser(jTextField2.getText(), jTextField3.getText());
+			proj.addUser(jTextField2.getText(), jTextField3.getText());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -156,6 +182,7 @@ public class Login extends javax.swing.JFrame {
             this.setEnabled(false);
             this.setVisible(false);
             frame.setVisible(true);
+            DataModel.INSTANCE.setActiveUser(jTextField2.getText());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

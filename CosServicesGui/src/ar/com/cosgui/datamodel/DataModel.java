@@ -1,13 +1,11 @@
+package ar.com.cosgui.datamodel;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
-
-
 import java.io.File;
 import java.util.HashMap;
-import java.util.Hashtable;
 import wox.serial.Easy;
 
 /**
@@ -20,6 +18,8 @@ public class DataModel {
 
     private HashMap<String,String> users = new HashMap<String, String>();
 
+    private String activeUser = new String();
+    
     protected DataModel(){
         loadUsers();
     }
@@ -28,6 +28,7 @@ public class DataModel {
 		Easy.save(users, "./config/users.xml");
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadUsers() {
 		File f = new File("./config/users.xml");
 		if (f.exists()) {
@@ -56,5 +57,13 @@ public class DataModel {
     	}
     	return false;
     }
+
+	public void setActiveUser(String activeUser) {
+		this.activeUser = activeUser;
+	}
+
+	public String getActiveUser() {
+		return activeUser;
+	}
     
 }
