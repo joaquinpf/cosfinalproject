@@ -30,7 +30,6 @@
 				<complexType>
 					<sequence>
 						<element name="user" type="impl:Auth"/>
-						<element name="user" type="xsd:string"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -56,10 +55,16 @@
 					</sequence>
 				</complexType>
 			</element>
+			<complexType name="Project">
+				<sequence>
+					<element name="description" type="xsd:string"/>
+					<element name="name" type="xsd:string"/>
+				</sequence>
+			</complexType>		
 			<element name="addProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="imp:Project"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -75,7 +80,7 @@
 			<element name="addGroupToProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -85,14 +90,14 @@
 						<element name="description" type="xsd:string"/>
 						<element name="group" type="xsd:string"/>
 						<element name="project" type="xsd:string"/>
-						<element name="name" type="xsd:string"/>
+						<element name="user" type="impl:Auth"/>
 					</sequence>
 				</complexType>
 			</element>
 			<element name="addMemberToProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
 			</element>
