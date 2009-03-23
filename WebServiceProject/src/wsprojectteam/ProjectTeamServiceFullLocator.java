@@ -22,7 +22,7 @@ public class ProjectTeamServiceFullLocator extends org.apache.axis.client.Servic
     }
 
     // Use to get a proxy class for ProjectTeamService
-    private java.lang.String ProjectTeamService_address = "http://localhost:8080/ProjectTeamWSProject/services/ProjectTeamService";
+    private java.lang.String ProjectTeamService_address = "http://localhost:8080/WebServiceProject/services/ProjectTeamService";
 
     public java.lang.String getProjectTeamServiceAddress() {
         return ProjectTeamService_address;

@@ -33,6 +33,9 @@ public class BugTrackerServiceBindingSkeleton implements wsbugtracker.BugTracker
         _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "description"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "owner"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "status"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("submitBug", _params, new javax.xml.namespace.QName("http://wsbugtracker", "submitBugReturn"));
         _oper.setReturnType(new javax.xml.namespace.QName("http://wsbugtracker", "Bug"));
@@ -45,16 +48,17 @@ public class BugTrackerServiceBindingSkeleton implements wsbugtracker.BugTracker
         ((java.util.List)_myOperations.get("submitBug")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "number"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "status"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
-        _oper = new org.apache.axis.description.OperationDesc("closeBug", _params, new javax.xml.namespace.QName("http://wsbugtracker", "closeBugReturn"));
+        _oper = new org.apache.axis.description.OperationDesc("changeBugStatus", _params, new javax.xml.namespace.QName("http://wsbugtracker", "changeBugStatusReturn"));
         _oper.setReturnType(new javax.xml.namespace.QName("http://wsbugtracker", "Bug"));
-        _oper.setElementQName(new javax.xml.namespace.QName("http://wsbugtracker", "closeBug"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wsbugtracker", "changeBugStatus"));
         _oper.setSoapAction("");
         _myOperationsList.add(_oper);
-        if (_myOperations.get("closeBug") == null) {
-            _myOperations.put("closeBug", new java.util.ArrayList());
+        if (_myOperations.get("changeBugStatus") == null) {
+            _myOperations.put("changeBugStatus", new java.util.ArrayList());
         }
-        ((java.util.List)_myOperations.get("closeBug")).add(_oper);
+        ((java.util.List)_myOperations.get("changeBugStatus")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "number"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false), 
         };
@@ -112,15 +116,15 @@ public class BugTrackerServiceBindingSkeleton implements wsbugtracker.BugTracker
     public BugTrackerServiceBindingSkeleton(wsbugtracker.BugTrackerService impl) {
         this.impl = impl;
     }
-    public wsbugtracker.Bug submitBug(java.lang.String description, java.lang.String type) throws java.rmi.RemoteException
+    public wsbugtracker.Bug submitBug(java.lang.String description, java.lang.String type, java.lang.String owner, java.lang.String project, java.lang.String status) throws java.rmi.RemoteException
     {
-        wsbugtracker.Bug ret = impl.submitBug(description, type);
+        wsbugtracker.Bug ret = impl.submitBug(description, type, owner, project, status);
         return ret;
     }
 
-    public wsbugtracker.Bug closeBug(int number) throws java.rmi.RemoteException
+    public wsbugtracker.Bug changeBugStatus(int number, java.lang.String status) throws java.rmi.RemoteException
     {
-        wsbugtracker.Bug ret = impl.closeBug(number);
+        wsbugtracker.Bug ret = impl.changeBugStatus(number, status);
         return ret;
     }
 

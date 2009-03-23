@@ -8,7 +8,7 @@ public class DataBase {
 	private static Hashtable<String,Project> projects = new Hashtable<String,Project>();
 	private static Hashtable<String,Auth> users = new Hashtable<String,Auth>();
 	
-    public String[] getProjects(){
+    public static String[] getProjects(){
     	String[] retArray = new String[projects.size()];
     	int i = 0;
     	for(String s: projects.keySet()){
@@ -19,7 +19,7 @@ public class DataBase {
     	return retArray;
     }
     
-    public String[] getProjectsForUser(Auth user){
+    public static String[] getProjectsForUser(Auth user){
     	ArrayList<String> a = new ArrayList<String>();
     	for(String s: projects.keySet()){
     		if(projects.get(s).hasMember(user.getUsername()))
@@ -34,7 +34,7 @@ public class DataBase {
     	return retArray;
     }
     
-    public boolean addProject(String description, String name){
+    public static boolean addProject(String description, String name){
     	Project p = new Project();
     	p.setDescription(description);
     	p.setName(name);
@@ -42,7 +42,7 @@ public class DataBase {
     	return true;
     }
     
-    public boolean addGroupToProject(String description, String project, String name){
+    public static boolean addGroupToProject(String description, String project, String name){
     	if(validProject(project) == true){
         	Group g = new Group();
         	g.setName(name);
@@ -53,7 +53,7 @@ public class DataBase {
     	return false;
     }
     
-    public boolean addMemberToProject(String description, String group, String project, Auth user){
+    public static boolean addMemberToProject(String description, String group, String project, Auth user){
     	if(validUser(user)==true && validProject(project)==true){
     		projects.get(project).addMember(group, user.getUsername());
     		return true;
@@ -61,7 +61,7 @@ public class DataBase {
 		return false;
     }
     
-	private boolean validProject(String project) {
+	private static boolean validProject(String project) {
 		if(projects.containsKey(project)){
 			return true;
 		}
@@ -84,4 +84,23 @@ public class DataBase {
 		}
 		return valid;
 	}
+
+	public static String[] getGroupsForProject(String project) {
+
+		String[] retArray = null;
+
+		if(validProject(project)){
+			ArrayList<String> a = new ArrayList<String>();
+			for(String s: projects.get(project).getGroups().keySet()){
+				a.add(s);
+			}
+
+			retArray = new String[a.size()];
+			for(int i=0;i<a.size();i++){
+				retArray[i] = a.get(i);
+			}
+
+		}
+		return retArray;
+	}	
 }

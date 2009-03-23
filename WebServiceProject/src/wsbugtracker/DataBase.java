@@ -1,10 +1,7 @@
 package wsbugtracker;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Vector;
 
 
 public class DataBase {
@@ -19,13 +16,17 @@ public class DataBase {
     	b.setOwner(owner);
     	b.setProject(project);
     	b.setType(type);
-    	b.setStatus("Submitted");
+    	b.setStatus("Open");
     	bugs.add(b);
     	return b;
     }
 
-    public static Bug closeBug(int number) {
-    	getBug(number).setStatus("Submitted");
+    public static Bug changeBugStatus(int number, String status) {
+    	Bug b = getBug(number);
+    	if(b != null){
+    		b.setStatus(status);
+    	}
+    	return b;
     }
 
     public static Bug getBug(int number) {
@@ -65,21 +66,6 @@ public class DataBase {
     	
     	return retArray;
     }
-/*
-	private static Hashtable<String, ArrayList<String>> projects = new Hashtable<String, ArrayList<String>>();
-	public static String[] getMails(Auth user){
-		if (validUser(user) == true){
-			ArrayList<String> userProjects = projects.get(user.getUsername());
-			String[] returnProjects = new String[userProjects.size()];
-
-			for(int i=0;i<userProjects.size();i++)
-				returnProjects[i] = userProjects.get(i);
-			return returnProjects;
-		}
-		else
-			return null;
-	}
-	*/
 	
 	private static boolean validUser(Auth user){
 		if(users.containsKey(user.getUsername()) == true){

@@ -11,6 +11,11 @@ import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 
 
 /*
@@ -36,9 +41,36 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         initTable();
+        initMockDatabase();
+        createPopupMenu();
     }
 
-    private void initTable(){
+    private void createPopupMenu() {
+		menu = new PopupMenu();
+		MenuItem close = new MenuItem("Close bug");
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+                bug.changeBugStatus(Integer.parseInt((String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0)),"Closed");
+            }
+		});
+		menu.add(close);
+		jTable1.add(menu);
+	}
+
+    private void initMockDatabase() {
+    	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+    	proj.addProject("Proyecto final de COS", "Cos Project");
+    	proj.addGroupToProject("Developers", "Cos Project", "Developers");
+    	proj.addGroupToProject("Testers", "Cos Project", "Testers");
+    	proj.addGroupToProject("Management", "Cos Project", "Management");
+    	proj.addProject("Proyecto final de Grid", "Grid Project");
+    	proj.addGroupToProject("Developers", "Grid Project", "Developers");
+    	proj.addGroupToProject("Testers", "Grid Project", "Testers");
+    	proj.addGroupToProject("Management", "Grid Project", "Management");
+    }
+
+	private void initTable(){
     	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
     	
@@ -48,8 +80,10 @@ public class MainFrame extends javax.swing.JFrame {
     	if(projs != null){
     		for(int i=0; i<projs.length;i++){
     			int[] projectBugs = bug.getBugsByProject(projs[i]);
-    			for(int j=0; i<projectBugs.length;i++){
-    				bugs.add(bug.getBug(projectBugs[j]));
+    			if(projectBugs != null){
+	    			for(int j=0; j<projectBugs.length;j++){
+	    				bugs.add(bug.getBug(projectBugs[j]));
+	    			}
     			}
     		}
     	}
@@ -57,20 +91,12 @@ public class MainFrame extends javax.swing.JFrame {
     	DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
-        Bug bugito = new Bug();
-        bugito.setDescription("Soy un bug");
-        bugito.setNumber(1);
-        bugito.setOwner("YO");
-        bugito.setProject(1);
-        bugito.setType("Tipo");
-
-        bugs.add(bugito);
-
         for(Bug b : bugs) {
-        	Object row [] = {Integer.toString(b.getNumber()),b.getDescription(),/*b.getStatus(),*/b.getOwner(),
+        	Object row [] = {Integer.toString(b.getNumber()),b.getDescription(),b.getStatus(),b.getOwner(),
         			b.getType(),b.getProject()};
         	model.addRow(row);
         }
+        jTable1.setModel(model);
     }
     
     /** This method is called from within the constructor to
@@ -82,6 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -96,25 +123,36 @@ public class MainFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
         jInternalFrame2 = new javax.swing.JInternalFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jInternalFrame1.setVisible(true);
 
-        jTable1.setModel(new DefaultTableModel());
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtering"));
 
         jLabel1.setText("Filter");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Proyecto", "Tipo", "Estado" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ID", "Description", "Status", "Owner", "Type", "Project" }));
 
         jTextField1.setText("CosFinalProyect");
 
         jButton1.setText("Set");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -155,6 +193,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton3.setText("Submit bug");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -164,7 +207,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -185,7 +228,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -209,31 +252,20 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGap(0, 390, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Mail", jPanel1);
-
-        jTextField2.setEditable(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jInternalFrame2.setVisible(true);
@@ -246,7 +278,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGap(0, 426, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,7 +298,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jInternalFrame2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -276,11 +308,50 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             ProjectSubscriptionDialog frame = new ProjectSubscriptionDialog(this, true);
             frame.setVisible(true);
+            initTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+            SubmitBugForm frame = new SubmitBugForm(this, true);
+            frame.setVisible(true);
+            initTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	initTable();
+    	if(jTextField1.getText() != ""){
+    		int col = jTable1.getColumnModel().getColumnIndex(jComboBox1.getSelectedItem());
+    		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+    		ArrayList<Object[]> filteredRows = new ArrayList<Object[]>();
+
+    		for(int i=0;i<model.getRowCount();i++){
+    			if(model.getValueAt(i, col).equals(jTextField1.getText())){
+    				Object row [] = {model.getValueAt(i, 0),model.getValueAt(i, 1),
+    						model.getValueAt(i, 2),model.getValueAt(i, 3),model.getValueAt(i, 4),
+    						model.getValueAt(i, 5),};
+    				filteredRows.add(row);
+
+    			}
+    		}
+
+    		model.setRowCount(0);
+
+    		for(Object[] i:filteredRows){
+    			model.addRow(i);
+    		}        
+    	}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        if((evt.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
+           menu.show(jTable1, evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        if((evt.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
+           menu.show(jTable1, evt.getX(), evt.getY());
+    }//GEN-LAST:event_jTable1MouseReleased
 
     /**
     * @param args the command line arguments
@@ -292,7 +363,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private PopupMenu menu;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -305,11 +377,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 
 }

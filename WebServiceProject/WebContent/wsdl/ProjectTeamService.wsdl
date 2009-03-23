@@ -24,11 +24,24 @@
 				<complexType>
 					<sequence>
 						<element name="user" type="impl:Auth"/>
-						<element name="user" type="xsd:string"/>
 					</sequence>
 				</complexType>
 			</element>
 			<element name="getProjectsForUserResponse">
+				<complexType>
+					<sequence>
+						<element name="result" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getGroupsForProject">
+				<complexType>
+					<sequence>
+						<element name="project" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getGroupsForProjectResponse">
 				<complexType>
 					<sequence>
 						<element name="result" type="impl:ArrayOfString"/>
@@ -42,6 +55,12 @@
 					</restriction>
 				</complexContent>
 			</complexType>
+			<complexType name="Auth">
+				<sequence>
+					<element name="username" type="xsd:string"/>
+					<element name="pass" type="xsd:string"/>
+				</sequence>
+			</complexType>
 			<element name="addProject">
 				<complexType>
 					<sequence>
@@ -53,10 +72,10 @@
 			<element name="addProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
-			</element>
+			</element>	
 			<element name="addGroupToProject">
 				<complexType>
 					<sequence>
@@ -69,7 +88,7 @@
 			<element name="addGroupToProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -79,14 +98,14 @@
 						<element name="description" type="xsd:string"/>
 						<element name="group" type="xsd:string"/>
 						<element name="project" type="xsd:string"/>
-						<element name="name" type="xsd:string"/>
+						<element name="user" type="impl:Auth"/>
 					</sequence>
 				</complexType>
 			</element>
 			<element name="addMemberToProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="xsd:string"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -104,12 +123,6 @@
 					</sequence>
 				</complexType>
 			</element>
-			<complexType name="Auth">
-				<sequence>
-					<element name="username" type="xsd:string"/>
-					<element name="pass" type="xsd:string"/>
-				</sequence>
-			</complexType>
 		</schema>
 	</wsdl:types>
 	
@@ -125,6 +138,12 @@
 	<wsdl:message name="getProjectsForUserResponse">
 		<wsdl:part element="impl:getProjectsForUserResponse" name="parameters"/>
 	</wsdl:message>
+	<wsdl:message name="getGroupsForProjectRequest">
+		<wsdl:part element="impl:getGroupsForProject" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getGroupsForProjectResponse">
+		<wsdl:part element="impl:getGroupsForProjectResponse" name="parameters"/>
+	</wsdl:message>	
 	<wsdl:message name="addProjectRequest">
 		<wsdl:part element="impl:addProject" name="parameters"/>
 	</wsdl:message>
@@ -159,6 +178,10 @@
 		<wsdl:operation name="getProjectsForUser">
 			<wsdl:input message="impl:getProjectsForUserRequest" name="getProjectsForUserRequest"/>
 			<wsdl:output message="impl:getProjectsForUserResponse" name="getProjectsForUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getGroupsForProject">
+			<wsdl:input message="impl:getGroupsForProjectRequest" name="getGroupsForProjectRequest"/>
+			<wsdl:output message="impl:getGroupsForProjectResponse" name="getGroupsForProjectResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="addProject">
 			<wsdl:input message="impl:addProjectRequest" name="addProjectRequest"/>
@@ -199,6 +222,15 @@
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="getGroupsForProject">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getGroupsForProjectRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getGroupsForProjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>		
 		<wsdl:operation name="addProject">
 			<soap:operation soapAction=""/>
 			<wsdl:input name="addProjectRequest">

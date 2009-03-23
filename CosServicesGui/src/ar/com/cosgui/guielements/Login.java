@@ -171,12 +171,11 @@ public class Login extends javax.swing.JFrame {
         if(DataModel.INSTANCE.validateUser(jTextField2.getText(), jTextField3.getText()) == false){
             jTextField4.setText("Username or password error");
         } else {
-
+            DataModel.INSTANCE.setActiveUser(jTextField2.getText());
             MainFrame frame = new MainFrame();
             this.setEnabled(false);
             this.setVisible(false);
             frame.setVisible(true);
-            DataModel.INSTANCE.setActiveUser(jTextField2.getText());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

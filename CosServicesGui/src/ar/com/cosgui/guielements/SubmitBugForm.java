@@ -11,9 +11,13 @@
 
 package ar.com.cosgui.guielements;
 
+import javax.xml.crypto.Data;
+
+import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
+import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
  *
@@ -25,6 +29,7 @@ public class SubmitBugForm extends javax.swing.JDialog {
     public SubmitBugForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        initProjects();
     }
 
     /** This method is called from within the constructor to
@@ -131,9 +136,20 @@ public class SubmitBugForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initProjects() {
+        ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        String[] projects = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
+        if(projects != null){
+        	for(int i=0;i<projects.length;i++){
+        		jComboBox1.addItem(projects[i]);
+        	}
+        }
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
-     bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem());
+     bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem(),
+    		 DataModel.INSTANCE.getActiveUser());
      this.setVisible(false);
      this.setEnabled(false);
 }//GEN-LAST:event_jButton1ActionPerformed

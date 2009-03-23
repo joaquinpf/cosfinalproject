@@ -1,5 +1,6 @@
-#Sun Feb 15 17:30:05 GST 2009
+#Sun Mar 22 16:10:38 VET 2009
 eclipse.preferences.version=1
+encoding//src/wsbugtracker/Auth.java=UTF-8
 encoding//src/wsbugtracker/Bug.java=UTF-8
 encoding//src/wsbugtracker/BugTrackerService.java=UTF-8
 encoding//src/wsbugtracker/BugTrackerServiceBindingStub.java=UTF-8
@@ -9,3 +10,9 @@ encoding//src/wsbusiness/BusinessService.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceBindingStub.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceFull.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceFullLocator.java=UTF-8
+encoding//src/wsprojectteam/Auth.java=UTF-8
+encoding//src/wsprojectteam/Project.java=UTF-8
+encoding//src/wsprojectteam/ProjectTeamService.java=UTF-8
+encoding//src/wsprojectteam/ProjectTeamServiceBindingStub.java=UTF-8
+encoding//src/wsprojectteam/ProjectTeamServiceFull.java=UTF-8
+encoding//src/wsprojectteam/ProjectTeamServiceFullLocator.java=UTF-8

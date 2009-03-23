@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<wsdl:definitions 
-	xmlns:impl="http://wsprojectteam" 
-	xmlns:intf="http://wsprojectteam" 
-	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="http://wsprojectteam">
+<wsdl:definitions xmlns:impl="http://wsprojectteam" xmlns:intf="http://wsprojectteam" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://wsprojectteam">
 	
     <wsdl:types>
 		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="http://wsprojectteam">
@@ -40,12 +34,32 @@
 					</sequence>
 				</complexType>
 			</element>
+			<element name="getGroupsForProject">
+				<complexType>
+					<sequence>
+						<element name="project" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getGroupsForProjectResponse">
+				<complexType>
+					<sequence>
+						<element name="result" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
 			<complexType name="ArrayOfString">
 				<complexContent>
 					<restriction base="soapenc:Array">
-						<attribute wsdl:arrayType="string[]" ref="soapenc:arrayType" />
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="string[]"/>
 					</restriction>
 				</complexContent>
+			</complexType>
+			<complexType name="Auth">
+				<sequence>
+					<element name="username" type="xsd:string"/>
+					<element name="pass" type="xsd:string"/>
+				</sequence>
 			</complexType>
 			<element name="addProject">
 				<complexType>
@@ -55,19 +69,13 @@
 					</sequence>
 				</complexType>
 			</element>
-			<complexType name="Project">
-				<sequence>
-					<element name="description" type="xsd:string"/>
-					<element name="name" type="xsd:string"/>
-				</sequence>
-			</complexType>		
 			<element name="addProjectResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="imp:Project"/>
+						<element name="result" type="xsd:boolean"/>
 					</sequence>
 				</complexType>
-			</element>
+			</element>	
 			<element name="addGroupToProject">
 				<complexType>
 					<sequence>
@@ -115,12 +123,6 @@
 					</sequence>
 				</complexType>
 			</element>
-			<complexType name="Auth">
-				<sequence>
-					<element name="username" type="xsd:string"/>
-					<element name="pass" type="xsd:string"/>
-				</sequence>
-			</complexType>
 		</schema>
 	</wsdl:types>
 	
@@ -136,6 +138,12 @@
 	<wsdl:message name="getProjectsForUserResponse">
 		<wsdl:part element="impl:getProjectsForUserResponse" name="parameters"/>
 	</wsdl:message>
+	<wsdl:message name="getGroupsForProjectRequest">
+		<wsdl:part element="impl:getGroupsForProject" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getGroupsForProjectResponse">
+		<wsdl:part element="impl:getGroupsForProjectResponse" name="parameters"/>
+	</wsdl:message>	
 	<wsdl:message name="addProjectRequest">
 		<wsdl:part element="impl:addProject" name="parameters"/>
 	</wsdl:message>
@@ -170,6 +178,10 @@
 		<wsdl:operation name="getProjectsForUser">
 			<wsdl:input message="impl:getProjectsForUserRequest" name="getProjectsForUserRequest"/>
 			<wsdl:output message="impl:getProjectsForUserResponse" name="getProjectsForUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getGroupsForProject">
+			<wsdl:input message="impl:getGroupsForProjectRequest" name="getGroupsForProjectRequest"/>
+			<wsdl:output message="impl:getGroupsForProjectResponse" name="getGroupsForProjectResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="addProject">
 			<wsdl:input message="impl:addProjectRequest" name="addProjectRequest"/>
@@ -210,6 +222,15 @@
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="getGroupsForProject">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getGroupsForProjectRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getGroupsForProjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>		
 		<wsdl:operation name="addProject">
 			<soap:operation soapAction=""/>
 			<wsdl:input name="addProjectRequest">
@@ -251,7 +272,7 @@
 
 	<wsdl:service name="ProjectTeamServiceFull">
 		<wsdl:port binding="impl:ProjectTeamServiceBinding" name="ProjectTeamService">
-			<soap:address location="http://localhost:8080/ProjectTeamWSProject/services/ProjectTeamService"/>
+			<soap:address location="http://localhost:8080/WebServiceProject/services/ProjectTeamService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

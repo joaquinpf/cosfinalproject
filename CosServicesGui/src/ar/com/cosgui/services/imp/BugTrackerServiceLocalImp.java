@@ -2,45 +2,74 @@ package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
 
-import ar.com.cosgui.services.IServiceLocalImp;
-
 import wsbugtracker.Auth;
 import wsbugtracker.Bug;
-import wsbugtracker.BugTrackerService;
+import wsbugtracker.BugTrackerServiceProxy;
+import ar.com.cosgui.services.IServiceLocalImp;
 
 public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
+	BugTrackerServiceProxy proxy = new BugTrackerServiceProxy();
+	
 	@Override
 	public void connect() {
-
+		
 	}
 
 	public int addUser(String user, String pass) {
-		// TODO Auto-generated method stub
-		return 0;
+		Auth a = new Auth();
+		a.setPass(pass);
+		a.setUsername(user);
+		try {
+			return proxy.addUser(a);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
-	public Bug closeBug(int number) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public Bug changeBugStatus(int number, String status) {
+		try {
+			return proxy.changeBugStatus(number, status);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Bug getBug(int number) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return proxy.getBug(number);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public int[] getBugsByProject(String project) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return proxy.getBugsByProject(project);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public int[] getBugsByType(String type) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return proxy.getBugsByType(type);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	public Bug submitBug(String description, String type, String project) {
-		return null;
+	public Bug submitBug(String description, String type, String project, String owner) {
+		try {
+			return proxy.submitBug(description, type,owner , project, "Open");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

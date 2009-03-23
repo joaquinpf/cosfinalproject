@@ -54,122 +54,18 @@ valid = false;
 </FORM>
 <%
 break;
-case 13:
+case 15:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
 <INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">description:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="description28" SIZE=20></TD>
-</TR>
-</TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">type:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="type30" SIZE=20></TD>
-</TR>
-</TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">owner:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="owner32" SIZE=20></TD>
-</TR>
-</TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">project:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project34" SIZE=20></TD>
-</TR>
-</TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">status:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="status36" SIZE=20></TD>
-</TR>
-</TABLE>
 <BR>
 <INPUT TYPE="SUBMIT" VALUE="Invoke">
 <INPUT TYPE="RESET" VALUE="Clear">
 </FORM>
 <%
 break;
-case 38:
-valid = false;
-%>
-<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
-<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">number:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="number53" SIZE=20></TD>
-</TR>
-</TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">status:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="status55" SIZE=20></TD>
-</TR>
-</TABLE>
-<BR>
-<INPUT TYPE="SUBMIT" VALUE="Invoke">
-<INPUT TYPE="RESET" VALUE="Clear">
-</FORM>
-<%
-break;
-case 57:
-valid = false;
-%>
-<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
-<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">number:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="number72" SIZE=20></TD>
-</TR>
-</TABLE>
-<BR>
-<INPUT TYPE="SUBMIT" VALUE="Invoke">
-<INPUT TYPE="RESET" VALUE="Clear">
-</FORM>
-<%
-break;
-case 74:
-valid = false;
-%>
-<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
-<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">type:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="type77" SIZE=20></TD>
-</TR>
-</TABLE>
-<BR>
-<INPUT TYPE="SUBMIT" VALUE="Invoke">
-<INPUT TYPE="RESET" VALUE="Clear">
-</FORM>
-<%
-break;
-case 79:
-valid = false;
-%>
-<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
-<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">project:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project82" SIZE=20></TD>
-</TR>
-</TABLE>
-<BR>
-<INPUT TYPE="SUBMIT" VALUE="Invoke">
-<INPUT TYPE="RESET" VALUE="Clear">
-</FORM>
-<%
-break;
-case 84:
+case 18:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -180,12 +76,149 @@ valid = false;
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">pass:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass89" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass23" SIZE=20></TD>
 </TR>
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">username:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username91" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username25" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 27:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">project:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project30" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 32:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">description:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="description35" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">name:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="name37" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 39:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">description:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="description42" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">project:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project44" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">name:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="name46" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 48:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">description:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="description51" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">group:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="group53" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">project:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project55" SIZE=20></TD>
+</TR>
+</TABLE>
+<TABLE>
+<TR>
+<TD COLSPAN="3" ALIGN="LEFT">user:</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">pass:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass59" SIZE=20></TD>
+</TR>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">username:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username61" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 63:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="3" ALIGN="LEFT">user:</TD>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">pass:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass68" SIZE=20></TD>
+</TR>
+<TR>
+<TD WIDTH="5%"></TD>
+<TD COLSPAN="2" ALIGN="LEFT">username:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username70" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>

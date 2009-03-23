@@ -43,7 +43,6 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
         ((java.util.List)_myOperations.get("getProjects")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "user"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://wsprojectteam", "Auth"), wsprojectteam.Auth.class, false, false), 
-            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "user"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("getProjectsForUser", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
         _oper.setReturnType(new javax.xml.namespace.QName("http://wsprojectteam", "ArrayOfString"));
@@ -55,11 +54,23 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
         }
         ((java.util.List)_myOperations.get("getProjectsForUser")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+        };
+        _oper = new org.apache.axis.description.OperationDesc("getGroupsForProject", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://wsprojectteam", "ArrayOfString"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wsprojectteam", "getGroupsForProject"));
+        _oper.setSoapAction("");
+        _myOperationsList.add(_oper);
+        if (_myOperations.get("getGroupsForProject") == null) {
+            _myOperations.put("getGroupsForProject", new java.util.ArrayList());
+        }
+        ((java.util.List)_myOperations.get("getGroupsForProject")).add(_oper);
+        _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "description"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "name"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("addProject", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
-        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         _oper.setElementQName(new javax.xml.namespace.QName("http://wsprojectteam", "addProject"));
         _oper.setSoapAction("");
         _myOperationsList.add(_oper);
@@ -73,7 +84,7 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "name"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("addGroupToProject", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
-        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         _oper.setElementQName(new javax.xml.namespace.QName("http://wsprojectteam", "addGroupToProject"));
         _oper.setSoapAction("");
         _myOperationsList.add(_oper);
@@ -85,10 +96,10 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "description"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "group"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
-            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "name"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "user"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://wsprojectteam", "Auth"), wsprojectteam.Auth.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("addMemberToProject", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
-        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         _oper.setElementQName(new javax.xml.namespace.QName("http://wsprojectteam", "addMemberToProject"));
         _oper.setSoapAction("");
         _myOperationsList.add(_oper);
@@ -123,27 +134,33 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
         return ret;
     }
 
-    public java.lang.String[] getProjectsForUser(wsprojectteam.Auth user, java.lang.String user2) throws java.rmi.RemoteException
+    public java.lang.String[] getProjectsForUser(wsprojectteam.Auth user) throws java.rmi.RemoteException
     {
-        java.lang.String[] ret = impl.getProjectsForUser(user, user2);
+        java.lang.String[] ret = impl.getProjectsForUser(user);
         return ret;
     }
 
-    public java.lang.String addProject(java.lang.String description, java.lang.String name) throws java.rmi.RemoteException
+    public java.lang.String[] getGroupsForProject(java.lang.String project) throws java.rmi.RemoteException
     {
-        java.lang.String ret = impl.addProject(description, name);
+        java.lang.String[] ret = impl.getGroupsForProject(project);
         return ret;
     }
 
-    public java.lang.String addGroupToProject(java.lang.String description, java.lang.String project, java.lang.String name) throws java.rmi.RemoteException
+    public boolean addProject(java.lang.String description, java.lang.String name) throws java.rmi.RemoteException
     {
-        java.lang.String ret = impl.addGroupToProject(description, project, name);
+        boolean ret = impl.addProject(description, name);
         return ret;
     }
 
-    public java.lang.String addMemberToProject(java.lang.String description, java.lang.String group, java.lang.String project, java.lang.String name) throws java.rmi.RemoteException
+    public boolean addGroupToProject(java.lang.String description, java.lang.String project, java.lang.String name) throws java.rmi.RemoteException
     {
-        java.lang.String ret = impl.addMemberToProject(description, group, project, name);
+        boolean ret = impl.addGroupToProject(description, project, name);
+        return ret;
+    }
+
+    public boolean addMemberToProject(java.lang.String description, java.lang.String group, java.lang.String project, wsprojectteam.Auth user) throws java.rmi.RemoteException
+    {
+        boolean ret = impl.addMemberToProject(description, group, project, user);
         return ret;
     }
 
