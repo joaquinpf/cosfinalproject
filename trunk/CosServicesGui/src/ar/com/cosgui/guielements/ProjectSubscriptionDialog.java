@@ -27,6 +27,17 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
     public ProjectSubscriptionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        initProjects();
+    }
+
+    private void initProjects() {
+        ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        String[] projects = proj.getProjects();
+        if(projects!=null){
+        	for(int i=0;i<projects.length;i++){
+            	jComboBox1.addItem(projects[i]);
+        	}
+        }
     }
 
     /** This method is called from within the constructor to
@@ -120,17 +131,25 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
-        project.addMemberToProject((String)jComboBox1.getSelectedItem(), (String)jComboBox2.getSelectedItem(),
-                DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass());
+        project.addMemberToProject((String)jComboBox2.getSelectedItem(), (String)jComboBox1.getSelectedItem(),
+                DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass(), "Member");
         this.setVisible(false);
         this.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        String[] groups = project.getGroupsForProject((String) jComboBox1.getSelectedItem());
+          
+        jComboBox2.removeAllItems();
+        if(groups != null){
+        	for(int i=0;i<groups.length;i++){
+        		jComboBox2.addItem(groups[i]);
+        	}
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
     * @param args the command line arguments

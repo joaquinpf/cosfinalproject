@@ -9,11 +9,11 @@
 <LI><A HREF="Input.jsp?method=5" TARGET="inputs"> setEndpoint(java.lang.String)</A></LI>
 <LI><A HREF="Input.jsp?method=10" TARGET="inputs"> getBugTrackerService()</A></LI>
 <LI><A HREF="Input.jsp?method=13" TARGET="inputs"> submitBug(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=38" TARGET="inputs"> changeBugStatus(int,java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=57" TARGET="inputs"> getBug(int)</A></LI>
-<LI><A HREF="Input.jsp?method=74" TARGET="inputs"> getBugsByType(java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=79" TARGET="inputs"> getBugsByProject(java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=84" TARGET="inputs"> addUser(wsbugtracker.Auth)</A></LI>
+<LI><A HREF="Input.jsp?method=38" TARGET="inputs"> closeBug(int)</A></LI>
+<LI><A HREF="Input.jsp?method=55" TARGET="inputs"> getBug(int)</A></LI>
+<LI><A HREF="Input.jsp?method=72" TARGET="inputs"> getBugsByType(java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=77" TARGET="inputs"> getBugsByProject(java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=82" TARGET="inputs"> addUser(wsbugtracker.Auth)</A></LI>
 </UL>
 </BODY>
 </HTML>

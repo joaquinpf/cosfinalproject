@@ -1,5 +1,7 @@
 package wsbugtracker;
 
+import java.rmi.RemoteException;
+
 public class BugTrackerServiceProxy implements wsbugtracker.BugTrackerService {
   private String _endpoint = null;
   private wsbugtracker.BugTrackerService bugTrackerService = null;
@@ -50,12 +52,6 @@ public class BugTrackerServiceProxy implements wsbugtracker.BugTrackerService {
     return bugTrackerService.submitBug(description, type, owner, project, status);
   }
   
-  public wsbugtracker.Bug changeBugStatus(int number, java.lang.String status) throws java.rmi.RemoteException{
-    if (bugTrackerService == null)
-      _initBugTrackerServiceProxy();
-    return bugTrackerService.changeBugStatus(number, status);
-  }
-  
   public wsbugtracker.Bug getBug(int number) throws java.rmi.RemoteException{
     if (bugTrackerService == null)
       _initBugTrackerServiceProxy();
@@ -78,6 +74,12 @@ public class BugTrackerServiceProxy implements wsbugtracker.BugTrackerService {
     if (bugTrackerService == null)
       _initBugTrackerServiceProxy();
     return bugTrackerService.addUser(user);
+  }
+
+  public Bug changeBugStatus(int number, String status) throws RemoteException {
+	if (bugTrackerService == null)
+	   _initBugTrackerServiceProxy();
+	return bugTrackerService.changeBugStatus(number, status);
   }
   
   

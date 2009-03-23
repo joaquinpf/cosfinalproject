@@ -18,9 +18,6 @@ public class BugTable extends JTable {
 	 */
 	private static final long serialVersionUID = -293303729609358987L;
 	
-	private boolean filled = false;	
-	private boolean profileable = false;
-	
 	public BugTable() {
 		super();		
 		DefaultTableModel model = (DefaultTableModel) this.getModel();
@@ -28,28 +25,30 @@ public class BugTable extends JTable {
 		model.addColumn("Description");
 		model.addColumn("Status");
 		model.addColumn("Owner");
-		model.addColumn("type");
-		model.addColumn("project");
-		
+		model.addColumn("Type");
+		model.addColumn("Project");
+
 		setCombobox();
  
 		TableColumn column = getColumnModel().getColumn(0); 
-		column.setPreferredWidth(20); 
+		column.setPreferredWidth(1); 
 		column = getColumnModel().getColumn(1); 
-		column.setPreferredWidth(350); 
+		column.setPreferredWidth(300); 
 		column = getColumnModel().getColumn(2); 
-		column.setPreferredWidth(4);
+		column.setPreferredWidth(70);
 		column = getColumnModel().getColumn(3);
-		column.setPreferredWidth(4);
+		column.setPreferredWidth(54);
 		column = getColumnModel().getColumn(4); 
-		column.setPreferredWidth(4);
+		column.setPreferredWidth(54);
 		column = getColumnModel().getColumn(5);
-		column.setPreferredWidth(4);
+		column.setPreferredWidth(54);
 		
 		setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		getTableHeader().setResizingAllowed(false);
+
+		model.addTableModelListener(new BugTableListener());
 	}
-	
+
 	private void setCombobox(){
         String[] statuses = {"Open", "In-Progress", "Closed", "Dismissed"};
 	    

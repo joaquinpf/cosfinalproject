@@ -181,15 +181,10 @@ case 38:
         gotMethod = true;
         String number_6id=  request.getParameter("number53");
         int number_6idTemp  = Integer.parseInt(number_6id);
-        String status_7id=  request.getParameter("status55");
-            java.lang.String status_7idTemp = null;
-        if(!status_7id.equals("")){
-         status_7idTemp  = status_7id;
-        }
-        wsbugtracker.Bug changeBugStatus38mtemp = sampleBugTrackerServiceProxyid.changeBugStatus(number_6idTemp,status_7idTemp);
-if(changeBugStatus38mtemp == null){
+        wsbugtracker.Bug closeBug38mtemp = sampleBugTrackerServiceProxyid.closeBug(number_6idTemp);
+if(closeBug38mtemp == null){
 %>
-<%=changeBugStatus38mtemp %>
+<%=closeBug38mtemp %>
 <%
 }else{
 %>
@@ -201,8 +196,8 @@ if(changeBugStatus38mtemp == null){
 <TD COLSPAN="2" ALIGN="LEFT">owner:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
-java.lang.String typeowner41 = changeBugStatus38mtemp.getOwner();
+if(closeBug38mtemp != null){
+java.lang.String typeowner41 = closeBug38mtemp.getOwner();
         String tempResultowner41 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeowner41));
         %>
         <%= tempResultowner41 %>
@@ -214,8 +209,8 @@ java.lang.String typeowner41 = changeBugStatus38mtemp.getOwner();
 <TD COLSPAN="2" ALIGN="LEFT">status:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
-java.lang.String typestatus43 = changeBugStatus38mtemp.getStatus();
+if(closeBug38mtemp != null){
+java.lang.String typestatus43 = closeBug38mtemp.getStatus();
         String tempResultstatus43 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typestatus43));
         %>
         <%= tempResultstatus43 %>
@@ -227,8 +222,8 @@ java.lang.String typestatus43 = changeBugStatus38mtemp.getStatus();
 <TD COLSPAN="2" ALIGN="LEFT">type:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
-java.lang.String typetype45 = changeBugStatus38mtemp.getType();
+if(closeBug38mtemp != null){
+java.lang.String typetype45 = closeBug38mtemp.getType();
         String tempResulttype45 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typetype45));
         %>
         <%= tempResulttype45 %>
@@ -240,9 +235,9 @@ java.lang.String typetype45 = changeBugStatus38mtemp.getType();
 <TD COLSPAN="2" ALIGN="LEFT">number:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
+if(closeBug38mtemp != null){
 %>
-<%=changeBugStatus38mtemp.getNumber()
+<%=closeBug38mtemp.getNumber()
 %><%}%>
 </TD>
 <TR>
@@ -250,8 +245,8 @@ if(changeBugStatus38mtemp != null){
 <TD COLSPAN="2" ALIGN="LEFT">description:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
-java.lang.String typedescription49 = changeBugStatus38mtemp.getDescription();
+if(closeBug38mtemp != null){
+java.lang.String typedescription49 = closeBug38mtemp.getDescription();
         String tempResultdescription49 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescription49));
         %>
         <%= tempResultdescription49 %>
@@ -263,8 +258,8 @@ java.lang.String typedescription49 = changeBugStatus38mtemp.getDescription();
 <TD COLSPAN="2" ALIGN="LEFT">project:</TD>
 <TD>
 <%
-if(changeBugStatus38mtemp != null){
-java.lang.String typeproject51 = changeBugStatus38mtemp.getProject();
+if(closeBug38mtemp != null){
+java.lang.String typeproject51 = closeBug38mtemp.getProject();
         String tempResultproject51 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeproject51));
         %>
         <%= tempResultproject51 %>
@@ -275,14 +270,14 @@ java.lang.String typeproject51 = changeBugStatus38mtemp.getProject();
 <%
 }
 break;
-case 57:
+case 55:
         gotMethod = true;
-        String number_8id=  request.getParameter("number72");
-        int number_8idTemp  = Integer.parseInt(number_8id);
-        wsbugtracker.Bug getBug57mtemp = sampleBugTrackerServiceProxyid.getBug(number_8idTemp);
-if(getBug57mtemp == null){
+        String number_7id=  request.getParameter("number70");
+        int number_7idTemp  = Integer.parseInt(number_7id);
+        wsbugtracker.Bug getBug55mtemp = sampleBugTrackerServiceProxyid.getBug(number_7idTemp);
+if(getBug55mtemp == null){
 %>
-<%=getBug57mtemp %>
+<%=getBug55mtemp %>
 <%
 }else{
 %>
@@ -294,11 +289,11 @@ if(getBug57mtemp == null){
 <TD COLSPAN="2" ALIGN="LEFT">owner:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
-java.lang.String typeowner60 = getBug57mtemp.getOwner();
-        String tempResultowner60 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeowner60));
+if(getBug55mtemp != null){
+java.lang.String typeowner58 = getBug55mtemp.getOwner();
+        String tempResultowner58 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeowner58));
         %>
-        <%= tempResultowner60 %>
+        <%= tempResultowner58 %>
         <%
 }%>
 </TD>
@@ -307,11 +302,11 @@ java.lang.String typeowner60 = getBug57mtemp.getOwner();
 <TD COLSPAN="2" ALIGN="LEFT">status:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
-java.lang.String typestatus62 = getBug57mtemp.getStatus();
-        String tempResultstatus62 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typestatus62));
+if(getBug55mtemp != null){
+java.lang.String typestatus60 = getBug55mtemp.getStatus();
+        String tempResultstatus60 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typestatus60));
         %>
-        <%= tempResultstatus62 %>
+        <%= tempResultstatus60 %>
         <%
 }%>
 </TD>
@@ -320,11 +315,11 @@ java.lang.String typestatus62 = getBug57mtemp.getStatus();
 <TD COLSPAN="2" ALIGN="LEFT">type:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
-java.lang.String typetype64 = getBug57mtemp.getType();
-        String tempResulttype64 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typetype64));
+if(getBug55mtemp != null){
+java.lang.String typetype62 = getBug55mtemp.getType();
+        String tempResulttype62 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typetype62));
         %>
-        <%= tempResulttype64 %>
+        <%= tempResulttype62 %>
         <%
 }%>
 </TD>
@@ -333,9 +328,9 @@ java.lang.String typetype64 = getBug57mtemp.getType();
 <TD COLSPAN="2" ALIGN="LEFT">number:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
+if(getBug55mtemp != null){
 %>
-<%=getBug57mtemp.getNumber()
+<%=getBug55mtemp.getNumber()
 %><%}%>
 </TD>
 <TR>
@@ -343,11 +338,11 @@ if(getBug57mtemp != null){
 <TD COLSPAN="2" ALIGN="LEFT">description:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
-java.lang.String typedescription68 = getBug57mtemp.getDescription();
-        String tempResultdescription68 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescription68));
+if(getBug55mtemp != null){
+java.lang.String typedescription66 = getBug55mtemp.getDescription();
+        String tempResultdescription66 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typedescription66));
         %>
-        <%= tempResultdescription68 %>
+        <%= tempResultdescription66 %>
         <%
 }%>
 </TD>
@@ -356,11 +351,11 @@ java.lang.String typedescription68 = getBug57mtemp.getDescription();
 <TD COLSPAN="2" ALIGN="LEFT">project:</TD>
 <TD>
 <%
-if(getBug57mtemp != null){
-java.lang.String typeproject70 = getBug57mtemp.getProject();
-        String tempResultproject70 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeproject70));
+if(getBug55mtemp != null){
+java.lang.String typeproject68 = getBug55mtemp.getProject();
+        String tempResultproject68 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(typeproject68));
         %>
-        <%= tempResultproject70 %>
+        <%= tempResultproject68 %>
         <%
 }%>
 </TD>
@@ -368,73 +363,73 @@ java.lang.String typeproject70 = getBug57mtemp.getProject();
 <%
 }
 break;
-case 74:
+case 72:
         gotMethod = true;
-        String type_9id=  request.getParameter("type77");
-            java.lang.String type_9idTemp = null;
-        if(!type_9id.equals("")){
-         type_9idTemp  = type_9id;
+        String type_8id=  request.getParameter("type75");
+            java.lang.String type_8idTemp = null;
+        if(!type_8id.equals("")){
+         type_8idTemp  = type_8id;
         }
-        int[] getBugsByType74mtemp = sampleBugTrackerServiceProxyid.getBugsByType(type_9idTemp);
-if(getBugsByType74mtemp == null){
+        int[] getBugsByType72mtemp = sampleBugTrackerServiceProxyid.getBugsByType(type_8idTemp);
+if(getBugsByType72mtemp == null){
 %>
-<%=getBugsByType74mtemp %>
+<%=getBugsByType72mtemp %>
 <%
 }else{
-        String tempreturnp75 = "[";        for(int ireturnp75=0;ireturnp75< getBugsByType74mtemp.length;ireturnp75++){
-            tempreturnp75 = tempreturnp75 + getBugsByType74mtemp[ireturnp75] + ",";
+        String tempreturnp73 = "[";        for(int ireturnp73=0;ireturnp73< getBugsByType72mtemp.length;ireturnp73++){
+            tempreturnp73 = tempreturnp73 + getBugsByType72mtemp[ireturnp73] + ",";
         }
-        int lengthreturnp75 = tempreturnp75.length();
-        tempreturnp75 = tempreturnp75.substring(0,(lengthreturnp75 - 1)) + "]";
+        int lengthreturnp73 = tempreturnp73.length();
+        tempreturnp73 = tempreturnp73.substring(0,(lengthreturnp73 - 1)) + "]";
         %>
-        <%=tempreturnp75%>
+        <%=tempreturnp73%>
         <%
 }
 break;
-case 79:
+case 77:
         gotMethod = true;
-        String project_10id=  request.getParameter("project82");
-            java.lang.String project_10idTemp = null;
-        if(!project_10id.equals("")){
-         project_10idTemp  = project_10id;
+        String project_9id=  request.getParameter("project80");
+            java.lang.String project_9idTemp = null;
+        if(!project_9id.equals("")){
+         project_9idTemp  = project_9id;
         }
-        int[] getBugsByProject79mtemp = sampleBugTrackerServiceProxyid.getBugsByProject(project_10idTemp);
-if(getBugsByProject79mtemp == null){
+        int[] getBugsByProject77mtemp = sampleBugTrackerServiceProxyid.getBugsByProject(project_9idTemp);
+if(getBugsByProject77mtemp == null){
 %>
-<%=getBugsByProject79mtemp %>
+<%=getBugsByProject77mtemp %>
 <%
 }else{
-        String tempreturnp80 = "[";        for(int ireturnp80=0;ireturnp80< getBugsByProject79mtemp.length;ireturnp80++){
-            tempreturnp80 = tempreturnp80 + getBugsByProject79mtemp[ireturnp80] + ",";
+        String tempreturnp78 = "[";        for(int ireturnp78=0;ireturnp78< getBugsByProject77mtemp.length;ireturnp78++){
+            tempreturnp78 = tempreturnp78 + getBugsByProject77mtemp[ireturnp78] + ",";
         }
-        int lengthreturnp80 = tempreturnp80.length();
-        tempreturnp80 = tempreturnp80.substring(0,(lengthreturnp80 - 1)) + "]";
+        int lengthreturnp78 = tempreturnp78.length();
+        tempreturnp78 = tempreturnp78.substring(0,(lengthreturnp78 - 1)) + "]";
         %>
-        <%=tempreturnp80%>
+        <%=tempreturnp78%>
         <%
 }
 break;
-case 84:
+case 82:
         gotMethod = true;
-        String pass_12id=  request.getParameter("pass89");
-            java.lang.String pass_12idTemp = null;
-        if(!pass_12id.equals("")){
-         pass_12idTemp  = pass_12id;
+        String pass_11id=  request.getParameter("pass87");
+            java.lang.String pass_11idTemp = null;
+        if(!pass_11id.equals("")){
+         pass_11idTemp  = pass_11id;
         }
-        String username_13id=  request.getParameter("username91");
-            java.lang.String username_13idTemp = null;
-        if(!username_13id.equals("")){
-         username_13idTemp  = username_13id;
+        String username_12id=  request.getParameter("username89");
+            java.lang.String username_12idTemp = null;
+        if(!username_12id.equals("")){
+         username_12idTemp  = username_12id;
         }
         %>
-        <jsp:useBean id="wsbugtracker1Auth_11id" scope="session" class="wsbugtracker.Auth" />
+        <jsp:useBean id="wsbugtracker1Auth_10id" scope="session" class="wsbugtracker.Auth" />
         <%
-        wsbugtracker1Auth_11id.setPass(pass_12idTemp);
-        wsbugtracker1Auth_11id.setUsername(username_13idTemp);
-        int addUser84mtemp = sampleBugTrackerServiceProxyid.addUser(wsbugtracker1Auth_11id);
-        String tempResultreturnp85 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(addUser84mtemp));
+        wsbugtracker1Auth_10id.setPass(pass_11idTemp);
+        wsbugtracker1Auth_10id.setUsername(username_12idTemp);
+        int addUser82mtemp = sampleBugTrackerServiceProxyid.addUser(wsbugtracker1Auth_10id);
+        String tempResultreturnp83 = org.eclipse.jst.ws.util.JspUtils.markup(String.valueOf(addUser82mtemp));
         %>
-        <%= tempResultreturnp85 %>
+        <%= tempResultreturnp83 %>
         <%
 break;
 }

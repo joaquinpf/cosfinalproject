@@ -106,19 +106,13 @@ valid = false;
 <TD ALIGN="left"><INPUT TYPE="TEXT" NAME="number53" SIZE=20></TD>
 </TR>
 </TABLE>
-<TABLE>
-<TR>
-<TD COLSPAN="1" ALIGN="LEFT">status:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="status55" SIZE=20></TD>
-</TR>
-</TABLE>
 <BR>
 <INPUT TYPE="SUBMIT" VALUE="Invoke">
 <INPUT TYPE="RESET" VALUE="Clear">
 </FORM>
 <%
 break;
-case 57:
+case 55:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -126,7 +120,7 @@ valid = false;
 <TABLE>
 <TR>
 <TD COLSPAN="1" ALIGN="LEFT">number:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="number72" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="number70" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>
@@ -135,7 +129,7 @@ valid = false;
 </FORM>
 <%
 break;
-case 74:
+case 72:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -143,7 +137,7 @@ valid = false;
 <TABLE>
 <TR>
 <TD COLSPAN="1" ALIGN="LEFT">type:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="type77" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="type75" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>
@@ -152,7 +146,7 @@ valid = false;
 </FORM>
 <%
 break;
-case 79:
+case 77:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -160,7 +154,7 @@ valid = false;
 <TABLE>
 <TR>
 <TD COLSPAN="1" ALIGN="LEFT">project:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project82" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="project80" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>
@@ -169,7 +163,7 @@ valid = false;
 </FORM>
 <%
 break;
-case 84:
+case 82:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -180,12 +174,12 @@ valid = false;
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">pass:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass89" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass87" SIZE=20></TD>
 </TR>
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">username:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username91" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username89" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>

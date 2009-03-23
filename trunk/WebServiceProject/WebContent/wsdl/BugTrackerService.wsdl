@@ -12,6 +12,9 @@
 					<sequence>
 						<element name="description" type="xsd:string"/>
 						<element name="type" type="xsd:string"/>
+						<element name="owner" type="xsd:string"/>
+						<element name="project" type="xsd:string"/>
+						<element name="status" type="xsd:string"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -28,21 +31,23 @@
 					<element name="type" type="xsd:string"/>
 					<element name="owner" type="xsd:string"/>
 					<element name="number" type="xsd:int"/>
-					<element name="project" type="xsd:int"/>
+					<element name="project" type="xsd:string"/>
+					<element name="status" type="xsd:string"/>
 				</sequence>
 			</complexType>
 			
-			<element name="closeBug">
+			<element name="changeBugStatus">
 				<complexType>
 					<sequence>
 						<element name="number" type="xsd:int"/>
+						<element name="status" type="xsd:string"/>
 					</sequence>
 				</complexType>
 			</element>
-			<element name="closeBugResponse">
+			<element name="changeBugStatusResponse">
 				<complexType>
 					<sequence>
-						<element name="closeBugReturn" type="impl:Bug"/>
+						<element name="changeBugStatusReturn" type="impl:Bug"/>
 					</sequence>
 				</complexType>
 			</element>
@@ -128,11 +133,11 @@
 	<wsdl:message name="submitBugResponse">
 		<wsdl:part element="impl:submitBugResponse" name="parameters"/>
 	</wsdl:message>
-	<wsdl:message name="closeBugRequest">
-		<wsdl:part element="impl:closeBug" name="parameters"/>
+	<wsdl:message name="changeBugStatusRequest">
+		<wsdl:part element="impl:changeBugStatus" name="parameters"/>
 	</wsdl:message>
-	<wsdl:message name="closeBugResponse">
-		<wsdl:part element="impl:closeBugResponse" name="parameters"/>
+	<wsdl:message name="changeBugStatusResponse">
+		<wsdl:part element="impl:changeBugStatusResponse" name="parameters"/>
 	</wsdl:message>
 	<wsdl:message name="getBugRequest">
 		<wsdl:part element="impl:getBug" name="parameters"/>
@@ -164,9 +169,9 @@
 			<wsdl:input message="impl:submitBugRequest" name="submitBugRequest"/>
 			<wsdl:output message="impl:submitBugResponse" name="submitBugResponse"/>
 		</wsdl:operation>
-		<wsdl:operation name="closeBug">
-			<wsdl:input message="impl:closeBugRequest" name="closeBugRequest"/>
-			<wsdl:output message="impl:closeBugResponse" name="closeBugResponse"/>
+		<wsdl:operation name="changeBugStatus">
+			<wsdl:input message="impl:changeBugStatusRequest" name="changeBugStatusRequest"/>
+			<wsdl:output message="impl:changeBugStatusResponse" name="changeBugStatusResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="getBug">
 			<wsdl:input message="impl:getBugRequest" name="getBugRequest"/>
@@ -197,12 +202,12 @@
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
-		<wsdl:operation name="closeBug">
+		<wsdl:operation name="changeBugStatus">
 			<soap:operation soapAction=""/>
-			<wsdl:input name="closeBugRequest">
+			<wsdl:input name="changeBugStatusRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
-			<wsdl:output name="closeBugResponse">
+			<wsdl:output name="changeBugStatusResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>

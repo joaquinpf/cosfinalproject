@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -24,11 +24,11 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:service name="BusinessService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="wsdlPortType" value="BusinessService"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://wsbusiness"/>
-  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
+  <ns1:parameter name="wsdlPortType" value="BusinessService"/>
   <ns1:parameter name="className" value="wsbusiness.BusinessServiceBindingSkeleton"/>
+  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
+  <ns1:parameter name="schemaQualified" value="http://wsbusiness"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://wsbusiness"/>
   <ns1:parameter name="wsdlServiceElement" value="BusinessServiceFull"/>
   <ns2:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns1:ArrayOfString" xmlns:ns1="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>

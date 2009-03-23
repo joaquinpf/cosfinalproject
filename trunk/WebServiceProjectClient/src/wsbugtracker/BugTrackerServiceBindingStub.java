@@ -29,6 +29,12 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "type"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "owner"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "status"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://wsbugtracker", "Bug"));
         oper.setReturnClass(wsbugtracker.Bug.class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://wsbugtracker", "submitBugReturn"));
@@ -37,12 +43,14 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
         _operations[0] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("closeBug");
+        oper.setName("changeBugStatus");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "number"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsbugtracker", "status"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://wsbugtracker", "Bug"));
         oper.setReturnClass(wsbugtracker.Bug.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("http://wsbugtracker", "closeBugReturn"));
+        oper.setReturnQName(new javax.xml.namespace.QName("http://wsbugtracker", "changeBugStatusReturn"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[1] = oper;
@@ -211,7 +219,7 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
         }
     }
 
-    public wsbugtracker.Bug submitBug(java.lang.String description, java.lang.String type) throws java.rmi.RemoteException {
+    public wsbugtracker.Bug submitBug(java.lang.String description, java.lang.String type, java.lang.String owner, java.lang.String project, java.lang.String status) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -227,7 +235,7 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {description, type});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {description, type, owner, project, status});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;
@@ -245,7 +253,7 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
 }
     }
 
-    public wsbugtracker.Bug closeBug(int number) throws java.rmi.RemoteException {
+    public wsbugtracker.Bug changeBugStatus(int number, java.lang.String status) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -257,11 +265,11 @@ public class BugTrackerServiceBindingStub extends org.apache.axis.client.Stub im
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://wsbugtracker", "closeBug"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://wsbugtracker", "changeBugStatus"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(number)});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Integer(number), status});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

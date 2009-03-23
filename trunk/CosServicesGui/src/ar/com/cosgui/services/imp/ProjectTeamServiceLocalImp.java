@@ -2,47 +2,91 @@ package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
 
-import ar.com.cosgui.services.IServiceLocalImp;
+import wsprojectteam.Auth;
+import wsprojectteam.ProjectTeamServiceProxy;
 
-import wsprojectteam.ProjectTeamService;
+import ar.com.cosgui.services.IServiceLocalImp;
 
 public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 
+	ProjectTeamServiceProxy proxy = new ProjectTeamServiceProxy();
+
 	@Override
 	public void connect() {
-
+		
 	}
 
-	public String addGroupToProject(String description, String project,
-			String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addGroupToProject(String description, String project,
+			String name) {
+		try {
+			return proxy.addGroupToProject(description, project, name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
-	public String addMemberToProject(String group,
-			String project, String name, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addMemberToProject(String group,
+			String project, String name, String password, String description) {
+		try {
+			Auth a = new Auth();
+			a.setPass(password);
+			a.setUsername(name);
+			return proxy.addMemberToProject(description, group, project, a);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
-	public String addProject(String description, String name)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean addProject(String description, String name) {
+		try {
+			return proxy.addProject(description, name);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public int addUser(String user, String pass) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			Auth a = new Auth();
+			a.setPass(pass);
+			a.setUsername(user);
+			return proxy.addUser(a);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
-	public String[] getProjects() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+	public String[] getProjects() {
+		try {
+			return proxy.getProjects();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public String[] getProjectsForUser(String user, String pass) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Auth a = new Auth();
+			a.setPass(pass);
+			a.setUsername(user);
+			return proxy.getProjectsForUser(a);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
+	
+	public String[] getGroupsForProject(String project){
+		try {
+			return proxy.getGroupsForProject(project);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}	   
 }
