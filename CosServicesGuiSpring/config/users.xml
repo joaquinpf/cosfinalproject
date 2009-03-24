@@ -1,0 +1,50 @@
+<object type="map" id="0">
+  <object type="entry">
+    <object type="string" value="" id="1" />
+    <object idref="1" />
+  </object>
+  <object type="entry">
+    <object type="string" value="2" id="2" />
+    <object idref="2" />
+  </object>
+  <object type="entry">
+    <object type="string" value="1" id="3" />
+    <object idref="3" />
+  </object>
+  <object type="entry">
+    <object type="string" value="0" id="4" />
+    <object idref="4" />
+  </object>
+  <object type="entry">
+    <object type="string" value="45" id="5" />
+    <object idref="5" />
+  </object>
+  <object type="entry">
+    <object type="string" value="7" id="6" />
+    <object idref="6" />
+  </object>
+  <object type="entry">
+    <object type="string" value="456" id="7" />
+    <object idref="7" />
+  </object>
+  <object type="entry">
+    <object type="string" value="4" id="8" />
+    <object idref="8" />
+  </object>
+  <object type="entry">
+    <object type="string" value="a" id="9" />
+    <object idref="9" />
+  </object>
+  <object type="entry">
+    <object type="string" value="111" id="10" />
+    <object idref="10" />
+  </object>
+  <object type="entry">
+    <object type="string" value="54" id="11" />
+    <object idref="5" />
+  </object>
+  <object type="entry">
+    <object type="string" value="4141" id="12" />
+    <object idref="12" />
+  </object>
+</object>

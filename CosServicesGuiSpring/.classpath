@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/woxSerializer.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-context-support.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-core.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-web.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/axis.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-beanutils-bean-collections.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-beanutils-core.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-jci-core-1.0.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-logging-adapters-1.1.1.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/commons-logging-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/soap.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-aop.jar"/>
+	<classpathentry kind="lib" path="H:/COPIAR/Cos Workspace/CommonLibs/lib/spring-beans.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CommonLibs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WebServiceProject"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WebServiceProjectClient"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
