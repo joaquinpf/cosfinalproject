@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="app" class="ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp">
+    	<property name="proxy"><ref local="service"/></property>
+   	</bean>
+
+	<bean id="service" class="ar.com.cosgui.services.imp.ProjectTeamJaxRpcPortProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface">
+            <value>ar.com.cosgui.services.imp.ProjectTeamIF</value>
+        </property>
+        <property name="wsdlDocumentUrl">
+            <value>http://localhost:8080/WebServiceProject/services/ProjectTeamService?wsdl</value>
+        </property>
+        <property name="namespaceUri">
+            <value>http://wsprojectteam</value>
+        </property>
+        <property name="serviceName">
+            <value>ProjectTeamServiceFull</value>
+        </property>
+        <property name="portName">
+            <value>ProjectTeamService</value>
+        </property>
+    </bean>	
+
+</beans>
