@@ -18,8 +18,8 @@ import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
- *
- * @author Kireta
+ * Modela la suscripcion a un grupo y proyecto existente del usuario activo
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class ProjectSubscriptionDialog extends javax.swing.JDialog {
 
@@ -30,6 +30,9 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         initProjects();
     }
 
+    /**
+     * Inicializa la lista de proyectos.
+     */
     private void initProjects() {
         ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] projects = proj.getProjects();
@@ -131,6 +134,10 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Suscribe al usuario activo al proyecto y grupo seleccionados.
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         project.addMemberToProject((String)jComboBox2.getSelectedItem(), (String)jComboBox1.getSelectedItem(),
@@ -139,6 +146,10 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         this.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Inicializa la lista de grupos basados en el proyecto seleccionado.
+     * @param evt
+     */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] groups = project.getGroupsForProject((String) jComboBox1.getSelectedItem());

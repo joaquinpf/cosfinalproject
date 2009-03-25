@@ -7,7 +7,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 
 /**
- * @author Joaqu�n Alejandro P�rez Fuentes
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class MyComboBoxEditor extends DefaultCellEditor {
 

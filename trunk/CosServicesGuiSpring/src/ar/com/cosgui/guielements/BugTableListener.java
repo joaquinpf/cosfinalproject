@@ -9,7 +9,9 @@ import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
 
 /**
- * @author Joaqu�n Alejandro P�rez Fuentes
+ * Listener de cambios para BugTable. 
+ * Implementa la notificacion de cambios a ServicePoint para el status.
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class BugTableListener implements TableModelListener {
 
