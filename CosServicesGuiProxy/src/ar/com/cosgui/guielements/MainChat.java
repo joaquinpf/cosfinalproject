@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import wschat.TextMessage;
 
 import ar.com.cosgui.services.ServicePoint;
@@ -32,6 +34,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private String username = null;
 	private String password = null;
     private Thread reader = null;
+    private int activeThread = 1;
 
 
     /** Creates new form MainChat */
@@ -40,6 +43,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         this.lblUsername.setText(username);
         refreshContactsStatus();
         this.reader = new Thread (this);
+		service.login(username, password);
         reader.start();
     }
 
@@ -126,10 +130,28 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         listOfflineUsers = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
 
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
         lblUsername.setFont(new java.awt.Font("Tahoma", 3, 14));
         lblUsername.setText("<username>");
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 2, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 2, 11));
         jLabel1.setText("Online users");
 
         cmdAddContact.setText("Add contact");
@@ -139,7 +161,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
         });
 
-        listOnlineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        listOnlineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11));
         listOnlineUsers.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -153,7 +175,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         });
         jScrollPane1.setViewportView(listOnlineUsers);
 
-        listOfflineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        listOfflineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11));
         listOfflineUsers.setForeground(new java.awt.Color(204, 0, 0));
         listOfflineUsers.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -168,7 +190,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         });
         jScrollPane2.setViewportView(listOfflineUsers);
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 2, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 2, 11));
         jLabel2.setText("Offline users");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,6 +272,16 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
 }//GEN-LAST:event_listOfflineUsersMouseClicked
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
+        try {
+            service.logout(username, password);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+        }
+        this.activeThread = 0;
+        reader.notify();
+    }//GEN-LAST:event_formInternalFrameClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAddContact;
@@ -265,7 +297,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     public void run() {
     	String[] msgs = null;
     	int refresh = 0;
-    	while (true) {
+    	while (activeThread == 1) {
     		try {
 	    		msgs = this.service.receiveMessage(this.username);
 			} catch (RemoteException e) {
