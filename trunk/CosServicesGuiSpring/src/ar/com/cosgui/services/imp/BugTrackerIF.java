@@ -1,7 +1,10 @@
 package ar.com.cosgui.services.imp;
 
 
-
+/**
+ * Interface a utilizar por Spring para el servicio de bug tracking.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public interface BugTrackerIF {
     public wsbugtracker.Bug submitBug(java.lang.String description, java.lang.String type, java.lang.String owner, java.lang.String project, java.lang.String status) throws java.rmi.RemoteException;
     public wsbugtracker.Bug changeBugStatus(int number, java.lang.String status) throws java.rmi.RemoteException;

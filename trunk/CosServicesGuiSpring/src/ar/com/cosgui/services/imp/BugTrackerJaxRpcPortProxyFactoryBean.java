@@ -17,6 +17,7 @@ public class BugTrackerJaxRpcPortProxyFactoryBean extends JaxRpcPortProxyFactory
 	protected void postProcessJaxRpcService(Service service) {
 		TypeMappingRegistry registry = service.getTypeMappingRegistry();
 		TypeMapping mapping = registry.getDefaultTypeMapping();
+		//MAPEO DE TIPOS
 		registerBeanMapping(mapping, Bug.class, "Bug");
 		registerBeanMapping(mapping, Auth.class, "Auth");
 		String[] array = registry.getRegisteredEncodingStyleURIs();

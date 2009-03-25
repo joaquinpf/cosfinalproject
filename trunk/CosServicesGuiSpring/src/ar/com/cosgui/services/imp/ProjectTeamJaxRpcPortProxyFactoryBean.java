@@ -16,8 +16,8 @@ public class ProjectTeamJaxRpcPortProxyFactoryBean extends JaxRpcPortProxyFactor
 	protected void postProcessJaxRpcService(Service service) {
 		TypeMappingRegistry registry = service.getTypeMappingRegistry();
 		TypeMapping mapping = registry.getDefaultTypeMapping();
+		//MAPEO DE TIPOS
 		registerBeanMapping(mapping, Auth.class, "Auth");
-		registerBeanMapping(mapping, String[].class, "String[]");
 		String[] array = registry.getRegisteredEncodingStyleURIs();
 		for (int i = 0; i < array.length; i++) {
 			System.out.println("Encoding style: " + array[0]);

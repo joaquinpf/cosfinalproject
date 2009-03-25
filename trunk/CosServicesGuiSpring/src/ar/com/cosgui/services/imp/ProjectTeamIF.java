@@ -1,8 +1,9 @@
 package ar.com.cosgui.services.imp;
 
-import java.util.ArrayList;
-
-
+/**
+ * Interface a utilizar por Spring para el servicio ProjectTeamService.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public interface ProjectTeamIF {
     public Object getProjects() throws java.rmi.RemoteException;
     public Object getProjectsForUser(wsprojectteam.Auth user) throws java.rmi.RemoteException;

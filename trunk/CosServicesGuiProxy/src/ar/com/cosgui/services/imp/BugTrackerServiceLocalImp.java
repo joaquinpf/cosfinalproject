@@ -7,8 +7,15 @@ import wsbugtracker.Bug;
 import wsbugtracker.BugTrackerServiceProxy;
 import ar.com.cosgui.services.IServiceLocalImp;
 
+/**
+ * Implementacion via Proxys del servicio de Bug Tracking.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
+	/**
+	 * Proxy del servicio
+	 */
 	BugTrackerServiceProxy proxy = new BugTrackerServiceProxy();
 	
 	@Override

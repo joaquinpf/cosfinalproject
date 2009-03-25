@@ -7,6 +7,10 @@ import wsprojectteam.ProjectTeamServiceProxy;
 
 import ar.com.cosgui.services.IServiceLocalImp;
 
+/**
+ * Implementacion via Proxys del servicio ProjectTeamService.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 
 	ProjectTeamServiceProxy proxy = new ProjectTeamServiceProxy();
