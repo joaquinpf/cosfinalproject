@@ -26,8 +26,8 @@ import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 
 /**
- *
- * @author Kireta
+ * Modela el login de usuarios o la creacion de usuarios nuevos
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class Login extends javax.swing.JFrame {
 
@@ -157,6 +157,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    /**
+     * Agrega un usuario al sistema local y externo provisto por ServicePoint.
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jTextField4.setText(DataModel.INSTANCE.addUser(jTextField2.getText(), jTextField3.getText()));        // TODO add your handling code here:
 
@@ -167,6 +171,10 @@ public class Login extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Login del usuario, verifica la identidad.
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(DataModel.INSTANCE.validateUser(jTextField2.getText(), jTextField3.getText()) == false){
             jTextField4.setText("Username or password error");

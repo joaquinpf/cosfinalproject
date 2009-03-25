@@ -9,7 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
- * @author Joaqu�n Alejandro P�rez Fuentes
+ * Tabla de bugs.
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class BugTable extends JTable {
 
@@ -18,6 +19,9 @@ public class BugTable extends JTable {
 	 */
 	private static final long serialVersionUID = -293303729609358987L;
 	
+	/**
+	 * Inicializacion. Crea las columnas y genera las opciones del Combobox
+	 */
 	public BugTable() {
 		super();		
 		DefaultTableModel model = (DefaultTableModel) this.getModel();
@@ -49,6 +53,9 @@ public class BugTable extends JTable {
 		model.addTableModelListener(new BugTableListener());
 	}
 
+	/**
+	 * Seteo de opciones en el combobox
+	 */
 	private void setCombobox(){
         String[] statuses = {"Open", "In-Progress", "Closed", "Dismissed"};
 	    
@@ -67,6 +74,9 @@ public class BugTable extends JTable {
 		return Object.class; 
 	}
 	
+	/**
+	 * Devuelve verdadero si la celda puede editarse. Override.
+	 */
     public boolean isCellEditable(int rowIndex, int vColIndex) {
     	if(vColIndex == 2){
     		return true;
