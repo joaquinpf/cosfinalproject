@@ -33,8 +33,8 @@ import java.awt.event.InputEvent;
 
 
 /**
- *
- * @author Kireta
+ * Ventana principal de la aplicacion
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -46,6 +46,9 @@ public class MainFrame extends javax.swing.JFrame {
         createPopupMenu();
     }
 
+    /**
+     * Crea el menu popup a utilizar con el boton derecho del mouse sobre la tabla
+     */
     private void createPopupMenu() {
 		menu = new PopupMenu();
 		MenuItem close = new MenuItem("Close bug");
@@ -59,6 +62,9 @@ public class MainFrame extends javax.swing.JFrame {
 		jTable1.add(menu);
 	}
 
+    /**
+     * Genera datos para el testeo de los servicios.
+     */
     private void initMockDatabase() {
     	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	proj.addProject("Proyecto final de COS", "Cos Project");
@@ -71,6 +77,10 @@ public class MainFrame extends javax.swing.JFrame {
     	proj.addGroupToProject("Management", "Grid Project", "Management");
     }
 
+    /**
+     * Inicializa la tabla con los bugs provistos por ServicePoint para los proyectos
+     * a los que el usuario actual esta suscripto
+     */
 	private void initTable(){
     	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
@@ -318,6 +328,11 @@ public class MainFrame extends javax.swing.JFrame {
             initTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Filtra la tabla segun lo ingresado.
+     * Para lograr esto se debe reinicializar por si habia algun filtro activo.
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	initTable();
     	if(jTextField1.getText() != ""){
@@ -332,7 +347,6 @@ public class MainFrame extends javax.swing.JFrame {
     						model.getValueAt(i, 2),model.getValueAt(i, 3),model.getValueAt(i, 4),
     						model.getValueAt(i, 5),};
     				filteredRows.add(row);
-
     			}
     		}
 

@@ -10,7 +10,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 /**
- * @author Joaqu�n Alejandro P�rez Fuentes
+ * Renderer de JComboBox para JTable
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class MyComboBoxRenderer extends JComboBox implements TableCellRenderer {
 

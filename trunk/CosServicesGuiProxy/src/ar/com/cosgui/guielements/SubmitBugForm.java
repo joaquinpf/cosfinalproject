@@ -20,8 +20,8 @@ import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
- *
- * @author Kireta
+ * Este formulario modela la carga de bugs al sistema.
+ * @author Joaquin Alejandro Perez Fuentes
  */
 public class SubmitBugForm extends javax.swing.JDialog {
 
@@ -136,6 +136,9 @@ public class SubmitBugForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Inicializa los proyectos, sincronizando con ServicePoint
+     */
     private void initProjects() {
         ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] projects = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
@@ -146,6 +149,10 @@ public class SubmitBugForm extends javax.swing.JDialog {
         }
     }
 
+    /**
+     * Envia un bug al sistema
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
      bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem(),
