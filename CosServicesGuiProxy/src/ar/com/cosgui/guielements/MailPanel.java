@@ -19,26 +19,32 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.MailServiceLocalImp;
+
+import wsmail.Mail;
+
 public class MailPanel extends javax.swing.JPanel {
 	private Vector<Mail> userMails = new Vector<Mail>();
 	private Vector<Mail> userSavedMails = new Vector<Mail>();
-	private wsmail.MailServiceProxy service = null;
-	private Auth user = null;
-
+	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+	private String username = null;
+	private String password = null;
+	
     /** Creates new form PanlMail */
-    public MailPanel(Auth user, wsmail.MailServiceProxy service) {
+    public MailPanel(String username, String password) {
         initComponents();
-        this.user = user;
-        this.service = service;
-        this.lblUsername.setText(user.getUsername());
-        this.loadMails(user);
+        this.username = username;
+        this.password = password;
+        this.loadMails(username, password);
     }
 
-    private Vector<Mail> getMails(String status, Auth user) {
+    private Vector<Mail> getMails(String status, String username, String password) {
     	Vector<Mail> filtred = new Vector<Mail>();
     	String[] mails = null;
     	try {
-			mails = service.getMails(user);
+			mails = service.getMails(username, password);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -51,9 +57,9 @@ public class MailPanel extends javax.swing.JPanel {
     	return filtred;
     }
 
-    private void loadMails(Auth user) {
-    	this.userMails = this.getMails("new", user);
-    	this.userSavedMails = this.getMails("saved", user);
+    private void loadMails(String username, String password) {
+    	this.userMails = this.getMails("new", username, password);
+    	this.userSavedMails = this.getMails("saved", username, password);
         this.printMails();
     }
 
@@ -116,7 +122,7 @@ public class MailPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         listMails = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listSaedMails = new javax.swing.JList();
+        listSavedMails = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -173,9 +179,9 @@ public class MailPanel extends javax.swing.JPanel {
         listMails.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listMails);
 
-        listSaedMails.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        listSaedMails.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(listSaedMails);
+        listSavedMails.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        listSavedMails.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(listSavedMails);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setForeground(new java.awt.Color(153, 0, 0));
@@ -250,13 +256,12 @@ public class MailPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdNewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewMailActionPerformed
-        NewMail nm = new NewMail(this, user, service);
-        this.setVisible(false);
+        NewMail nm = new NewMail(username, password);
         nm.setVisible(true);
     }//GEN-LAST:event_cmdNewMailActionPerformed
 
     private void cmdVerifyNewMailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVerifyNewMailsActionPerformed
-    	this.loadMails(user);
+    	this.loadMails(username, password);
     }//GEN-LAST:event_cmdVerifyNewMailsActionPerformed
 
     private void cmdViewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdViewMailActionPerformed
@@ -264,9 +269,9 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
     	if (mail != null) {
-        	ViewMessage vm = new ViewMessage (this, mail);
-    		this.setVisible(false);
+        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText());
     		vm.setVisible(true);
+    	}
     }//GEN-LAST:event_cmdViewMailActionPerformed
 
     private void cmdSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSaveActionPerformed
@@ -274,11 +279,11 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
 		try {
-			service.saveMail(this.user, mail);
+			service.saveMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		this.loadMails(user);
+		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdSaveActionPerformed
 
     private void cmdDeleteMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteMailActionPerformed
@@ -286,11 +291,11 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
 		try {
-			service.deleteMail(this.user, mail);
+			service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		this.loadMails(user);
+		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdDeleteMailActionPerformed
 
     private void cmdViewMailSavedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdViewMailSavedActionPerformed
@@ -298,8 +303,7 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
     		mail = userSavedMails.elementAt(this.listSavedMails.getSelectedIndex());
     	if (mail != null) {
-        	ViewMessage vm = new ViewMessage (this, mail);
-    		this.setVisible(false);
+        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText());
     		vm.setVisible(true);
     	}
     }//GEN-LAST:event_cmdViewMailSavedActionPerformed
@@ -309,11 +313,11 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
     		mail = userSavedMails.elementAt(this.listSavedMails.getSelectedIndex());
 		try {
-			service.deleteMail(this.user, mail);
+			service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		this.loadMails(user);
+		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdDeleteMailSavedActionPerformed
 
 
@@ -331,7 +335,7 @@ public class MailPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList listMails;
-    private javax.swing.JList listSaedMails;
+    private javax.swing.JList listSavedMails;
     // End of variables declaration//GEN-END:variables
 
 }

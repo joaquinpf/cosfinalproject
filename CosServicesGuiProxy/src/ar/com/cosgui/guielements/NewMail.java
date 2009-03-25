@@ -8,26 +8,31 @@ package ar.com.cosgui.guielements;
 
 import java.rmi.RemoteException;
 
+import wsmail.Mail;
+
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.MailServiceLocalImp;
+
 /**
  *
  * @author  Administrador
  */
 public class NewMail extends javax.swing.JFrame {
-	Auth user = null;
-	wsmail.MailServiceProxy service = null;
-    private MainMenu mainMenu = null;
+	private String username = null;
+	private String password = null;
+	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
     
     /** Creates new form NewMail */
     public NewMail() {
         initComponents();
     }
 
-    public NewMail (MainMenu mainMenu, Auth user, wsmail.MailServiceProxy service) {
-        this.mainMenu = mainMenu;
-        this.service = service;
-        this.user = user;
+    public NewMail (String username, String password) {
+        this.username = username;
+        this.password = password;
         initComponents();
-        this.txtFrom.setText(user.getUsername());
+        this.txtFrom.setText(this.username);
     }
 
     /** This method is called from within the constructor to
@@ -155,22 +160,19 @@ public class NewMail extends javax.swing.JFrame {
     private void cmdSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSendActionPerformed
         Mail mail = new Mail(this.txtFrom.getText(), this.txtTo.getText(), this.txtSubject.getText(), this.txtText.getText(), "new");
         try {
-			service.sendMail(this.user, mail);
+			service.sendMail(this.username, this.password, this.txtTo.getText(), this.txtSubject.getText(), this.txtText.getText());
 			//mostrar que el mensaje se envio correctamente.
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-        mainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cmdSendActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
-        mainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cmdCancelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        mainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
     

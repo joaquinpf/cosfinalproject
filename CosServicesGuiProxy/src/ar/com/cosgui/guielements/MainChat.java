@@ -11,6 +11,16 @@
 
 package ar.com.cosgui.guielements;
 
+import java.rmi.RemoteException;
+import java.util.Hashtable;
+import java.util.Vector;
+
+import wschat.TextMessage;
+
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.ChatServiceLocalImp;
+
 /**
  *
  * @author Administrator
@@ -18,17 +28,16 @@ package ar.com.cosgui.guielements;
 public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
     private Hashtable<String, ActiveChat> windows = new Hashtable <String, ActiveChat>();
-    private wschat.ChatServiceProxy service = null;
-    private Auth auth = null;
+    private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+    private String username = null;
+	private String password = null;
     private Thread reader = null;
 
 
     /** Creates new form MainChat */
-    public MainChat(String username, Auth auth, wschat.ChatServiceProxy service) {
+    public MainChat(String username, String password) {
         initComponents();
         this.lblUsername.setText(username);
-        this.service = service;
-        this.auth = auth;
         refreshContactsStatus();
         this.reader = new Thread (this);
         reader.start();
@@ -39,7 +48,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     	Vector<String> contactsOnline = new Vector<String> ();
     	Vector<String> contactsOffline = new Vector<String> ();
     	try {
-			contacts = this.service.getContacts(this.lblUsername.getText());
+			contacts = service.getContacts(this.username);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,18 +71,18 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 		}
     }
 
-    private void printMessage (TextMessage msg) {
-        if (msg != null) {
-      		if (!windows.containsKey(msg.getUsernameSrc())) {
-      			ActiveChat chat = new ActiveChat (this.service, this.auth.getUsername(), msg.getUsernameSrc());
-	            windows.put(msg.getUsernameSrc(), chat);
+    private void printMessage (String message, String usernameSrc, String usernameDst) {
+        if ((message != null) && (usernameSrc != null) && (usernameDst != null)) {
+      		if (!windows.containsKey(usernameSrc)) {
+      			ActiveChat chat = new ActiveChat (this.username, usernameSrc);
+	            windows.put(usernameSrc, chat);
 	            chat.setVisible(true);
-	            chat.printMessage(msg);
+	            chat.printMessage(message, usernameSrc, usernameDst);
         	}
         	else {
-        		ActiveChat chat = windows.get(msg.getUsernameSrc());
+        		ActiveChat chat = windows.get(usernameSrc);
         		chat.setVisible(true);
-        		chat.printMessage(msg);
+        		chat.printMessage(message, usernameSrc, usernameDst);
         	}
         }
     }
@@ -209,31 +218,35 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
-    	AddContact ac = new AddContact(this.service, this.auth.getUsername());
+    	AddContact ac = new AddContact(this.username);
     	ac.setVisible(true);
     }//GEN-LAST:event_cmdAddContactActionPerformed
 
     private void listOnlineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOnlineUsersMouseClicked
         if (this.listOnlineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOnlineUsers.getSelectedValue())) {
-                ActiveChat chat = new ActiveChat(this.service, this.auth.getUsername(), (String) this.listOnlineUsers.getSelectedValue());
+                ActiveChat chat = new ActiveChat(this.username, (String) this.listOnlineUsers.getSelectedValue());
                 windows.put((String) this.listOnlineUsers.getSelectedValue(), chat);
                 chat.setVisible(true);
-            } else {
-            ActiveChat chat = windows.get((String) this.listOnlineUsers.getSelectedValue());
-            chat.setVisible(true);
+            } 
+			else {
+	            ActiveChat chat = windows.get((String) this.listOnlineUsers.getSelectedValue());
+                windows.put((String) this.listOnlineUsers.getSelectedValue(), chat);
+	            chat.setVisible(true);
             }
 }//GEN-LAST:event_listOnlineUsersMouseClicked
 
     private void listOfflineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOfflineUsersMouseClicked
         if (this.listOfflineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOfflineUsers.getSelectedValue())) {
-                ActiveChat chat = new ActiveChat(this.service, this.auth.getUsername(), (String) this.listOfflineUsers.getSelectedValue());
+                ActiveChat chat = new ActiveChat(this.username, (String) this.listOfflineUsers.getSelectedValue());
                 windows.put((String) this.listOfflineUsers.getSelectedValue(), chat);
                 chat.setVisible(true);
-            } else {
-            ActiveChat chat = windows.get((String) this.listOfflineUsers.getSelectedValue());
-            chat.setVisible(true);
+            } 
+			else {
+	            ActiveChat chat = windows.get((String) this.listOfflineUsers.getSelectedValue());
+                windows.put((String) this.listOfflineUsers.getSelectedValue(), chat);
+	            chat.setVisible(true);
             }
 }//GEN-LAST:event_listOfflineUsersMouseClicked
 
@@ -254,7 +267,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     	int refresh = 0;
     	while (true) {
     		try {
-	    		msgs = this.service.receiveMessage(this.auth.getUsername());
+	    		msgs = this.service.receiveMessage(this.username);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
@@ -262,7 +275,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 				TextMessage message = null;
 				for (int i = 0; i < msgs.length; i++) {
 					message = this.getTextMessageFromString(msgs[i]);
-					this.printMessage(message);
+					this.printMessage(message.getMessage(), message.getUsernameSrc(), message.getUsernameDst());
 				}
 			}
 			try {

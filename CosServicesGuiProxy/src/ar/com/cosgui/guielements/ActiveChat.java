@@ -12,6 +12,8 @@
 package ar.com.cosgui.guielements;
 
 //import ar.com.cosgui.datamodel.DataModel;
+import java.rmi.RemoteException;
+
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
@@ -20,7 +22,7 @@ import ar.com.cosgui.services.imp.ChatServiceLocalImp;
  * @author Administrator
  */
 public class ActiveChat extends javax.swing.JFrame {
-	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 	private String username = null;
     private String contactName = null;
 
@@ -140,20 +142,13 @@ public class ActiveChat extends javax.swing.JFrame {
 }//GEN-LAST:event_cmdCloseActionPerformed
 
     public void printMessage (String message, String usernameSrc, String usernameDst) {
-        if (msg != null)
+        if ((message != null) && (usernameSrc != null) && (usernameDst != null))
         	this.txtChatText.setText(this.txtChatText.getText() + "\n" + usernameSrc + " to " + usernameDst + ": " + message);
     }
 
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ActiveChat().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClose;
