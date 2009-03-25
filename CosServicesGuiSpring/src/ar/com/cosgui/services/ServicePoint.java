@@ -21,10 +21,21 @@ public class ServicePoint {
 	 */
 	protected ServicePoint(){
 				
-		services.put(ServicesConstants.BUG_TRACKING_SERVICE, new BugTrackerServiceLocalImp());
-		services.put(ServicesConstants.PROJECT_TEAM_SERVICE, new ProjectTeamServiceLocalImp());
-		services.put(ServicesConstants.CHAT_SERVICE, new ChatServiceLocalImp());
-		services.put(ServicesConstants.MAIL_SERVICE, new MailServiceLocalImp());
+        FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("src/ar/com/cosgui/services/imp/BugTrackerService.xml");
+        BugTrackerServiceLocalImp bugtracker = (ar.com.cosgui.services.imp.BugTrackerServiceLocalImp) ctx.getBean("app");
+        services.put(ServicesConstants.BUG_TRACKING_SERVICE, bugtracker);
+
+        ctx = new FileSystemXmlApplicationContext("src/ar/com/cosgui/services/imp/ProjectTeamService.xml");
+        ProjectTeamServiceLocalImp projectteam = (ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp) ctx.getBean("app");
+        services.put(ServicesConstants.PROJECT_TEAM_SERVICE, projectteam);
+
+        ctx = new FileSystemXmlApplicationContext("src/ar/com/cosgui/services/imp/ChatService.xml");
+        ChatServiceLocalImp chat = (ar.com.cosgui.services.imp.ChatServiceLocalImp) ctx.getBean("app");
+        services.put(ServicesConstants.CHAT_SERVICE, chat);
+
+        ctx = new FileSystemXmlApplicationContext("src/ar/com/cosgui/services/imp/MailService.xml");
+        MailServiceLocalImp mail = (ar.com.cosgui.services.imp.MailServiceLocalImp) ctx.getBean("app");
+        services.put(ServicesConstants.MAIL_SERVICE, mail);
 	}
 	
 	/**

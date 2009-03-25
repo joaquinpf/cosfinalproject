@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="app" class="ar.com.cosgui.services.imp.BugTrackerServiceLocalImp">
+    	<property name="service"><ref local="service"/></property>
+   	</bean>
+
+	<bean id="service" class="ar.com.cosgui.services.imp.BugTrackerJaxRpcPortProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface">
+            <value>ar.com.cosgui.services.imp.ChatIF</value>
+        </property>
+        <property name="wsdlDocumentUrl">
+            <value>http://localhost:8080/WebServiceProject/services/ChatService?wsdl</value>
+        </property>
+        <property name="namespaceUri">
+            <value>http://wschat</value>
+        </property>
+        <property name="serviceName">
+            <value>ChatServiceFull</value>
+        </property>
+        <property name="portName">
+            <value>ChatService</value>
+        </property>
+    </bean>	
+
+</beans>
