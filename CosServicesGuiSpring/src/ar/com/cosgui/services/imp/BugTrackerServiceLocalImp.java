@@ -7,6 +7,10 @@ import wsbugtracker.Auth;
 import wsbugtracker.Bug;
 import ar.com.cosgui.services.IServiceLocalImp;
 
+/**
+ * Implementacion via Spring del servicio de Bug Tracking.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
 	private BugTrackerIF wsbugtracker = null;

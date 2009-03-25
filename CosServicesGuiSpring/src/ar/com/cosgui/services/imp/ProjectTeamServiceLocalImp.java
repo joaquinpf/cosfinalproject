@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import wsprojectteam.Auth;
 import ar.com.cosgui.services.IServiceLocalImp;
 
+/**
+ * Implementacion via Spring del servicio ProjectTeamService.
+ * @author Joaquin Alejandro Perez Fuentes
+ */
 public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 
 	private ProjectTeamIF proxy = null;
