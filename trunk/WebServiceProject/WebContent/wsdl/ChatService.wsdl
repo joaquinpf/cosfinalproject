@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:impl="http://wschat" xmlns:intf="http://wschat" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://wschat">
+
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="http://wschat">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+
+			<element name="login">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="Auth">
+				<sequence>
+					<element name="username" type="xsd:string"/>
+					<element name="pass" type="xsd:string"/>
+				</sequence>
+			</complexType>
+			<element name="loginResponse">
+				<complexType>
+					<sequence>
+						<element name="loginReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="logout">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="logoutResponse">
+				<complexType>
+					<sequence>
+						<element name="logoutReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="sendMessage">
+				<complexType>
+					<sequence>
+						<element name="textMessage" type="impl:TextMessage"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="TextMessage">
+				<sequence>
+					<element name="message" type="xsd:string"/>
+					<element name="usernameSrc" type="xsd:string"/>
+					<element name="usernameDst" type="xsd:string"/>
+				</sequence>
+			</complexType>
+			<element name="sendMessageResponse">
+				<complexType>
+					<sequence>
+						<element name="sendMessageReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getContacts">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getContactsResponse">
+				<complexType>
+					<sequence>
+						<element name="getContactsReturn" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="ArrayOfString">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="string[]"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+
+			<element name="addContact">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+						<element name="contact" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addContactResponse">
+				<complexType>
+					<sequence>
+						<element name="addContactReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="receiveMessage">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="receiveMessageResponse">
+				<complexType>
+					<sequence>
+						<element name="receiveMessageReturn" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="getStatus">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getStatusResponse">
+				<complexType>
+					<sequence>
+						<element name="getStatusReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			
+			<element name="existUserName">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="existUserNameResponse">
+				<complexType>
+					<sequence>
+						<element name="existUserNameReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="addUser">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addUserResponse">
+				<complexType>
+					<sequence>
+						<element name="addUserReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+		</schema>
+		
+	</wsdl:types>
+	
+	<wsdl:message name="loginRequest">
+		<wsdl:part element="impl:login" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="loginResponse">
+		<wsdl:part element="impl:loginResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="logoutRequest">
+		<wsdl:part element="impl:logout" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="logoutResponse">
+		<wsdl:part element="impl:logoutResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="sendMessageRequest">
+		<wsdl:part element="impl:sendMessage" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="sendMessageResponse">
+		<wsdl:part element="impl:sendMessageResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getContactsRequest">
+		<wsdl:part element="impl:getContacts" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getContactsResponse">
+		<wsdl:part element="impl:getContactsResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addContactRequest">
+		<wsdl:part element="impl:addContact" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addContactResponse">
+		<wsdl:part element="impl:addContactResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="receiveMessageRequest">
+		<wsdl:part element="impl:receiveMessage" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="receiveMessageResponse">
+		<wsdl:part element="impl:receiveMessageResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getStatusRequest">
+		<wsdl:part element="impl:getStatus" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getStatusResponse">
+		<wsdl:part element="impl:getStatusResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="existUserNameRequest">
+		<wsdl:part element="impl:existUserName" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="existUserNameResponse">
+		<wsdl:part element="impl:existUserNameResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserRequest">
+		<wsdl:part element="impl:addUser" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserResponse">
+		<wsdl:part element="impl:addUserResponse" name="parameters"/>
+	</wsdl:message>
+
+	
+	<wsdl:portType name="ChatService">
+		<wsdl:operation name="login">
+			<wsdl:input message="impl:loginRequest" name="loginRequest"/>
+			<wsdl:output message="impl:loginResponse" name="loginResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="logout">
+			<wsdl:input message="impl:logoutRequest" name="logoutRequest"/>
+			<wsdl:output message="impl:logoutResponse" name="logoutResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="sendMessage">
+			<wsdl:input message="impl:sendMessageRequest" name="sendMessageRequest"/>
+			<wsdl:output message="impl:sendMessageResponse" name="sendMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getContacts">
+			<wsdl:input message="impl:getContactsRequest" name="getContactsRequest"/>
+			<wsdl:output message="impl:getContactsResponse" name="getContactsResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addContact">
+			<wsdl:input message="impl:addContactRequest" name="addContactRequest"/>
+			<wsdl:output message="impl:addContactResponse" name="addContactResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="receiveMessage">
+			<wsdl:input message="impl:receiveMessageRequest" name="receiveMessageRequest"/>
+			<wsdl:output message="impl:receiveMessageResponse" name="receiveMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<wsdl:input message="impl:getStatusRequest" name="getStatusRequest"/>
+			<wsdl:output message="impl:getStatusResponse" name="getStatusResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="existUserName">
+			<wsdl:input message="impl:existUserNameRequest" name="existUserNameRequest"/>
+			<wsdl:output message="impl:existUserNameResponse" name="existUserNameResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addUser">
+			<wsdl:input message="impl:addUserRequest" name="addUserRequest"/>
+			<wsdl:output message="impl:addUserResponse" name="addUserResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="ChatServiceBinding" type="impl:ChatService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="login">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="loginRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="loginResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="logout">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="logoutRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="logoutResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sendMessage">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="sendMessageRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="sendMessageResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getContacts">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getContactsRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getContactsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addContact">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="addContactRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addContactResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="receiveMessage">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="receiveMessageRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="receiveMessageResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getStatus">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getStatusRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getStatusResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="existUserName">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="existUserNameRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="existUserNameResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="addUserRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addUserResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="ChatServiceFull">
+		<wsdl:port binding="impl:ChatServiceBinding" name="ChatService">
+			<soap:address location="http://localhost:8080/WebServiceProject/services/ChatService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

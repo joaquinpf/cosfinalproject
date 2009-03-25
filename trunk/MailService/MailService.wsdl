@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:impl="http://wsmail" xmlns:intf="http://wsmail" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://wsmail">
+
+    <wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="http://wsmail">
+			
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+		
+			<complexType name="Mail">
+				<sequence>
+					<element name="from" type="xsd:string"/>
+					<element name="to" type="xsd:string"/>
+					<element name="subject" type="xsd:string"/>
+					<element name="text" type="xsd:string"/>
+					<element name="status" type="xsd:string"/>
+				</sequence>
+			</complexType>
+			<complexType name="Auth">
+				<sequence>
+					<element name="username" type="xsd:string"/>
+					<element name="pass" type="xsd:string"/>
+				</sequence>
+			</complexType>
+			<element name="sendMail">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+						<element name="mail" type="impl:Mail"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="sendMailResponse">
+				<complexType>
+					<sequence>
+						<element name="sendMailReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="validUser">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="validUserResponse">
+				<complexType>
+					<sequence>
+						<element name="validUserReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="validUserName">
+				<complexType>
+					<sequence>
+						<element name="user" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="validUserNameResponse">
+				<complexType>
+					<sequence>
+						<element name="validUserNameReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="getMails">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getMailsResponse">
+				<complexType>
+					<sequence>
+						<element name="getMailsReturn" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="ArrayOfString">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute wsdl:arrayType="string[]" ref="soapenc:arrayType"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+			
+			<element name="saveMail">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+						<element name="mail" type="impl:Mail"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="saveMailResponse">
+				<complexType>
+					<sequence>
+						<element name="saveMailReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="deleteMail">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+						<element name="mail" type="impl:Mail"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="deleteMailResponse">
+				<complexType>
+					<sequence>
+						<element name="deleteMailReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+
+			<element name="addUserMail">
+				<complexType>
+					<sequence>
+						<element name="user" type="impl:Auth"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="addUserMailResponse">
+				<complexType>
+					<sequence>
+						<element name="addUserMailReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+		</schema>
+	</wsdl:types>
+	
+	<wsdl:message name="sendMailRequest">
+		<wsdl:part element="impl:sendMail" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="sendMailResponse">
+		<wsdl:part element="impl:sendMailResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="validUserRequest">
+		<wsdl:part element="impl:validUser" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="validUserResponse">
+		<wsdl:part element="impl:validUserResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="validUserNameRequest">
+		<wsdl:part element="impl:validUserName" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="validUserNameResponse">
+		<wsdl:part element="impl:validUserNameResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getMailsRequest">
+		<wsdl:part element="impl:getMails" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getMailsResponse">
+		<wsdl:part element="impl:getMailsResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="saveMailRequest">
+		<wsdl:part element="impl:saveMail" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="saveMailResponse">
+		<wsdl:part element="impl:saveMailResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="deleteMailRequest">
+		<wsdl:part element="impl:deleteMail" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="deleteMailResponse">
+		<wsdl:part element="impl:deleteMailResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserMailRequest">
+		<wsdl:part element="impl:addUserMail" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="addUserMailResponse">
+		<wsdl:part element="impl:addUserMailResponse" name="parameters"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="MailService">
+		<wsdl:operation name="sendMail">
+			<wsdl:input message="impl:sendMailRequest" name="sendMailRequest"/>
+			<wsdl:output message="impl:sendMailResponse" name="sendMailResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="validUser">
+			<wsdl:input message="impl:validUserRequest" name="validUserRequest"/>
+			<wsdl:output message="impl:validUserResponse" name="validUserResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="validUserName">
+			<wsdl:input message="impl:validUserNameRequest" name="validUserNameRequest"/>
+			<wsdl:output message="impl:validUserNameResponse" name="validUserNameResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMails">
+			<wsdl:input message="impl:getMailsRequest" name="getMailsRequest"/>
+			<wsdl:output message="impl:getMailsResponse" name="getMailsResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="saveMail">
+			<wsdl:input message="impl:saveMailRequest" name="saveMailRequest"/>
+			<wsdl:output message="impl:saveMailResponse" name="saveMailResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="deleteMail">
+			<wsdl:input message="impl:deleteMailRequest" name="deleteMailRequest"/>
+			<wsdl:output message="impl:deleteMailResponse" name="deleteMailResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addUserMail">
+			<wsdl:input message="impl:addUserMailRequest" name="addUserMailRequest"/>
+			<wsdl:output message="impl:addUserMailResponse" name="addUserMailResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="MailServiceBinding" type="impl:MailService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="sendMail">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="sendMailRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="sendMailResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="validUser">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="validUserRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="validUserResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="validUserName">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="validUserNameRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="validUserNameResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getMails">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getMailsRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getMailsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="saveMail">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="saveMailRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="saveMailResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteMail">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="deleteMailRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="deleteMailResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addUserMail">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="addUserMailRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="addUserMailResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="MailServiceFull">
+		<wsdl:port binding="impl:MailServiceBinding" name="MailService">
+			<soap:address location="http://localhost:8080/WebServiceProject/services/MailService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

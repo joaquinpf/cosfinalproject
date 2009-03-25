@@ -11,20 +11,18 @@ package ar.com.cosgui.guielements;
  * @author  Administrador
  */
 public class ViewMessage extends javax.swing.JFrame {
-    private MainMenu mainMenu = null;
     
     /** Creates new form ViewMessage */
     public ViewMessage() {
-	initComponents();
+		initComponents();
     }
     
-    public ViewMessage(MainMenu mainMenu, Mail mail) {
-		this.mainMenu = mainMenu;
+    public ViewMessage(String from, String to, String subject, String text) {
 		initComponents();
-		this.txtFrom.setText(mail.getFrom());
-		this.txtSubject.setText(mail.getSubject());
-		this.txtText.setText(mail.getText());
-		this.txtTo.setText(mail.getTo());
+		this.txtFrom.setText(from);
+		this.txtSubject.setText(subject);
+		this.txtText.setText(text);
+		this.txtTo.setText(to);
     }
 
     /** This method is called from within the constructor to
@@ -137,13 +135,11 @@ public class ViewMessage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
-	mainMenu.setVisible(true);
-	this.dispose();
+		this.dispose();
 }//GEN-LAST:event_cmdCloseActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-	mainMenu.setVisible(true);
-	this.dispose();
+		this.dispose();
     }//GEN-LAST:event_formWindowClosing
     
     /**

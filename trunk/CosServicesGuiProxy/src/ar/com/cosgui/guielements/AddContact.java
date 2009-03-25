@@ -11,20 +11,25 @@
 
 package ar.com.cosgui.guielements;
 
+import java.rmi.RemoteException;
+
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.ChatServiceLocalImp;
+
 /**
  *
  * @author Administrator
  */
 public class AddContact extends javax.swing.JFrame {
 
-	private wschat.ChatServiceProxy service = null;
+	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 	private String username = null;
 
     /** Creates new form AddContact */
-    public AddContact(wschat.ChatServiceProxy service, String username) {
+    public AddContact(String username) {
         initComponents();
         this.lblInvalidUser.setVisible(false);
-        this.service = service;
         this.username = username;
     }
 
@@ -120,7 +125,7 @@ public class AddContact extends javax.swing.JFrame {
 
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
     	try {
-			if ((!this.username.equals(this.txtContactUsername.getText())) && (this.service.addContact(this.username, this.txtContactUsername.getText()) == 1)) {
+			if (this.service.addContact(this.username, this.txtContactUsername.getText()) == 1) {
 				this.dispose();
 			}
 			else {
@@ -128,7 +133,6 @@ public class AddContact extends javax.swing.JFrame {
 				this.lblInvalidUser.setVisible(true);
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 }//GEN-LAST:event_cmdAddContactActionPerformed
@@ -137,16 +141,6 @@ public class AddContact extends javax.swing.JFrame {
 		this.dispose();
 }//GEN-LAST:event_cmdCancelActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddContact().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAddContact;
