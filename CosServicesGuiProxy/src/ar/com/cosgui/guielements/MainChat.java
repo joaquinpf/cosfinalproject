@@ -17,7 +17,6 @@ import java.util.Vector;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import wschat.TextMessage;
 
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
