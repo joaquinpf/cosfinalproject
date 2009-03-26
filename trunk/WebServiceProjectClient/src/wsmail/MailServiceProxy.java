@@ -85,7 +85,7 @@ public class MailServiceProxy implements wsmail.MailService {
       _initMailServiceProxy();
     return mailService.addUserMail(user);
   }
-  
+  /*
   public static void main(String[] args) throws Exception {
 		System.out.println(System.getProperty("user.dir"));
 		wsmail.MailServiceProxy service = new wsmail.MailServiceProxy ();
@@ -97,5 +97,5 @@ public class MailServiceProxy implements wsmail.MailService {
 				System.out.println("Ocurrio un problema al intentarconectarse remotamentecon elservidor.");
 				e.printStackTrace();
 		}
-  }
+  }*/
 }
