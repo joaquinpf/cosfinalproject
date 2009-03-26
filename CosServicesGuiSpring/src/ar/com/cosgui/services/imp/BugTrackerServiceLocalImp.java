@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import wsbugtracker.Auth;
-import wsbugtracker.Bug;
+import ar.com.cosgui.datamodel.Bug;
 import ar.com.cosgui.services.IServiceLocalImp;
 
 /**
@@ -42,7 +42,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
 	public Bug changeBugStatus(int number, String status) {
 		try {
-			return wsbugtracker.changeBugStatus(number, status);
+			return LocalBuguize(wsbugtracker.changeBugStatus(number, status));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -51,7 +51,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
 	public Bug getBug(int number) {
 		try {
-			return wsbugtracker.getBug(number);
+			return LocalBuguize(wsbugtracker.getBug(number));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -96,10 +96,21 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 
 	public Bug submitBug(String description, String type, String project, String owner) {
 		try {
-			return wsbugtracker.submitBug(description, type,owner , project, "Open");
+			return LocalBuguize(wsbugtracker.submitBug(description, type,owner , project, "Open"));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private Bug LocalBuguize(wsbugtracker.Bug submitBug) {
+		Bug b = new Bug();
+		b.setDescription(submitBug.getDescription());
+		b.setNumber(submitBug.getNumber());
+		b.setOwner(submitBug.getOwner());
+		b.setProject(submitBug.getProject());
+		b.setStatus(submitBug.getStatus());
+		b.setType(submitBug.getType());
+		return b;
 	}
 }

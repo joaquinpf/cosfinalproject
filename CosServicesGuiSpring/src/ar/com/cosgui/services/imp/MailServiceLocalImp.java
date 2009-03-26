@@ -1,14 +1,22 @@
 package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import ar.com.cosgui.services.IServiceLocalImp;
-import wsmail.MailServiceProxy;
 import wsmail.Auth;
 import wsmail.Mail;
 
 public class MailServiceLocalImp implements IServiceLocalImp {
-	private MailServiceProxy service = new MailServiceProxy();
+	private MailIF service = null;
+
+	public MailIF getService() {
+		return service;
+	}
+
+	public void setService(MailIF service) {
+		this.service = service;
+	}
 
 	@Override
 	public void connect() {
@@ -58,13 +66,28 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	public java.lang.String[] getMails(String username, String password) throws java.rmi.RemoteException{
 		try {
 			if (this.validUser(username, password) == 1)
-				return service.getMails (new Auth(username, password));
+				return toStringArray(service.getMails (new Auth(username, password)));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	  
+	@SuppressWarnings("unchecked")
+	private String[] toStringArray(Object array) {
+		if(array instanceof String){
+			String[] ret = new String[1];
+			ret[0] = (String) array; 
+			return ret;
+		} else if(array instanceof ArrayList){
+			if(array!=null)	{
+				String[] retStringuized = new String[((ArrayList<String>) array).size()];
+				return ((ArrayList<String>) array).toArray(retStringuized);
+			}
+		}
+		return null;
+	}
+	
 	public int saveMail(String username, String password, String from, String subject, String text, String status) throws java.rmi.RemoteException{
 		try {
 			if (this.validUser (username, password) == 1)

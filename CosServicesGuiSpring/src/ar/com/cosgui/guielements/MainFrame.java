@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-import wsbugtracker.Bug;
-
+import ar.com.cosgui.datamodel.Bug;
 import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;

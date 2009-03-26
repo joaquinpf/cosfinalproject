@@ -1,6 +1,7 @@
 package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import ar.com.cosgui.services.IServiceLocalImp;
 import wschat.Auth;
@@ -9,7 +10,15 @@ import wschat.TextMessage;
 
 
 public class ChatServiceLocalImp implements IServiceLocalImp {
-	private ChatServiceProxy service = new ChatServiceProxy();
+	private ChatIF service = null;
+
+	public ChatIF getService() {
+		return service;
+	}
+
+	public void setService(ChatIF service) {
+		this.service = service;
+	}
 
 	@Override
 	public void connect() {
@@ -56,7 +65,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 	  
 	public java.lang.String[] getContacts(String username) throws java.rmi.RemoteException{
     	try {
-			return service.getContacts (username);
+			return toStringArray(service.getContacts (username));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +84,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 	  
 	public java.lang.String[] receiveMessage(String username) throws java.rmi.RemoteException{
     	try {
-			return service.receiveMessage (username);
+			return toStringArray(service.receiveMessage (username));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -100,4 +109,19 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
+	@SuppressWarnings("unchecked")
+	private String[] toStringArray(Object array) {
+		if(array instanceof String){
+			String[] ret = new String[1];
+			ret[0] = (String) array; 
+			return ret;
+		} else if(array instanceof ArrayList){
+			if(array!=null)	{
+				String[] retStringuized = new String[((ArrayList<String>) array).size()];
+				return ((ArrayList<String>) array).toArray(retStringuized);
+			}
+		}
+		return null;
+	}
+	
 }

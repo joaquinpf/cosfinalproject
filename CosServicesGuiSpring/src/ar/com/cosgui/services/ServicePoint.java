@@ -1,6 +1,8 @@
 package ar.com.cosgui.services;
 import java.util.HashMap;
 
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
