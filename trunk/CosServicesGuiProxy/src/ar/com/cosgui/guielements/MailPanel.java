@@ -23,7 +23,7 @@ import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
 
-import wsmail.Mail;
+import Mail;
 
 public class MailPanel extends javax.swing.JPanel {
 	private Vector<Mail> userMails = new Vector<Mail>();
