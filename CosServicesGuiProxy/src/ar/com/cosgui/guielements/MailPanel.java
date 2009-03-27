@@ -19,11 +19,11 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
+import ar.com.cosgui.datamodel.Mail;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
 
-import Mail;
 
 public class MailPanel extends javax.swing.JPanel {
 	private Vector<Mail> userMails = new Vector<Mail>();
@@ -38,6 +38,7 @@ public class MailPanel extends javax.swing.JPanel {
         this.username = username;
         this.password = password;
         this.loadMails(username, password);
+        this.setVisible(true);
     }
 
     private Vector<Mail> getMails(String status, String username, String password) {

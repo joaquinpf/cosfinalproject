@@ -21,7 +21,7 @@ public class MailServiceFullLocator extends org.apache.axis.client.Service imple
         super(wsdlLoc, sName);
     }
 
-    // Use to get a proxy class for MailService    cambiar "localhost" por la direccion del servidor
+    // Use to get a proxy class for MailService
     private java.lang.String MailService_address = "http://localhost:8080/WebServiceProject/services/MailService";
 
     public java.lang.String getMailServiceAddress() {

@@ -1,4 +1,4 @@
-#Sun Mar 22 16:10:38 VET 2009
+#Thu Mar 26 17:42:42 VET 2009
 eclipse.preferences.version=1
 encoding//src/wsbugtracker/Auth.java=UTF-8
 encoding//src/wsbugtracker/Bug.java=UTF-8
@@ -10,6 +10,18 @@ encoding//src/wsbusiness/BusinessService.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceBindingStub.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceFull.java=UTF-8
 encoding//src/wsbusiness/BusinessServiceFullLocator.java=UTF-8
+encoding//src/wschat/Auth.java=UTF-8
+encoding//src/wschat/ChatService.java=UTF-8
+encoding//src/wschat/ChatServiceBindingStub.java=UTF-8
+encoding//src/wschat/ChatServiceFull.java=UTF-8
+encoding//src/wschat/ChatServiceFullLocator.java=UTF-8
+encoding//src/wschat/TextMessage.java=UTF-8
+encoding//src/wsmail/Auth.java=UTF-8
+encoding//src/wsmail/Mail.java=UTF-8
+encoding//src/wsmail/MailService.java=UTF-8
+encoding//src/wsmail/MailServiceBindingStub.java=UTF-8
+encoding//src/wsmail/MailServiceFull.java=UTF-8
+encoding//src/wsmail/MailServiceFullLocator.java=UTF-8
 encoding//src/wsprojectteam/Auth.java=UTF-8
 encoding//src/wsprojectteam/Project.java=UTF-8
 encoding//src/wsprojectteam/ProjectTeamService.java=UTF-8

@@ -260,7 +260,4 @@ public class Mail  implements java.io.Serializable {
             _javaType, _xmlType, typeDesc);
     }
 
-    public java.lang.String toString(){
-    	return new String (this.status + "|" + this.from + "|" + this.to + "|" + this.subject + "|" + this.text);
-    }
 }
