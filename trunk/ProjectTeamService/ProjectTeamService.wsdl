@@ -20,6 +20,20 @@
 					</sequence>
 				</complexType>
 			</element>
+			<element name="getUsersForProject">
+				<complexType>
+					<sequence>
+						<element name="project" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="getUsersForProjectResponse">
+				<complexType>
+					<sequence>
+						<element name="result" type="impl:ArrayOfString"/>
+					</sequence>
+				</complexType>
+			</element>
 			<element name="getProjectsForUser">
 				<complexType>
 					<sequence>
@@ -132,6 +146,12 @@
 	<wsdl:message name="getProjectsResponse">
 		<wsdl:part element="impl:getProjectsResponse" name="parameters"/>
 	</wsdl:message>
+	<wsdl:message name="getUsersForProjectRequest">
+		<wsdl:part element="impl:getUsersForProject" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="getUsersForProjectResponse">
+		<wsdl:part element="impl:getUsersForProjectResponse" name="parameters"/>
+	</wsdl:message>	
 	<wsdl:message name="getProjectsForUserRequest">
 		<wsdl:part element="impl:getProjectsForUser" name="parameters"/>
 	</wsdl:message>
@@ -175,6 +195,10 @@
 			<wsdl:input message="impl:getProjectsRequest" name="getProjectsRequest"/>
 			<wsdl:output message="impl:getProjectsResponse" name="getProjectsResponse"/>
 		</wsdl:operation>
+		<wsdl:operation name="getUsersForProject">
+			<wsdl:input message="impl:getUsersForProjectRequest" name="getUsersForProjectRequest"/>
+			<wsdl:output message="impl:getUsersForProjectResponse" name="getUsersForProjectResponse"/>
+		</wsdl:operation>
 		<wsdl:operation name="getProjectsForUser">
 			<wsdl:input message="impl:getProjectsForUserRequest" name="getProjectsForUserRequest"/>
 			<wsdl:output message="impl:getProjectsForUserResponse" name="getProjectsForUserResponse"/>
@@ -210,6 +234,15 @@
 				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output name="getProjectsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getUsersForProject">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="getUsersForProjectRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getUsersForProjectResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>

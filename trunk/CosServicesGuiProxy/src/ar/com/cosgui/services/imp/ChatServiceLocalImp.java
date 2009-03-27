@@ -99,5 +99,9 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		}
 		return 0;
 	}
+	
+	public int removeContact(String username, String contact){
+		return 0;
+	}
 	  
 }
