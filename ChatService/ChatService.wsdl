@@ -102,6 +102,22 @@
 				</complexType>
 			</element>
 			
+			<element name="removeContact">
+				<complexType>
+					<sequence>
+						<element name="username" type="xsd:string"/>
+						<element name="contact" type="xsd:string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="removeContactResponse">
+				<complexType>
+					<sequence>
+						<element name="removeContactReturn" type="xsd:int"/>
+					</sequence>
+				</complexType>
+			</element>
+			
 			<element name="receiveMessage">
 				<complexType>
 					<sequence>
@@ -196,6 +212,12 @@
 	<wsdl:message name="addContactResponse">
 		<wsdl:part element="impl:addContactResponse" name="parameters"/>
 	</wsdl:message>
+	<wsdl:message name="removeContactRequest">
+		<wsdl:part element="impl:removeContact" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="removeContactResponse">
+		<wsdl:part element="impl:removeContactResponse" name="parameters"/>
+	</wsdl:message>	
 	<wsdl:message name="receiveMessageRequest">
 		<wsdl:part element="impl:receiveMessage" name="parameters"/>
 	</wsdl:message>
@@ -242,6 +264,10 @@
 		<wsdl:operation name="addContact">
 			<wsdl:input message="impl:addContactRequest" name="addContactRequest"/>
 			<wsdl:output message="impl:addContactResponse" name="addContactResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="removeContact">
+			<wsdl:input message="impl:removeContactRequest" name="removeContactRequest"/>
+			<wsdl:output message="impl:removeContactResponse" name="removeContactResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="receiveMessage">
 			<wsdl:input message="impl:receiveMessageRequest" name="receiveMessageRequest"/>
@@ -308,6 +334,15 @@
 				<soap:body use="literal"/>
 			</wsdl:output>
 		</wsdl:operation>
+		<wsdl:operation name="removeContact">
+			<soap:operation soapAction=""/>
+			<wsdl:input name="removeContactRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="removeContactResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>		
 		<wsdl:operation name="receiveMessage">
 			<soap:operation soapAction=""/>
 			<wsdl:input name="receiveMessageRequest">

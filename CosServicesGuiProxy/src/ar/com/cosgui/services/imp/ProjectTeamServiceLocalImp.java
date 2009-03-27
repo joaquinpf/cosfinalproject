@@ -92,5 +92,10 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 			e.printStackTrace();
 			return null;
 		}
-	}	   
+	}	  
+	
+	public String[] getUsersForProject(String project){
+		return null;
+	}
+	 
 }

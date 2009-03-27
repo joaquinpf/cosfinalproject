@@ -23,6 +23,7 @@ import ar.com.cosgui.datamodel.TextMessage;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
+import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
  *
@@ -291,8 +292,32 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 			refresh++;
 	    	if (refresh == 5) {
 	    		refresh = 0;
+	    		cleanContacts();
+	    		refreshContact();
 	    		this.refreshContactsStatus();
 	    	}
+    	}
+    }
+
+    private void cleanContacts() {
+    	String[] contacts = service.getContacts(DataModel.INSTANCE.getActiveUser());
+		if(contacts != null){
+			for(int i=0;i<contacts.length;i++){
+				service.removeContact(DataModel.INSTANCE.getActiveUser(), contacts[i]);
+			}
+		}
+	}
+
+	private void refreshContact() {
+    	ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+    	String[] projects = project.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
+    	if(projects != null){
+    		for(int i=0;i<projects.length;i++){
+    			String[] users = project.getUsersForProject(projects[i]);
+    			for(int j=0;j<users.length;j++){
+    				service.addContact(DataModel.INSTANCE.getActiveUser(), users[i]);
+    			}
+    		}
     	}
     }
 
