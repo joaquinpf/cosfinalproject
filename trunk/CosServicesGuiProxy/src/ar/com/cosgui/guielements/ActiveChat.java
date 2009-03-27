@@ -52,7 +52,7 @@ public class ActiveChat extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtSendText = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("Active chat");
@@ -86,14 +86,13 @@ public class ActiveChat extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmdSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cmdSend, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(lblUsername, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -102,7 +101,6 @@ public class ActiveChat extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -126,15 +124,10 @@ public class ActiveChat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSendActionPerformed
-    	try {
-			this.service.sendMessage(this.txtSendText.getText(), this.username, this.contactName);
-			this.printMessage(this.txtSendText.getText(), this.username, this.contactName);
-			this.txtSendText.setText("");
-			this.txtSendText.transferFocus();
-    	} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	this.service.sendMessage(this.txtSendText.getText(), this.username, this.contactName);
+		this.printMessage(this.txtSendText.getText(), this.username, this.contactName);
+		this.txtSendText.setText("");
+		this.txtSendText.transferFocus();
 }//GEN-LAST:event_cmdSendActionPerformed
 
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed

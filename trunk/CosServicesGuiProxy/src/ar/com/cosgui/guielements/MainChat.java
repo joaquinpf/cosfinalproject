@@ -18,6 +18,8 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.datamodel.TextMessage;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
@@ -30,8 +32,8 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
     private Hashtable<String, ActiveChat> windows = new Hashtable <String, ActiveChat>();
     private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
-    private String username = null;
-	private String password = null;
+    private String username = DataModel.INSTANCE.getActiveUser();
+	private String password = DataModel.INSTANCE.getActiveUserPass();
     private Thread reader = null;
     private int activeThread = 1;
 
@@ -44,30 +46,21 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         this.reader = new Thread (this);
 		service.login(username, password);
         reader.start();
+        this.setVisible(true);
     }
 
     public void refreshContactsStatus() {
     	String[] contacts = null;
     	Vector<String> contactsOnline = new Vector<String> ();
     	Vector<String> contactsOffline = new Vector<String> ();
-    	try {
-			contacts = service.getContacts(this.username);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	contacts = service.getContacts(this.username);
 		if (contacts != null) {
 			for (int i = 0; i < contacts.length; i++) {
-				try {
-					if (this.service.getStatus(contacts[i]) == 1)
-						contactsOnline.add(contacts[i]);
-					else
-						if (this.service.getStatus(contacts[i]) == 0)
-							contactsOffline.add(contacts[i]);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				if (this.service.getStatus(contacts[i]) == 1)
+					contactsOnline.add(contacts[i]);
+				else
+					if (this.service.getStatus(contacts[i]) == 0)
+						contactsOffline.add(contacts[i]);
 			}
 			this.listOnlineUsers.setListData(contactsOnline);
 			this.listOfflineUsers.setListData(contactsOffline);
@@ -160,12 +153,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
         });
 
-        listOnlineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11));
-        listOnlineUsers.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        listOnlineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         listOnlineUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listOnlineUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,13 +162,8 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         });
         jScrollPane1.setViewportView(listOnlineUsers);
 
-        listOfflineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11));
+        listOfflineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         listOfflineUsers.setForeground(new java.awt.Color(204, 0, 0));
-        listOfflineUsers.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         listOfflineUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listOfflineUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -208,7 +191,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                                 .addComponent(cmdAddContact))
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
@@ -227,7 +210,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
                         .addComponent(jLabel1))
                     .addComponent(cmdAddContact))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
@@ -272,11 +255,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 }//GEN-LAST:event_listOfflineUsersMouseClicked
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        try {
-            service.logout(username, password);
-        } catch (RemoteException ex) {
-            ex.printStackTrace();
-        }
+        service.logout(username, password);
         this.activeThread = 0;
         reader.notify();
     }//GEN-LAST:event_formInternalFrameClosing
@@ -297,11 +276,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     	String[] msgs = null;
     	int refresh = 0;
     	while (activeThread == 1) {
-    		try {
-	    		msgs = this.service.receiveMessage(this.username);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
+    		msgs = this.service.receiveMessage(this.username);
 			if (msgs != null) {
 				TextMessage message = null;
 				for (int i = 0; i < msgs.length; i++) {

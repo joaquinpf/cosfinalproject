@@ -8,8 +8,7 @@ package ar.com.cosgui.guielements;
 
 import java.rmi.RemoteException;
 
-import Mail;
-
+import ar.com.cosgui.datamodel.Mail;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;

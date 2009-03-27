@@ -49,12 +49,12 @@ public class AddContact extends javax.swing.JFrame {
         cmdAddContact = new javax.swing.JButton();
         cmdCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("Add new contact");
 
-        lblInvalidUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblInvalidUser.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblInvalidUser.setForeground(new java.awt.Color(204, 0, 0));
         lblInvalidUser.setText("Invalid username");
 
@@ -78,7 +78,6 @@ public class AddContact extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -100,7 +99,6 @@ public class AddContact extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 116, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -124,16 +122,12 @@ public class AddContact extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
-    	try {
-			if (this.service.addContact(this.username, this.txtContactUsername.getText()) == 1) {
-				this.dispose();
-			}
-			else {
-				this.lblInvalidUser.setText("Invalid username");
-				this.lblInvalidUser.setVisible(true);
-			}
-		} catch (RemoteException e) {
-			e.printStackTrace();
+    	if (this.service.addContact(this.username, this.txtContactUsername.getText()) == 1) {
+			this.dispose();
+		}
+		else {
+			this.lblInvalidUser.setText("Invalid username");
+			this.lblInvalidUser.setVisible(true);
 		}
 }//GEN-LAST:event_cmdAddContactActionPerformed
 

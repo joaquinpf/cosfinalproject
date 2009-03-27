@@ -86,10 +86,6 @@ public class TextMessage  implements java.io.Serializable {
         this.usernameDst = usernameDst;
     }
 
-    public String toString() {
-    	return new String (this.getUsernameSrc() + "|" + this.getUsernameDst() + "|" + this.getMessage());
-    }
-    
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof TextMessage)) return false;
