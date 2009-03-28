@@ -7,6 +7,8 @@
 
 package wschat;
 
+import javax.xml.crypto.Data;
+
 public class ChatServiceBindingImpl implements wschat.ChatService{
     public int login(wschat.Auth user) throws java.rmi.RemoteException {
         return DataBase.login(user);
@@ -26,6 +28,10 @@ public class ChatServiceBindingImpl implements wschat.ChatService{
 
     public int addContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException {
         return DataBase.addContact(username, contact);
+    }
+
+    public int removeContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException {
+        return DataBase.removeContact(username, contact);
     }
 
     public java.lang.String[] receiveMessage(java.lang.String username) throws java.rmi.RemoteException {

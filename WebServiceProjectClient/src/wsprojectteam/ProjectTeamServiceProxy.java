@@ -50,6 +50,12 @@ public class ProjectTeamServiceProxy implements wsprojectteam.ProjectTeamService
     return projectTeamService.getProjects();
   }
   
+  public java.lang.String[] getUsersForProject(java.lang.String project) throws java.rmi.RemoteException{
+    if (projectTeamService == null)
+      _initProjectTeamServiceProxy();
+    return projectTeamService.getUsersForProject(project);
+  }
+  
   public java.lang.String[] getProjectsForUser(wsprojectteam.Auth user) throws java.rmi.RemoteException{
     if (projectTeamService == null)
       _initProjectTeamServiceProxy();

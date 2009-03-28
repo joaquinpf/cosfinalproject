@@ -185,21 +185,10 @@ valid = false;
 <TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username57" SIZE=20></TD>
 </TR>
 </TABLE>
-<BR>
-<INPUT TYPE="SUBMIT" VALUE="Invoke">
-<INPUT TYPE="RESET" VALUE="Clear">
-</FORM>
-<%
-break;
-case 59:
-valid = false;
-%>
-<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
-<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
 <TABLE>
 <TR>
-<TD COLSPAN="1" ALIGN="LEFT">username:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username62" SIZE=20></TD>
+<TD COLSPAN="1" ALIGN="LEFT">contact:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="contact59" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>
@@ -208,7 +197,7 @@ valid = false;
 </FORM>
 <%
 break;
-case 64:
+case 61:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -216,7 +205,7 @@ valid = false;
 <TABLE>
 <TR>
 <TD COLSPAN="1" ALIGN="LEFT">username:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username67" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username64" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>
@@ -225,7 +214,41 @@ valid = false;
 </FORM>
 <%
 break;
-case 69:
+case 66:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">username:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username69" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 71:
+valid = false;
+%>
+<FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
+<INPUT TYPE="HIDDEN" NAME="method" VALUE="<%=method%>">
+<TABLE>
+<TR>
+<TD COLSPAN="1" ALIGN="LEFT">username:</TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username74" SIZE=20></TD>
+</TR>
+</TABLE>
+<BR>
+<INPUT TYPE="SUBMIT" VALUE="Invoke">
+<INPUT TYPE="RESET" VALUE="Clear">
+</FORM>
+<%
+break;
+case 76:
 valid = false;
 %>
 <FORM METHOD="POST" ACTION="Result.jsp" TARGET="result">
@@ -236,12 +259,12 @@ valid = false;
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">pass:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass74" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="pass81" SIZE=20></TD>
 </TR>
 <TR>
 <TD WIDTH="5%"></TD>
 <TD COLSPAN="2" ALIGN="LEFT">username:</TD>
-<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username76" SIZE=20></TD>
+<TD ALIGN="left"><INPUT TYPE="TEXT" NAME="username83" SIZE=20></TD>
 </TR>
 </TABLE>
 <BR>

@@ -35,11 +35,15 @@ public class DataBase {
     }
     
     public static boolean addProject(String description, String name){
-    	Project p = new Project();
-    	p.setDescription(description);
-    	p.setName(name);
-    	projects.put(name,p);
-    	return true;
+    	if(validProject(name) == false){
+    		Project p = new Project();
+    		p.setDescription(description);
+    		p.setName(name);
+    		projects.put(name,p);
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     public static boolean addGroupToProject(String description, String project, String name){
@@ -62,7 +66,7 @@ public class DataBase {
     }
     
 	private static boolean validProject(String project) {
-		if(projects.containsKey(project)){
+		if(projects.containsKey(project) == true){
 			return true;
 		}
 		return false;
@@ -89,7 +93,7 @@ public class DataBase {
 
 		String[] retArray = null;
 
-		if(validProject(project)){
+		if(validProject(project) == true){
 			ArrayList<String> a = new ArrayList<String>();
 			for(String s: projects.get(project).getGroups().keySet()){
 				a.add(s);
@@ -102,5 +106,17 @@ public class DataBase {
 
 		}
 		return retArray;
+	}
+
+	public static String[] getUsersForProject(String project) {
+		if(validProject(project) == true ){
+			ArrayList<String> users = projects.get(project).getUsers();
+			String[] retArray = new String[users.size()];
+			for(int i=0;i<users.size();i++){
+				retArray[i] = users.get(i);
+			}
+			return retArray;
+		}
+		return null;
 	}	
 }

@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -22,30 +22,30 @@
  <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
- <ns1:service name="BusinessService" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="wsdlPortType" value="BusinessService"/>
-  <ns1:parameter name="className" value="wsbusiness.BusinessServiceBindingSkeleton"/>
-  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
-  <ns1:parameter name="schemaQualified" value="http://wsbusiness"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://wsbusiness"/>
-  <ns1:parameter name="wsdlServiceElement" value="BusinessServiceFull"/>
-  <ns2:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns1:ArrayOfString" xmlns:ns1="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
-  <ns1:arrayMapping innerType="xsd:double" languageSpecificType="java:double[]" qname="ns2:ArrayOfDouble" xmlns:ns2="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
- </ns1:service>
  <ns1:service name="ChatService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="ChatService"/>
-  <ns1:parameter name="className" value="wschat.ChatServiceBindingSkeleton"/>
-  <ns1:parameter name="wsdlServicePort" value="ChatService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://wschat"/>
+  <ns1:parameter name="wsdlServicePort" value="ChatService"/>
+  <ns1:parameter name="className" value="wschat.ChatServiceBindingSkeleton"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://wschat"/>
   <ns1:parameter name="wsdlServiceElement" value="ChatServiceFull"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:TextMessage" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wschat.TextMessage" xmlns:ns3="http://wschat"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns4:Auth" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wschat.Auth" xmlns:ns4="http://wschat"/>
-  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns5:ArrayOfString" xmlns:ns5="http://wschat" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns2:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns1:TextMessage" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wschat.TextMessage" xmlns:ns1="http://wschat" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns2:Auth" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wschat.Auth" xmlns:ns2="http://wschat"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns3:ArrayOfString" xmlns:ns3="http://wschat" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ </ns1:service>
+ <ns1:service name="BusinessService" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:parameter name="allowedMethods" value="*"/>
+  <ns1:parameter name="wsdlPortType" value="BusinessService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://wsbusiness"/>
+  <ns1:parameter name="wsdlServicePort" value="BusinessService"/>
+  <ns1:parameter name="className" value="wsbusiness.BusinessServiceBindingSkeleton"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://wsbusiness"/>
+  <ns1:parameter name="wsdlServiceElement" value="BusinessServiceFull"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns4:ArrayOfString" xmlns:ns4="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="xsd:double" languageSpecificType="java:double[]" qname="ns5:ArrayOfDouble" xmlns:ns5="http://wsbusiness" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
@@ -84,11 +84,11 @@
  </ns1:service>
  <ns1:service name="MailService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:parameter name="allowedMethods" value="*"/>
-  <ns1:parameter name="wsdlPortType" value="MailService"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="schemaQualified" value="http://wsmail"/>
-  <ns1:parameter name="wsdlServicePort" value="MailService"/>
+  <ns1:parameter name="wsdlPortType" value="MailService"/>
   <ns1:parameter name="className" value="wsmail.MailServiceBindingSkeleton"/>
+  <ns1:parameter name="wsdlServicePort" value="MailService"/>
+  <ns1:parameter name="schemaQualified" value="http://wsmail"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://wsmail"/>
   <ns1:parameter name="wsdlServiceElement" value="MailServiceFull"/>
   <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns11:Auth" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:wsmail.Auth" xmlns:ns11="http://wsmail"/>

@@ -22,13 +22,6 @@
       <parameter name="typeMappingVersion" value="1.2"/>
       <parameter name="allowedMethods" value="*"/>
 
-      <arrayMapping
-        xmlns:ns="http://wschat"
-        qname="ns:ArrayOfString"
-        type="java:java.lang.String[]"
-        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
-        encodingStyle=""
-      />
       <typeMapping
         xmlns:ns="http://wschat"
         qname="ns:TextMessage"
@@ -43,6 +36,13 @@
         type="java:wschat.Auth"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://wschat"
+        qname="ns:ArrayOfString"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
         encodingStyle=""
       />
   </service>

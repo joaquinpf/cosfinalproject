@@ -93,6 +93,19 @@ public class ChatServiceBindingSkeleton implements wschat.ChatService, org.apach
         ((java.util.List)_myOperations.get("addContact")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wschat", "username"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wschat", "contact"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+        };
+        _oper = new org.apache.axis.description.OperationDesc("removeContact", _params, new javax.xml.namespace.QName("http://wschat", "removeContactReturn"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wschat", "removeContact"));
+        _oper.setSoapAction("");
+        _myOperationsList.add(_oper);
+        if (_myOperations.get("removeContact") == null) {
+            _myOperations.put("removeContact", new java.util.ArrayList());
+        }
+        ((java.util.List)_myOperations.get("removeContact")).add(_oper);
+        _params = new org.apache.axis.description.ParameterDesc [] {
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wschat", "username"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("receiveMessage", _params, new javax.xml.namespace.QName("http://wschat", "receiveMessageReturn"));
         _oper.setReturnType(new javax.xml.namespace.QName("http://wschat", "ArrayOfString"));
@@ -175,6 +188,12 @@ public class ChatServiceBindingSkeleton implements wschat.ChatService, org.apach
     public int addContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException
     {
         int ret = impl.addContact(username, contact);
+        return ret;
+    }
+
+    public int removeContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException
+    {
+        int ret = impl.removeContact(username, contact);
         return ret;
     }
 

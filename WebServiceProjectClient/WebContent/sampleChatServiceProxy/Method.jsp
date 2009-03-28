@@ -13,10 +13,11 @@
 <LI><A HREF="Input.jsp?method=31" TARGET="inputs"> sendMessage(wschat.TextMessage)</A></LI>
 <LI><A HREF="Input.jsp?method=42" TARGET="inputs"> getContacts(java.lang.String)</A></LI>
 <LI><A HREF="Input.jsp?method=47" TARGET="inputs"> addContact(java.lang.String,java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=54" TARGET="inputs"> receiveMessage(java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=59" TARGET="inputs"> getStatus(java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=64" TARGET="inputs"> existUserName(java.lang.String)</A></LI>
-<LI><A HREF="Input.jsp?method=69" TARGET="inputs"> addUser(wschat.Auth)</A></LI>
+<LI><A HREF="Input.jsp?method=54" TARGET="inputs"> removeContact(java.lang.String,java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=61" TARGET="inputs"> receiveMessage(java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=66" TARGET="inputs"> getStatus(java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=71" TARGET="inputs"> existUserName(java.lang.String)</A></LI>
+<LI><A HREF="Input.jsp?method=76" TARGET="inputs"> addUser(wschat.Auth)</A></LI>
 </UL>
 </BODY>
 </HTML>

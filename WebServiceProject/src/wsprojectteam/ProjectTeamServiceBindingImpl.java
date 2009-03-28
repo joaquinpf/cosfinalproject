@@ -8,16 +8,19 @@
 package wsprojectteam;
 
 public class ProjectTeamServiceBindingImpl implements wsprojectteam.ProjectTeamService{
-    	
-	public java.lang.String[] getProjects() throws java.rmi.RemoteException {
+    public java.lang.String[] getProjects() throws java.rmi.RemoteException {
         return DataBase.getProjects();
+    }
+
+    public java.lang.String[] getUsersForProject(java.lang.String project) throws java.rmi.RemoteException {
+        return DataBase.getUsersForProject(project);
     }
 
     public java.lang.String[] getProjectsForUser(wsprojectteam.Auth user) throws java.rmi.RemoteException {
         return DataBase.getProjectsForUser(user);
     }
 
-	public java.lang.String[] getGroupsForProject(java.lang.String project) throws java.rmi.RemoteException {
+    public java.lang.String[] getGroupsForProject(java.lang.String project) throws java.rmi.RemoteException {
         return DataBase.getGroupsForProject(project);
     }
 

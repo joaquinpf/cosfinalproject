@@ -42,6 +42,18 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
         }
         ((java.util.List)_myOperations.get("getProjects")).add(_oper);
         _params = new org.apache.axis.description.ParameterDesc [] {
+            new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "project"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false), 
+        };
+        _oper = new org.apache.axis.description.OperationDesc("getUsersForProject", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
+        _oper.setReturnType(new javax.xml.namespace.QName("http://wsprojectteam", "ArrayOfString"));
+        _oper.setElementQName(new javax.xml.namespace.QName("http://wsprojectteam", "getUsersForProject"));
+        _oper.setSoapAction("");
+        _myOperationsList.add(_oper);
+        if (_myOperations.get("getUsersForProject") == null) {
+            _myOperations.put("getUsersForProject", new java.util.ArrayList());
+        }
+        ((java.util.List)_myOperations.get("getUsersForProject")).add(_oper);
+        _params = new org.apache.axis.description.ParameterDesc [] {
             new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://wsprojectteam", "user"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://wsprojectteam", "Auth"), wsprojectteam.Auth.class, false, false), 
         };
         _oper = new org.apache.axis.description.OperationDesc("getProjectsForUser", _params, new javax.xml.namespace.QName("http://wsprojectteam", "result"));
@@ -131,6 +143,12 @@ public class ProjectTeamServiceBindingSkeleton implements wsprojectteam.ProjectT
     public java.lang.String[] getProjects() throws java.rmi.RemoteException
     {
         java.lang.String[] ret = impl.getProjects();
+        return ret;
+    }
+
+    public java.lang.String[] getUsersForProject(java.lang.String project) throws java.rmi.RemoteException
+    {
+        java.lang.String[] ret = impl.getUsersForProject(project);
         return ret;
     }
 

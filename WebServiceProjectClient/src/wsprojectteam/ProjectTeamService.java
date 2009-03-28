@@ -9,6 +9,7 @@ package wsprojectteam;
 
 public interface ProjectTeamService extends java.rmi.Remote {
     public java.lang.String[] getProjects() throws java.rmi.RemoteException;
+    public java.lang.String[] getUsersForProject(java.lang.String project) throws java.rmi.RemoteException;
     public java.lang.String[] getProjectsForUser(wsprojectteam.Auth user) throws java.rmi.RemoteException;
     public java.lang.String[] getGroupsForProject(java.lang.String project) throws java.rmi.RemoteException;
     public boolean addProject(java.lang.String description, java.lang.String name) throws java.rmi.RemoteException;
