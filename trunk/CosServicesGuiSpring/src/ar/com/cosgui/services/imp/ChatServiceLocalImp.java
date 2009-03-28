@@ -3,10 +3,10 @@ package ar.com.cosgui.services.imp;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import ar.com.cosgui.services.IServiceLocalImp;
 import wschat.Auth;
-import wschat.ChatServiceProxy;
 import wschat.TextMessage;
+
+import ar.com.cosgui.services.IServiceLocalImp;
 
 
 public class ChatServiceLocalImp implements IServiceLocalImp {
@@ -36,7 +36,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 
-	public int login(String user, String pass) throws java.rmi.RemoteException{
+	public int login(String user, String pass) {
     	try {
 			return service.login (new Auth(user, pass));
 		} catch (RemoteException e) {
@@ -45,7 +45,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
-	public int logout(String user, String pass) throws java.rmi.RemoteException{
+	public int logout(String user, String pass) {
     	try {
 			return service.logout (new Auth(user, pass));
 		} catch (RemoteException e) {
@@ -54,7 +54,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
-	public int sendMessage(String message, String usernameSrc, String usernameDst) throws java.rmi.RemoteException{
+	public int sendMessage(String message, String usernameSrc, String usernameDst) {
     	try {
 			return service.sendMessage (new TextMessage(message, usernameSrc, usernameDst));
 		} catch (RemoteException e) {
@@ -63,7 +63,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
-	public java.lang.String[] getContacts(String username) throws java.rmi.RemoteException{
+	public java.lang.String[] getContacts(String username) {
     	try {
 			return toStringArray(service.getContacts (username));
 		} catch (RemoteException e) {
@@ -72,7 +72,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 	  
-	public int addContact(String username, String contact) throws java.rmi.RemoteException{
+	public int addContact(String username, String contact) {
     	try {
 			if (!username.equals(contact))
 				return service.addContact (username, contact);
@@ -82,7 +82,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
-	public java.lang.String[] receiveMessage(String username) throws java.rmi.RemoteException{
+	public java.lang.String[] receiveMessage(String username) {
     	try {
 			return toStringArray(service.receiveMessage (username));
 		} catch (RemoteException e) {
@@ -91,7 +91,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return null;
 	}
 	  
-	public int getStatus(String username) throws java.rmi.RemoteException{
+	public int getStatus(String username) {
     	try {
 			return service.getStatus (username);
 		} catch (RemoteException e) {
@@ -100,7 +100,7 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 		return 0;
 	}
 	  
-	public int existUserName(String username) throws java.rmi.RemoteException{
+	public int existUserName(String username) {
     	try {
 			return service.existUserName (username);
 		} catch (RemoteException e) {
@@ -122,6 +122,15 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 			}
 		}
 		return null;
+	}
+
+	public int removeContact(String username, String contact){
+    	try {
+			return service.removeContact(username, contact);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }
