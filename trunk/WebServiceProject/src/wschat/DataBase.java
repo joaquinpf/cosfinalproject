@@ -19,7 +19,7 @@ public class DataBase{
 
 	/** Contiene un vector de contactos para cada usuario del sistema. */
 	private static Hashtable<String, Vector<String>> contacts = new Hashtable <String, Vector<String>>();
-
+	
 	/**
 	* Actualiza el estado de un usuario a "online" (1).
 	* @param user. Nombre de usuario y contraseña perteneciente a un sujeto.
@@ -34,7 +34,7 @@ public class DataBase{
     	}
     	return 0;
     }
-
+	
 	/** 
 	* Dice si un usuario y contraseñas son validas o no.
 	* @param user. Nombre de usuario y contraseñas correspondientes a un sujeto.
@@ -101,13 +101,21 @@ public class DataBase{
 	* @return int. 0 si el contacto no existe, de lo contrario 1.
 	*/
     public static int addContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException {
-        if (existUserName(contact) == 1) {
+        if (existUserName(contact) == 1 && contacts.get(username).contains(contact) == false) {
         	contacts.get(username).add(contact);
         	return 1;
         }
     	return 0;
     }
 
+	public static int removeContact(String username, String contact) {
+        if (existUserName(contact) == 1) {
+        	contacts.get(username).remove(contact);
+        	return 1;
+        }
+    	return 0;
+	}
+    
 	/**
 	* Retorna los mensajes que han llegado para el usuario.
 	* @param username. Nombre del usuario que solicita la operacion.

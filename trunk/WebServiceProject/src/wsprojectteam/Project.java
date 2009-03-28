@@ -1,5 +1,6 @@
 package wsprojectteam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Project {
@@ -29,8 +30,12 @@ public class Project {
 	}	
 	
 	public boolean addGroup(Group g){
-		this.groups.put(g.getName(), g);
-		return true;
+		if(groups.containsKey(g.getName())==false){
+			this.groups.put(g.getName(), g);
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean addMember(String group, String name){
@@ -47,5 +52,17 @@ public class Project {
 			}
 		}
 		return false;
+	}
+	
+	public ArrayList<String> getUsers(){
+		ArrayList<String> users = new ArrayList<String>();
+		for(String g: groups.keySet()){
+			for(String user:groups.get(g).getMembers()){
+				if(users.contains(user) == false){
+					users.add(user);
+				}
+			}
+		}
+		return users;
 	}
 }

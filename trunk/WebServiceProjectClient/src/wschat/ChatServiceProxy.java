@@ -74,6 +74,12 @@ public class ChatServiceProxy implements wschat.ChatService {
     return chatService.addContact(username, contact);
   }
   
+  public int removeContact(java.lang.String username, java.lang.String contact) throws java.rmi.RemoteException{
+    if (chatService == null)
+      _initChatServiceProxy();
+    return chatService.removeContact(username, contact);
+  }
+  
   public java.lang.String[] receiveMessage(java.lang.String username) throws java.rmi.RemoteException{
     if (chatService == null)
       _initChatServiceProxy();
