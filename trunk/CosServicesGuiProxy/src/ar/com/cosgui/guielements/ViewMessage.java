@@ -7,16 +7,18 @@
 package ar.com.cosgui.guielements;
 
 /**
- *
- * @author  Administrador
+ * Muestra los detalles de un mail.
+ * @author  Marcos Steimbach.
  */
 public class ViewMessage extends javax.swing.JFrame {
     
-    /** Creates new form ViewMessage */
-    public ViewMessage() {
-		initComponents();
-    }
-    
+	/**
+	* Creates new form ViewMessage
+	* @param from. Emisor del mail.
+	* @param to. Destinatario del mail.
+	* @param subject. Asunto del mail.
+	* @param text. Texto del mail.
+	*/
     public ViewMessage(String from, String to, String subject, String text) {
 		initComponents();
 		this.txtFrom.setText(from);
@@ -134,24 +136,16 @@ public class ViewMessage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	/** Cierra el formulario. */
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
 		this.dispose();
 }//GEN-LAST:event_cmdCloseActionPerformed
 
+	/** Cierre del formulario.*/
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 		this.dispose();
     }//GEN-LAST:event_formWindowClosing
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-	java.awt.EventQueue.invokeLater(new Runnable() {
-	    public void run() {
-		new ViewMessage().setVisible(true);
-	    }
-	});
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdClose;

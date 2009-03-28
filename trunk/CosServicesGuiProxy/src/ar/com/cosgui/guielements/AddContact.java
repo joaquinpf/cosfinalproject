@@ -18,15 +18,20 @@ import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
 
 /**
- *
- * @author Administrator
+ * Permite agregar un contacto a la lista del chat del usuario.
+ * @author Marcos Steimbach.
  */
 public class AddContact extends javax.swing.JFrame {
 
+	/** Referencia a la implementacion del servicio.*/
 	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+
+	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;
 
-    /** Creates new form AddContact */
+    /** Creates new form AddContact 
+	* @param username. Nombre del usuario que inicio sesion.
+	*/
     public AddContact(String username) {
         initComponents();
         this.lblInvalidUser.setVisible(false);
@@ -121,6 +126,7 @@ public class AddContact extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Agrega el contacto especificado en el formulario a la lista de contactos del usuario. */
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
     	if (this.service.addContact(this.username, this.txtContactUsername.getText()) == 1) {
 			this.dispose();
@@ -131,6 +137,7 @@ public class AddContact extends javax.swing.JFrame {
 		}
 }//GEN-LAST:event_cmdAddContactActionPerformed
 
+    /** Cierra el formulario. */
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed
 		this.dispose();
 }//GEN-LAST:event_cmdCancelActionPerformed

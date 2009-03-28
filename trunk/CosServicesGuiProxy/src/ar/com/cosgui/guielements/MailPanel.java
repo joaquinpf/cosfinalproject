@@ -24,15 +24,31 @@ import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
 
+/**
+ * Ventana principal del mail de usuario.
+ * @author Marcos Steimbach
+ */
 
 public class MailPanel extends javax.swing.JPanel {
+	/** Contiene los mails del usuario que no han sido guardados.*/
 	private Vector<Mail> userMails = new Vector<Mail>();
+	
+	/** Contiene los mails que el usuario ha guardado.*/
 	private Vector<Mail> userSavedMails = new Vector<Mail>();
+	
+	/** Referencia a la implementacion del servicio.*/
 	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+	
+	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;
+	
+	/** Contraseña del usuario que ha iniciado la sesion.*/
 	private String password = null;
 	
-    /** Creates new form PanlMail */
+    /** Creates new form PanlMail 
+	* @param username. Nombre del usuario que inicia la sesion
+	* @param password. Contraseña del usuario que inicia la sesion
+	*/
     public MailPanel(String username, String password) {
         initComponents();
         this.username = username;
@@ -41,6 +57,14 @@ public class MailPanel extends javax.swing.JPanel {
         this.setVisible(true);
     }
 
+    /** 
+	* Obtiene los mails correspondientes al usuario que tengan el estado "status". En este sistema estan implementados los
+	* estados "new" y "saved" dependiendo de si el usuario guardo el mail o no.
+	* @param status. Estado de los mails que se quieren obtener.
+	* @param username. Nombre del usuario
+	* @param username. Contraseña del usuario
+	* @return Vector<Mail>. Vector con los mail obtenidos.
+	*/
     private Vector<Mail> getMails(String status, String username, String password) {
     	Vector<Mail> filtred = new Vector<Mail>();
     	String[] mails = null;
@@ -58,12 +82,20 @@ public class MailPanel extends javax.swing.JPanel {
     	return filtred;
     }
 
+    /** 
+	* Carga los vectores de mails del usuario y actualiza las listas con dichos mails.
+	* @param username. Nombre del usuario
+	* @param username. Contraseña del usuario
+	*/
     private void loadMails(String username, String password) {
     	this.userMails = this.getMails("new", username, password);
     	this.userSavedMails = this.getMails("saved", username, password);
         this.printMails();
     }
 
+    /** 
+	* Procesa los mails de los vectores y carga ambas listas.
+	*/
     private void printMails() {
     	Mail actualMail = null;
     	Iterator<Mail> it = null;
@@ -82,6 +114,11 @@ public class MailPanel extends javax.swing.JPanel {
 		this.listSavedMails.setListData(addeds);
 }
 
+    /** 
+	* Decodifica una cadena de caracteres para generar el mail al  que representa.
+	*Cada campo del mail esta separado por el caracter "|".
+	* @param mailString. String conteniendo los datos de un mail.
+	*/
     private Mail getMailFromString(String mailString) {
     	Mail mail = new Mail();
     	char[] texto = mailString.toCharArray();
@@ -256,15 +293,18 @@ public class MailPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Presenta la ventana para redactar un nuevo mail. */
     private void cmdNewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewMailActionPerformed
         NewMail nm = new NewMail(username, password);
         nm.setVisible(true);
     }//GEN-LAST:event_cmdNewMailActionPerformed
 
+    /** Verifica la llegada de nuevos mails al usuario. */
     private void cmdVerifyNewMailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVerifyNewMailsActionPerformed
     	this.loadMails(username, password);
     }//GEN-LAST:event_cmdVerifyNewMailsActionPerformed
 
+    /** Muestra en pantalla los datos del mail seleccionado.*/
     private void cmdViewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdViewMailActionPerformed
     	Mail mail = null;
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
@@ -275,6 +315,7 @@ public class MailPanel extends javax.swing.JPanel {
     	}
     }//GEN-LAST:event_cmdViewMailActionPerformed
 
+    /** Guarda el mail seleccionado. */
     private void cmdSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSaveActionPerformed
     	Mail mail = null;
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
@@ -287,6 +328,7 @@ public class MailPanel extends javax.swing.JPanel {
 		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdSaveActionPerformed
 
+    /** Borra el mail que se haya seleccionado */
     private void cmdDeleteMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteMailActionPerformed
     	Mail mail = null;
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
@@ -299,6 +341,7 @@ public class MailPanel extends javax.swing.JPanel {
 		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdDeleteMailActionPerformed
 
+    /** Muestra en pantalla los datos del mail guardado que se haya seleccionado. */
     private void cmdViewMailSavedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdViewMailSavedActionPerformed
     	Mail mail = null;
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
@@ -309,6 +352,7 @@ public class MailPanel extends javax.swing.JPanel {
     	}
     }//GEN-LAST:event_cmdViewMailSavedActionPerformed
 
+    /** Borra el mail guardado que este seleccionado. */
     private void cmdDeleteMailSavedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdDeleteMailSavedActionPerformed
     	Mail mail = null;
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
