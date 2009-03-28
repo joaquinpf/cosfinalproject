@@ -115,5 +115,14 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 			e.printStackTrace();
 			return null;
 		}
-	}	   
+	}
+
+	public String[] getUsersForProject(String project){
+		try {
+			return toStringArray(proxy.getGroupsForProject(project));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}   
 }

@@ -9,8 +9,8 @@ import org.apache.axis.encoding.ser.BeanDeserializerFactory;
 import org.apache.axis.encoding.ser.BeanSerializerFactory;
 import org.springframework.remoting.jaxrpc.JaxRpcPortProxyFactoryBean;
 
-import wsmail.Auth;
-import wsmail.Mail;
+import wschat.Auth;
+import wschat.TextMessage;
 
 public class ChatJaxRpcPortProxyFactoryBean extends JaxRpcPortProxyFactoryBean {
 
@@ -18,7 +18,7 @@ public class ChatJaxRpcPortProxyFactoryBean extends JaxRpcPortProxyFactoryBean {
 		TypeMappingRegistry registry = service.getTypeMappingRegistry();
 		TypeMapping mapping = registry.getDefaultTypeMapping();
 		//MAPEO DE TIPOS
-		registerBeanMapping(mapping, Mail.class, "Mail");
+		registerBeanMapping(mapping, TextMessage.class, "TextMessage");
 		registerBeanMapping(mapping, Auth.class, "Auth");
 		String[] array = registry.getRegisteredEncodingStyleURIs();
 		for (int i = 0; i < array.length; i++) {
@@ -28,7 +28,7 @@ public class ChatJaxRpcPortProxyFactoryBean extends JaxRpcPortProxyFactoryBean {
 	}
 	
 	protected void registerBeanMapping(TypeMapping mapping, Class type, String name) {
-	      QName qName = new QName("http://wsmail", name);
+	      QName qName = new QName("http://wschat", name);
 	      mapping.register(type, qName, new BeanSerializerFactory(type, qName),
 							  new BeanDeserializerFactory(type, qName));
 	}

@@ -2,11 +2,11 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-	<bean id="app" class="ar.com.cosgui.services.imp.BugTrackerServiceLocalImp">
+	<bean id="app" class="ar.com.cosgui.services.imp.ChatServiceLocalImp">
     	<property name="service"><ref local="service"/></property>
    	</bean>
 
-	<bean id="service" class="ar.com.cosgui.services.imp.BugTrackerJaxRpcPortProxyFactoryBean" lazy-init="true">
+	<bean id="service" class="ar.com.cosgui.services.imp.ChatJaxRpcPortProxyFactoryBean" lazy-init="true">
         <property name="serviceInterface">
             <value>ar.com.cosgui.services.imp.ChatIF</value>
         </property>
