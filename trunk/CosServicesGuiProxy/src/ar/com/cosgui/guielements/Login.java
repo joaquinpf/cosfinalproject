@@ -4,6 +4,11 @@ package ar.com.cosgui.guielements;
 
 import java.rmi.RemoteException;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import org.jvnet.substance.SubstanceLookAndFeel;
+
 import wsbugtracker.Auth;
 import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.services.IServiceLocalImp;
@@ -34,6 +39,7 @@ public class Login extends javax.swing.JFrame {
     /** Creates new form Login */
     public Login() {
         initComponents();
+        GuiUtils.centerOnScreen(this);
     }
 
     /** This method is called from within the constructor to
@@ -83,6 +89,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cerrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Username");
 
@@ -180,12 +191,17 @@ public class Login extends javax.swing.JFrame {
             jTextField4.setText("Username or password error");
         } else {
             DataModel.INSTANCE.setActiveUser(jTextField2.getText());
-            MainFrame frame = new MainFrame();
+            //MainFrame frame = new MainFrame();
+            new MegaParent();
             this.setEnabled(false);
             this.setVisible(false);
-            frame.setVisible(true);
+            //frame.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
     * @param args the command line arguments
@@ -193,6 +209,9 @@ public class Login extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                // set new skin by class name
+                SubstanceLookAndFeel
+                    .setSkin(new org.jvnet.substance.skin.NebulaSkin());
                 new Login().setVisible(true);
             }
         });

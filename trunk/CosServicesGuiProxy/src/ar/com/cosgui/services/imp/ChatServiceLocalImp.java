@@ -157,6 +157,11 @@ public class ChatServiceLocalImp implements IServiceLocalImp {
 	}
 	
 	public int removeContact(String username, String contact){
+    	try {
+			return service.removeContact(username, contact);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	  

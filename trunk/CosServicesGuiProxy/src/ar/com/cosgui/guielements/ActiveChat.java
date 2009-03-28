@@ -12,16 +12,18 @@
 package ar.com.cosgui.guielements;
 
 //import ar.com.cosgui.datamodel.DataModel;
+import java.awt.Component;
 import java.rmi.RemoteException;
 
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
+import javax.swing.JInternalFrame;
 /**
  * Ventana que contiene un chat activo entre dos usuarios.
  * @author Marcos Steimbach
  */
-public class ActiveChat extends javax.swing.JFrame {
+public class ActiveChat extends JInternalFrame {
 	/** Referencia a la implementacion del servicio.*/
 	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 
@@ -35,11 +37,16 @@ public class ActiveChat extends javax.swing.JFrame {
 	* @param username. Nombre del usuario que ha iniciado la sesion. 
 	* @param contactName. Nombre del contacto con el cual se mantiene la conversacion 
 	*/
-    public ActiveChat(String username, String contactName) {
+    public ActiveChat(String username, String contactName, Component parent) {
         initComponents();
         this.username = username;
         this.contactName = contactName;
         this.lblUsername.setText(contactName);
+        GuiUtils.centerOnParent(this, parent);
+        this.toFront();
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setTitle("Chat with: " + contactName);
     }
 
     /** This method is called from within the constructor to
@@ -60,7 +67,7 @@ public class ActiveChat extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtSendText = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("Active chat");
@@ -121,9 +128,9 @@ public class ActiveChat extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdSend, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(cmdSend, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(cmdClose)
                 .addContainerGap())
         );

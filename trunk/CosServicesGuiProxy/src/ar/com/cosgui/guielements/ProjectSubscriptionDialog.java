@@ -16,18 +16,26 @@ import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+import java.awt.Component;
+import javax.swing.JInternalFrame;
 
 /**
  * Modela la suscripcion a un grupo y proyecto existente del usuario activo
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class ProjectSubscriptionDialog extends javax.swing.JDialog {
+public class ProjectSubscriptionDialog extends JInternalFrame {
 
     /** Creates new form ProjectSubscriptionDialog */
-    public ProjectSubscriptionDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ProjectSubscriptionDialog(Component parent) {
+        super();
         initComponents();
         initProjects();
+        GuiUtils.centerOnParent(this, parent);
+        this.toFront();
+        this.setLayer(2);
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setTitle("Project subscription");
     }
 
     /**
@@ -59,7 +67,7 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Project subscription"));
 
@@ -128,7 +136,7 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -162,22 +170,6 @@ public class ProjectSubscriptionDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ProjectSubscriptionDialog dialog = new ProjectSubscriptionDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

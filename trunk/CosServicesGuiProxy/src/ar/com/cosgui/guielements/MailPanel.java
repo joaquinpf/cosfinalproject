@@ -19,6 +19,8 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javax.swing.JDesktopPane;
+
 import ar.com.cosgui.datamodel.Mail;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
@@ -44,13 +46,15 @@ public class MailPanel extends javax.swing.JPanel {
 	
 	/** Contraseña del usuario que ha iniciado la sesion.*/
 	private String password = null;
+	private TaskBarDesktopPane parent = null;
 	
     /** Creates new form PanlMail 
 	* @param username. Nombre del usuario que inicia la sesion
 	* @param password. Contraseña del usuario que inicia la sesion
 	*/
-    public MailPanel(String username, String password) {
-        initComponents();
+    public MailPanel(String username, String password, TaskBarDesktopPane parent) {
+    	this.parent = parent;
+    	initComponents();
         this.username = username;
         this.password = password;
         this.loadMails(username, password);
@@ -68,11 +72,7 @@ public class MailPanel extends javax.swing.JPanel {
     private Vector<Mail> getMails(String status, String username, String password) {
     	Vector<Mail> filtred = new Vector<Mail>();
     	String[] mails = null;
-    	try {
-			mails = service.getMails(username, password);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+    	mails = service.getMails(username, password);
 		if (mails != null)
 			for (int i = 0; i < mails.length; i++) {
 				Mail mail = this.getMailFromString(mails[i]);
@@ -104,15 +104,15 @@ public class MailPanel extends javax.swing.JPanel {
     		actualMail = it.next();
     		addeds.add("From: " + actualMail.getFrom() + "     --     Subject: " + actualMail.getSubject());
     	}
-		this.listMails.setListData(addeds);
+    	this.listMails.setListData(addeds);
 
     	addeds = new Vector<String>();
     	for(it = userSavedMails.iterator(); it.hasNext();){
     		actualMail = it.next();
     		addeds.add("From: " + actualMail.getFrom() + "     --     Subject: " + actualMail.getSubject());
     	}
-		this.listSavedMails.setListData(addeds);
-}
+    	this.listSavedMails.setListData(addeds);
+    }
 
     /** 
 	* Decodifica una cadena de caracteres para generar el mail al  que representa.
@@ -214,9 +214,11 @@ public class MailPanel extends javax.swing.JPanel {
             }
         });
 
+        listMails.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         listMails.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listMails);
 
+        listSavedMails.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         listSavedMails.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         listSavedMails.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(listSavedMails);
@@ -296,6 +298,8 @@ public class MailPanel extends javax.swing.JPanel {
     /** Presenta la ventana para redactar un nuevo mail. */
     private void cmdNewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNewMailActionPerformed
         NewMail nm = new NewMail(username, password);
+        this.parent.add(nm);
+        this.parent.setSelectedFrame(nm);
         nm.setVisible(true);
     }//GEN-LAST:event_cmdNewMailActionPerformed
 
@@ -310,7 +314,9 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
     	if (mail != null) {
-        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText());
+        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText(), this.parent);
+  	    	this.parent.add(vm);
+  	    	this.parent.setSelectedFrame(vm);
     		vm.setVisible(true);
     	}
     }//GEN-LAST:event_cmdViewMailActionPerformed
@@ -320,11 +326,7 @@ public class MailPanel extends javax.swing.JPanel {
     	Mail mail = null;
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
-		try {
-			service.saveMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		service.saveMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdSaveActionPerformed
 
@@ -333,11 +335,7 @@ public class MailPanel extends javax.swing.JPanel {
     	Mail mail = null;
     	if (this.listMails.getSelectedIndex() <= userMails.size() && this.listMails.getSelectedIndex() >= 0)
     		mail = userMails.elementAt(this.listMails.getSelectedIndex());
-		try {
-			service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdDeleteMailActionPerformed
 
@@ -347,7 +345,9 @@ public class MailPanel extends javax.swing.JPanel {
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
     		mail = userSavedMails.elementAt(this.listSavedMails.getSelectedIndex());
     	if (mail != null) {
-        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText());
+        	ViewMessage vm = new ViewMessage (mail.getFrom(), mail.getTo(), mail.getSubject(), mail.getText(), this.parent);
+  	    	this.parent.add(vm);
+  	    	this.parent.setSelectedFrame(vm);
     		vm.setVisible(true);
     	}
     }//GEN-LAST:event_cmdViewMailSavedActionPerformed
@@ -357,11 +357,7 @@ public class MailPanel extends javax.swing.JPanel {
     	Mail mail = null;
     	if (this.listSavedMails.getSelectedIndex() <= userSavedMails.size() && this.listSavedMails.getSelectedIndex() >= 0)
     		mail = userSavedMails.elementAt(this.listSavedMails.getSelectedIndex());
-		try {
-			service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		service.deleteMail(this.username, this.password, mail.getFrom(), mail.getSubject(), mail.getText(), mail.getStatus());
 		this.loadMails(this.username, this.password);
     }//GEN-LAST:event_cmdDeleteMailSavedActionPerformed
 

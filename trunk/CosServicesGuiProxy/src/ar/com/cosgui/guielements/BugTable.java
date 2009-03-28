@@ -35,7 +35,7 @@ public class BugTable extends JTable {
 		setCombobox();
  
 		TableColumn column = getColumnModel().getColumn(0); 
-		column.setPreferredWidth(1); 
+		column.setPreferredWidth(20); 
 		column = getColumnModel().getColumn(1); 
 		column.setPreferredWidth(300); 
 		column = getColumnModel().getColumn(2); 
