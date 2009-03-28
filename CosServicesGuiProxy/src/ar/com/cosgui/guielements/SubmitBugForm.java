@@ -11,25 +11,37 @@
 
 package ar.com.cosgui.guielements;
 
+import java.awt.Component;
+
 import javax.xml.crypto.Data;
 
+import ar.com.cosgui.datamodel.Bug;
 import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.datamodel.Mail;
+import ar.com.cosgui.datamodel.Notificator;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
+import ar.com.cosgui.services.imp.MailServiceLocalImp;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
  * Este formulario modela la carga de bugs al sistema.
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class SubmitBugForm extends javax.swing.JDialog {
+public class SubmitBugForm extends javax.swing.JInternalFrame {
 
     /** Creates new form SubmitBugForm */
-    public SubmitBugForm(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public SubmitBugForm(Component parent) {
+        super();
         initComponents();
         initProjects();
+        GuiUtils.centerOnParent(this, parent);
+        this.toFront();
+        this.setLayer(2);
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setTitle("Submit bug");
     }
 
     /** This method is called from within the constructor to
@@ -50,7 +62,7 @@ public class SubmitBugForm extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Submit Bug"));
 
@@ -130,7 +142,7 @@ public class SubmitBugForm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,29 +166,16 @@ public class SubmitBugForm extends javax.swing.JDialog {
      * @param evt
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
-     bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem(),
-    		 DataModel.INSTANCE.getActiveUser());
-     this.setVisible(false);
-     this.setEnabled(false);
-}//GEN-LAST:event_jButton1ActionPerformed
+    	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+    	Bug b = bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem(),
+    			DataModel.INSTANCE.getActiveUser());
+    	if(b != null){
+    		Notificator.notifyNewBug(b);
+    	}
+    	this.setVisible(false);
+    	this.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SubmitBugForm dialog = new SubmitBugForm(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

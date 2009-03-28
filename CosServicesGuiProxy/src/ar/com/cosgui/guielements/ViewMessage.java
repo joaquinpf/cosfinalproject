@@ -6,25 +6,35 @@
 
 package ar.com.cosgui.guielements;
 
+import java.awt.Component;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+
 /**
  * Muestra los detalles de un mail.
  * @author  Marcos Steimbach.
  */
-public class ViewMessage extends javax.swing.JFrame {
+public class ViewMessage extends JInternalFrame {
     
-	/**
+    /**
 	* Creates new form ViewMessage
 	* @param from. Emisor del mail.
 	* @param to. Destinatario del mail.
 	* @param subject. Asunto del mail.
 	* @param text. Texto del mail.
 	*/
-    public ViewMessage(String from, String to, String subject, String text) {
+    public ViewMessage(String from, String to, String subject, String text, Component parent) {
 		initComponents();
 		this.txtFrom.setText(from);
 		this.txtSubject.setText(subject);
 		this.txtText.setText(text);
 		this.txtTo.setText(to);
+        GuiUtils.centerOnParent(this, parent);
+        this.setLayer(0);
+        this.toFront();
+        this.setClosable(true);
+        this.setIconifiable(true);
     }
 
     /** This method is called from within the constructor to
@@ -49,11 +59,6 @@ public class ViewMessage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mail System - View message    *C.O.S. 2008*");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("Message");
@@ -141,7 +146,7 @@ public class ViewMessage extends javax.swing.JFrame {
 		this.dispose();
 }//GEN-LAST:event_cmdCloseActionPerformed
 
-	/** Cierre del formulario.*/
+	/** Cierra el formulario. */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 		this.dispose();
     }//GEN-LAST:event_formWindowClosing

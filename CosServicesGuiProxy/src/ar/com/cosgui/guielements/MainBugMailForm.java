@@ -1,51 +1,45 @@
-package ar.com.cosgui.guielements;
-
-import java.util.ArrayList;
-
-import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
-
-import ar.com.cosgui.datamodel.Bug;
-import ar.com.cosgui.datamodel.DataModel;
-import ar.com.cosgui.datamodel.Notificator;
-import ar.com.cosgui.datamodel.TextMessage;
-import ar.com.cosgui.services.ServicePoint;
-import ar.com.cosgui.services.ServicesConstants;
-import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
-import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
-
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
 /*
- * MainFrame.java
+ * MainBugMailForm.java
  *
- * Created on 21/02/2009, 12:47:51
+ * Created on 28/03/2009, 14:11:21
  */
 
+package ar.com.cosgui.guielements;
 
+import ar.com.cosgui.datamodel.Bug;
+import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.datamodel.Notificator;
+import ar.com.cosgui.services.ServicePoint;
+import ar.com.cosgui.services.ServicesConstants;
+import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
+import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
- * Ventana principal de la aplicacion
- * @author Joaquin Alejandro Perez Fuentes
+ *
+ * @author Kireta
  */
-public class MainFrame extends javax.swing.JFrame implements Runnable {
+public class MainBugMailForm extends javax.swing.JInternalFrame implements Runnable {
 
     private Thread reader = null;
     private int activeThread = 1;
     private boolean filtering = false;
+    private TaskBarDesktopPane parent = null;
     
-    /** Creates new form MainFrame */
-    public MainFrame() {
+    /** Creates new form MainBugMailForm */
+    public MainBugMailForm(TaskBarDesktopPane parent) {
+    	this.parent = parent;
         initComponents();
         initMockDatabase();
         initTable();
@@ -54,10 +48,12 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
         reader.start();
         GuiUtils.centerOnScreen(this);
         this.toFront();
-        jInternalFrame1.setIconifiable(true);
-    }
+        this.setVisible(true);
+        this.setIconifiable(true);
+        this.setTitle("Main window");
+      }
 
-    /**
+        /**
      * Crea el menu popup a utilizar con el boton derecho del mouse sobre la tabla
      */
     private void createPopupMenu() {
@@ -86,17 +82,17 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
                 String to = "";
                 if(users != null && users.length >= 1 ){
             		to += users[0];
-                	
+
                 	for(int j=1;j<users.length;j++){
                 		to += "," + users[j];
                 	}
                 }
                 if(to.equals("") == false){
-                	NewMail nm = new NewMail(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass(), 
+                	NewMail nm = new NewMail(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass(),
                 			"<COMMENT> Comment on " + b.getProject() + ", bug #" + bug, to
                 			,"<FILL YOUR COMMENT HERE>");
-                    jDesktopPane1.add(nm);
-                    jDesktopPane1.setSelectedFrame(nm);
+                	parent.add(nm);
+                	parent.setSelectedFrame(nm);
                 	nm.setVisible(true);
                 }
 			}
@@ -127,10 +123,10 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
 	private void initTable(){
     	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
-    	
+
     	String[] projs = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass());
     	ArrayList<Bug> bugs = new ArrayList<Bug>();
-    	
+
     	if(projs != null){
     		for(int i=0; i<projs.length;i++){
     			int[] projectBugs = bug.getBugsByProject(projs[i]);
@@ -141,7 +137,7 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
     			}
     		}
     	}
-    	
+
     	DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
@@ -152,7 +148,7 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
         }
         jTable1.setModel(model);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -162,9 +158,6 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -177,11 +170,6 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
         jPanel4 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jInternalFrame1.setPreferredSize(new java.awt.Dimension(594, 557));
-        jInternalFrame1.setVisible(true);
 
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -282,13 +270,13 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -297,98 +285,61 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Issues", jPanel2);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        MailPanel mail = new MailPanel(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass(), jDesktopPane1);
-        jTabbedPane1.add("Mail", mail);
-
-        jInternalFrame1.setBounds(10, 10, 594, 557);
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
         );
 
-        MainChat chat = new MainChat(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass(), jDesktopPane1);
-        chat.setLocation(605,11);
-        jDesktopPane1.add(chat);
+        MailPanel mail = new MailPanel(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass(), this.parent);
+        jTabbedPane1.add("Mail", mail);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            ProjectSubscriptionDialog frame = new ProjectSubscriptionDialog(jDesktopPane1);
-            jDesktopPane1.add(frame);
-            jDesktopPane1.setSelectedFrame(frame);
-            frame.setVisible(true);
-            initTable();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-            SubmitBugForm frame = new SubmitBugForm(jDesktopPane1);
-            jDesktopPane1.add(frame);
-            jDesktopPane1.setSelectedFrame(frame);
-            frame.setVisible(true);
-            initTable();
-            
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    /**
-     * Filtra la tabla segun lo ingresado.
-     * Para lograr esto se debe reinicializar por si habia algun filtro activo.
-     * @param evt
-     */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	initTable();
-    	if(jTextField1.getText().replaceAll(" ","").equals("") == false){
-    		filterRows(jTextField1.getText());    		
-    		filtering = true;
-    	} else {
-    		filtering = false;
-    	}
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
         if((evt.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
-           menu.show(jTable1, evt.getX(), evt.getY());
-    }//GEN-LAST:event_jTable1MousePressed
+            menu.show(jTable1, evt.getX(), evt.getY());
+}//GEN-LAST:event_jTable1MousePressed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
         if((evt.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK)
-           menu.show(jTable1, evt.getX(), evt.getY());
-    }//GEN-LAST:event_jTable1MouseReleased
+            menu.show(jTable1, evt.getX(), evt.getY());
+}//GEN-LAST:event_jTable1MouseReleased
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame().setVisible(true);
-            }
-        });
-    }
-    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        initTable();
+        if(jTextField1.getText().replaceAll(" ","").equals("") == false){
+            filterRows(jTextField1.getText());
+            filtering = true;
+        } else {
+            filtering = false;
+        }
+}//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ProjectSubscriptionDialog frame = new ProjectSubscriptionDialog(parent);
+        parent.add(frame);
+        parent.setSelectedFrame(frame);
+        frame.setVisible(true);
+        initTable();
+}//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        SubmitBugForm frame = new SubmitBugForm(parent);
+        parent.add(frame);
+        parent.setSelectedFrame(frame);
+        frame.setVisible(true);
+        initTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     @Override
-    public void run() {    	
+    public void run() {
     	int refresh = 0;
     	while (activeThread == 1) {
 
@@ -407,8 +358,8 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
     	}
     }
 
-    
-    private void filterRows(String text) {    		
+
+    private void filterRows(String text) {
     	int col = jTable1.getColumnModel().getColumnIndex(jComboBox1.getSelectedItem());
     	DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
@@ -432,18 +383,16 @@ public class MainFrame extends javax.swing.JFrame implements Runnable {
 
 
 	private PopupMenu menu;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;

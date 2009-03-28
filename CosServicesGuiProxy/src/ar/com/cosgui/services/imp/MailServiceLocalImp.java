@@ -19,7 +19,7 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	public void connect() {
 
 	}
-
+	
 	/**
 	* Agrega un usuario a la lista de usuarios de mails.
 	* @param user. Nombre de usuario del sujeto.
@@ -46,7 +46,7 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	* @param text. Texto del mensaje.
 	* @return int. -2 si el mail es nulo, -1 si es un usuario invalido, 0 si no se encontro el destinatario y 1 si la operacion se completo con exito.
 	*/
-	public int sendMail(String username, String password, String to, String subject, String text) throws java.rmi.RemoteException{
+	public int sendMail(String username, String password, String to, String subject, String text) {
         Mail mail = new Mail(username, to, subject, text, "new");
         try {
 			if (this.validUser(username, password) == 1)
@@ -63,7 +63,7 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	* @param password. Contraseña del sujeto.
 	* @return int. 0 si el usuario es invalido y 1 si es valido.
 	*/
-	public int validUser(String username, String password) throws java.rmi.RemoteException{
+	public int validUser(String username, String password){
         try {
 			return service.validUser(new Auth (username, password));
 		} catch (RemoteException e) {
@@ -71,7 +71,7 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 		}
 		return 0;
 	}
-	  
+	
 	/**
 	* Dice si un nombre de usuario existe o no en la lista de usuarios del sistema.
 	* @parameter user. Nombre de usuario que se quiere verificar.
@@ -85,14 +85,14 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 		}
 		return 0;
 	}
-	  
+	
 	/** 
 	* Si el usuario es válido retorna un vector de strings representando todos los mails que pertenecen al usuario.
 	* @param username. Nombre de usuario del sujeto.
 	* @param password. Contraseña del sujeto.
 	* @return String[]. Array de strings conteniendo cada posicion una representacion de mail.
 	*/
-	public java.lang.String[] getMails(String username, String password) throws java.rmi.RemoteException{
+	public java.lang.String[] getMails(String username, String password){
 		try {
 			if (this.validUser(username, password) == 1)
 				return service.getMails (new Auth(username, password));
@@ -111,8 +111,8 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	* @param text. Texto del mensaje.
 	* @param status. Estado del mensaje.
 	* @return int. -1 si es un usuario invalido, 0 si no se encontro el mail y 1 si la operacion se completo con exito.
-	*/
-	public int saveMail(String username, String password, String from, String subject, String text, String status) throws java.rmi.RemoteException{
+	*/  
+	public int saveMail(String username, String password, String from, String subject, String text, String status){
 		try {
 			if (this.validUser (username, password) == 1)
 				return service.saveMail (new Auth(username, password), new Mail (from, username, subject, text, status));
@@ -131,8 +131,8 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	* @param text. Texto del mensaje.
 	* @param status. Estado del mensaje.
 	* @return int. -1 si es un usuario invalido, 0 si no se encontro el mail y 1 si la operacion se completo con exito.
-	*/
-	public int deleteMail(String username, String password, String from, String subject, String text, String status) throws java.rmi.RemoteException{
+	*/  
+	public int deleteMail(String username, String password, String from, String subject, String text, String status){
 		try {
 			if (this.validUser (username, password) == 1)
 				return service.deleteMail (new Auth(username, password), new Mail (from, username, subject, text, status));

@@ -95,7 +95,12 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 	}	  
 	
 	public String[] getUsersForProject(String project){
-		return null;
+		try {
+			return proxy.getUsersForProject(project);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	 
 }

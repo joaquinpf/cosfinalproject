@@ -11,17 +11,19 @@
 
 package ar.com.cosgui.guielements;
 
+import java.awt.Component;
 import java.rmi.RemoteException;
 
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
+import javax.swing.JInternalFrame;
 
 /**
  * Permite agregar un contacto a la lista del chat del usuario.
  * @author Marcos Steimbach.
  */
-public class AddContact extends javax.swing.JFrame {
+public class AddContact extends JInternalFrame {
 
 	/** Referencia a la implementacion del servicio.*/
 	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
@@ -32,10 +34,16 @@ public class AddContact extends javax.swing.JFrame {
     /** Creates new form AddContact 
 	* @param username. Nombre del usuario que inicio sesion.
 	*/
-    public AddContact(String username) {
+    public AddContact(String username, Component parent) {
         initComponents();
         this.lblInvalidUser.setVisible(false);
         this.username = username;
+        GuiUtils.centerOnParent(this, parent);
+        this.toFront();
+        this.setLayer(2);
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setTitle("Add contact");
     }
 
     /** This method is called from within the constructor to
@@ -54,7 +62,7 @@ public class AddContact extends javax.swing.JFrame {
         cmdAddContact = new javax.swing.JButton();
         cmdCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("Add new contact");
@@ -120,7 +128,7 @@ public class AddContact extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdAddContact)
                     .addComponent(cmdCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();

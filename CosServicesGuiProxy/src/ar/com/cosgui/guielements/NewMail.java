@@ -6,18 +6,17 @@
 
 package ar.com.cosgui.guielements;
 
-import java.rmi.RemoteException;
-
 import ar.com.cosgui.datamodel.Mail;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
+import javax.swing.JInternalFrame;
 
 /**
  *
  * @author  Administrador
  */
-public class NewMail extends javax.swing.JFrame {
+public class NewMail extends JInternalFrame {
 	private String username = null;
 	private String password = null;
 	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
@@ -25,13 +24,32 @@ public class NewMail extends javax.swing.JFrame {
     /** Creates new form NewMail */
     public NewMail() {
         initComponents();
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setLayer(0);
     }
-
+    
+    public NewMail (String username, String password, String subject, String to, String text) {
+        this.username = username;
+        this.password = password;
+        initComponents();
+        this.txtFrom.setText(this.username);
+        this.txtTo.setText(to);
+        this.txtSubject.setText(subject);
+        this.txtText.setText(text);
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setLayer(0);
+    }
+    
     public NewMail (String username, String password) {
         this.username = username;
         this.password = password;
         initComponents();
         this.txtFrom.setText(this.username);
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setLayer(0);
     }
 
     /** This method is called from within the constructor to
@@ -57,11 +75,6 @@ public class NewMail extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mail System - New mail    *C.O.S. 2008*");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14));
         jLabel1.setText("New mail");
@@ -157,13 +170,12 @@ public class NewMail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSendActionPerformed
-        Mail mail = new Mail(this.txtFrom.getText(), this.txtTo.getText(), this.txtSubject.getText(), this.txtText.getText(), "new");
-        try {
-			service.sendMail(this.username, this.password, this.txtTo.getText(), this.txtSubject.getText(), this.txtText.getText());
-			//mostrar que el mensaje se envio correctamente.
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+    	String[] to = this.txtTo.getText().split(",");
+    	for(int i=0; i<to.length; i++){
+    		Mail mail = new Mail(this.txtFrom.getText(), to[i], this.txtSubject.getText(), this.txtText.getText(), "new");
+    		service.sendMail(this.username, this.password, to[i], this.txtSubject.getText(), this.txtText.getText());
+    		//TODO mostrar que el mensaje se envio correctamente.
+    	}
         this.dispose();
     }//GEN-LAST:event_cmdSendActionPerformed
 
@@ -175,16 +187,6 @@ public class NewMail extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
     
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewMail().setVisible(true);
-            }
-        });
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdCancel;

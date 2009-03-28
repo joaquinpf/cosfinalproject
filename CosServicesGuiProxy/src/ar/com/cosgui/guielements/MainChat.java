@@ -11,12 +11,15 @@
 
 package ar.com.cosgui.guielements;
 
+import java.awt.Component;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.Vector;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JDesktopPane;
 
 import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.datamodel.TextMessage;
@@ -48,20 +51,23 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
 	/** Dice si el thread reader debe permanecer activo o no. */
     private int activeThread = 1;
-
+    private TaskBarDesktopPane parent = null;
 
     /** Creates new form MainChat 
 	* @param username. Nombre del usuario que inicia la sesion
 	* @param password. Contraseña del usuario que inicia la sesion
 	*/
-    public MainChat(String username, String password) {
+    public MainChat(String username, String password, TaskBarDesktopPane parent) {
         initComponents();
+        this.parent = parent;
         this.lblUsername.setText(username);
         refreshContactsStatus();
         this.reader = new Thread (this);
 		service.login(username, password);
         reader.start();
+        this.setTitle("Chat window");
         this.setVisible(true);
+        this.setIconifiable(true);
     }
 
 	/** Actualiza las listas de estado de los contactos. */
@@ -87,13 +93,17 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private void printMessage (String message, String usernameSrc, String usernameDst) {
         if ((message != null) && (usernameSrc != null) && (usernameDst != null)) {
       		if (!windows.containsKey(usernameSrc)) {
-      			ActiveChat chat = new ActiveChat (this.username, usernameSrc);
+                ActiveChat chat = new ActiveChat(this.username, (String) this.listOnlineUsers.getSelectedValue(), this.parent);
 	            windows.put(usernameSrc, chat);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
 	            chat.setVisible(true);
 	            chat.printMessage(message, usernameSrc, usernameDst);
         	}
         	else {
         		ActiveChat chat = windows.get(usernameSrc);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
         		chat.setVisible(true);
         		chat.printMessage(message, usernameSrc, usernameDst);
         	}
@@ -143,6 +153,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         listOfflineUsers = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
 
+        setRequestFocusEnabled(false);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -174,6 +185,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
         });
 
+        listOnlineUsers.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         listOnlineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         listOnlineUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listOnlineUsers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,6 +195,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         });
         jScrollPane1.setViewportView(listOnlineUsers);
 
+        listOfflineUsers.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         listOfflineUsers.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         listOfflineUsers.setForeground(new java.awt.Color(204, 0, 0));
         listOfflineUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -231,7 +244,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
                         .addComponent(jLabel1))
                     .addComponent(cmdAddContact))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
@@ -244,7 +257,9 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
 	/** Abre el formulario para agregar un contacto. */
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
-    	AddContact ac = new AddContact(this.username);
+    	AddContact ac = new AddContact(this.username,this.parent);
+	    this.parent.add(ac);
+  	    this.parent.setSelectedFrame(ac);
     	ac.setVisible(true);
     }//GEN-LAST:event_cmdAddContactActionPerformed
 
@@ -252,13 +267,17 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private void listOnlineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOnlineUsersMouseClicked
         if (this.listOnlineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOnlineUsers.getSelectedValue())) {
-                ActiveChat chat = new ActiveChat(this.username, (String) this.listOnlineUsers.getSelectedValue());
+                ActiveChat chat = new ActiveChat(this.username, (String) this.listOnlineUsers.getSelectedValue(), this.parent);
                 windows.put((String) this.listOnlineUsers.getSelectedValue(), chat);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
                 chat.setVisible(true);
             } 
 			else {
 	            ActiveChat chat = windows.get((String) this.listOnlineUsers.getSelectedValue());
                 windows.put((String) this.listOnlineUsers.getSelectedValue(), chat);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
 	            chat.setVisible(true);
             }
 }//GEN-LAST:event_listOnlineUsersMouseClicked
@@ -267,20 +286,25 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private void listOfflineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOfflineUsersMouseClicked
         if (this.listOfflineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOfflineUsers.getSelectedValue())) {
-                ActiveChat chat = new ActiveChat(this.username, (String) this.listOfflineUsers.getSelectedValue());
+                ActiveChat chat = new ActiveChat(this.username, (String) this.listOnlineUsers.getSelectedValue(), this.parent);
                 windows.put((String) this.listOfflineUsers.getSelectedValue(), chat);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
                 chat.setVisible(true);
             } 
 			else {
 	            ActiveChat chat = windows.get((String) this.listOfflineUsers.getSelectedValue());
                 windows.put((String) this.listOfflineUsers.getSelectedValue(), chat);
+      	    	this.parent.add(chat);
+      	    	this.parent.setSelectedFrame(chat);
 	            chat.setVisible(true);
             }
 }//GEN-LAST:event_listOfflineUsersMouseClicked
 
 	/** Deslogea al usuario actual y mata el thread de lectura de mensajes */
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        service.logout(username, password);
+        //TODO MIRAME
+    	service.logout(username, password);
         this.activeThread = 0;
         reader.notify();
     }//GEN-LAST:event_formInternalFrameClosing
@@ -341,8 +365,10 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     	if(projects != null){
     		for(int i=0;i<projects.length;i++){
     			String[] users = project.getUsersForProject(projects[i]);
-    			for(int j=0;j<users.length;j++){
-    				service.addContact(DataModel.INSTANCE.getActiveUser(), users[i]);
+    			if(users != null){
+    				for(int j=0;j<users.length;j++){
+    					service.addContact(DataModel.INSTANCE.getActiveUser(), users[j]);
+    				}
     			}
     		}
     	}
