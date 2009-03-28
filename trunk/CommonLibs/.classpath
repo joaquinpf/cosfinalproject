@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="aopalliance.jar"/>
-	<classpathentry kind="lib" path="axis.jar"/>
-	<classpathentry kind="lib" path="commons-beanutils-bean-collections.jar"/>
-	<classpathentry kind="lib" path="commons-beanutils-core.jar"/>
-	<classpathentry kind="lib" path="commons-beanutils.jar"/>
-	<classpathentry kind="lib" path="commons-discovery.jar"/>
-	<classpathentry kind="lib" path="commons-jci-core-1.0.jar"/>
-	<classpathentry kind="lib" path="commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="commons-logging-adapters-1.1.1.jar"/>
-	<classpathentry kind="lib" path="commons-logging-api-1.1.1.jar"/>
-	<classpathentry kind="lib" path="jaxrpc.jar"/>
-	<classpathentry kind="lib" path="soap.jar"/>
-	<classpathentry kind="lib" path="spring-aop.jar"/>
-	<classpathentry kind="lib" path="spring-beans.jar"/>
-	<classpathentry kind="lib" path="spring-context-support.jar"/>
-	<classpathentry kind="lib" path="spring-context.jar"/>
-	<classpathentry kind="lib" path="spring-core.jar"/>
-	<classpathentry kind="lib" path="spring-web.jar"/>
-	<classpathentry kind="lib" path="wsdl4j.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
+	<classpathentry kind="lib" path="lib/axis.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-bean-collections.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils-core.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-discovery.jar"/>
+	<classpathentry kind="lib" path="lib/commons-jci-core-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-adapters-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxrpc.jar"/>
+	<classpathentry kind="lib" path="lib/soap.jar"/>
+	<classpathentry kind="lib" path="lib/spring-aop.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-support.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core.jar"/>
+	<classpathentry kind="lib" path="lib/spring-web.jar"/>
+	<classpathentry kind="lib" path="lib/wsdl4j.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
