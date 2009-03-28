@@ -26,20 +26,34 @@ import ar.com.cosgui.services.imp.ChatServiceLocalImp;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
- *
- * @author Administrator
+ * Vista principal del mail (ventana de contactos).
+ * @author Marcos Steimbach.
  */
 public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
+	/** Contiene las ventanas activas de chat del usuario. */
     private Hashtable<String, ActiveChat> windows = new Hashtable <String, ActiveChat>();
+
+	/** Referencia a la implementacion del servicio.*/
     private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+
+	/** Nombre del usuario que ha iniciado la sesion. */
     private String username = DataModel.INSTANCE.getActiveUser();
+
+	/** Contraseña del usuario que ha iniciado la sesion.*/
 	private String password = DataModel.INSTANCE.getActiveUserPass();
+	
+	/** Se encarga de verificar la llegada de mensajes destinados al usuario y el estado de los contactos. */
     private Thread reader = null;
+
+	/** Dice si el thread reader debe permanecer activo o no. */
     private int activeThread = 1;
 
 
-    /** Creates new form MainChat */
+    /** Creates new form MainChat 
+	* @param username. Nombre del usuario que inicia la sesion
+	* @param password. Contraseña del usuario que inicia la sesion
+	*/
     public MainChat(String username, String password) {
         initComponents();
         this.lblUsername.setText(username);
@@ -50,6 +64,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         this.setVisible(true);
     }
 
+	/** Actualiza las listas de estado de los contactos. */
     public void refreshContactsStatus() {
     	String[] contacts = null;
     	Vector<String> contactsOnline = new Vector<String> ();
@@ -68,6 +83,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 		}
     }
 
+	/** Se encarga de obtener o crear la ventana de chat correspondiente y enviarle el mensaje recibido para que ésta lo muestre */
     private void printMessage (String message, String usernameSrc, String usernameDst) {
         if ((message != null) && (usernameSrc != null) && (usernameDst != null)) {
       		if (!windows.containsKey(usernameSrc)) {
@@ -84,6 +100,10 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         }
     }
 
+	/** Decodifica un mensaje de texto enviado como una cadena de caracteres.
+	* @param messageString. String que representa un mensaje de texto.
+	* @return TextMessage. Mensaje de texto formado por los valores de los campos especificados en messageString.
+	*/
     private TextMessage getTextMessageFromString(String messageString) {
     	TextMessage textMessage = new TextMessage();
     	char[] texto = messageString.toCharArray();
@@ -222,11 +242,13 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	/** Abre el formulario para agregar un contacto. */
     private void cmdAddContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAddContactActionPerformed
     	AddContact ac = new AddContact(this.username);
     	ac.setVisible(true);
     }//GEN-LAST:event_cmdAddContactActionPerformed
 
+	/** Abre una conversacion con el usuario que ha sido seleccionado de la lista de conectados. */
     private void listOnlineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOnlineUsersMouseClicked
         if (this.listOnlineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOnlineUsers.getSelectedValue())) {
@@ -241,6 +263,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
 }//GEN-LAST:event_listOnlineUsersMouseClicked
 
+	/** Abre una conversacion con el usuario que ha sido seleccionado de la lista de desconectados. */
     private void listOfflineUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listOfflineUsersMouseClicked
         if (this.listOfflineUsers.getSelectedValue() != null)
             if (!windows.containsKey(this.listOfflineUsers.getSelectedValue())) {
@@ -255,6 +278,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
             }
 }//GEN-LAST:event_listOfflineUsersMouseClicked
 
+	/** Deslogea al usuario actual y mata el thread de lectura de mensajes */
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         service.logout(username, password);
         this.activeThread = 0;
@@ -273,6 +297,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private javax.swing.JList listOnlineUsers;
     // End of variables declaration//GEN-END:variables
 
+	/** Thread que lee los mensajes destinados al usuario y actualiza la lista de contactos y el estado de los mismos. */
     public void run() {
     	String[] msgs = null;
     	int refresh = 0;
@@ -299,6 +324,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     	}
     }
 
+	/** Elimina los contactos que posee el usuario en el chat. */
     private void cleanContacts() {
     	String[] contacts = service.getContacts(DataModel.INSTANCE.getActiveUser());
 		if(contacts != null){
@@ -308,6 +334,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 		}
 	}
 
+	/** Carga los contactos del usuario pertenecientes a los proyectos a los cuales esta suscripto. */
 	private void refreshContact() {
     	ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	String[] projects = project.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());

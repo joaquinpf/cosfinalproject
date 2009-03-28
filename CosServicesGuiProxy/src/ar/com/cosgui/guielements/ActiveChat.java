@@ -18,15 +18,23 @@ import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
 /**
- *
- * @author Administrator
+ * Ventana que contiene un chat activo entre dos usuarios.
+ * @author Marcos Steimbach
  */
 public class ActiveChat extends javax.swing.JFrame {
+	/** Referencia a la implementacion del servicio.*/
 	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+
+	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;
+
+	/** Nombre del contacto con el cual se mantiene la conversacion */
     private String contactName = null;
 
-    /** Creates new form ActiveChat */
+    /** Creates new form ActiveChat 
+	* @param username. Nombre del usuario que ha iniciado la sesion. 
+	* @param contactName. Nombre del contacto con el cual se mantiene la conversacion 
+	*/
     public ActiveChat(String username, String contactName) {
         initComponents();
         this.username = username;
@@ -123,6 +131,7 @@ public class ActiveChat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	/** Envia al contacto el mensaje excrito. */
     private void cmdSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSendActionPerformed
     	this.service.sendMessage(this.txtSendText.getText(), this.username, this.contactName);
 		this.printMessage(this.txtSendText.getText(), this.username, this.contactName);
@@ -130,10 +139,16 @@ public class ActiveChat extends javax.swing.JFrame {
 		this.txtSendText.transferFocus();
 }//GEN-LAST:event_cmdSendActionPerformed
 
+	/** Cierra la ventana de chat. */
     private void cmdCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCloseActionPerformed
     	this.dispose();
 }//GEN-LAST:event_cmdCloseActionPerformed
 
+	/** Muestra un mensaje en la pantalla. 
+	* @param message. Mensaje a mostrar.
+	* @param usernameSrc. Usuario que envia el mensaje.
+	* @param usernameDst. Usuario al que va dirigido el mensaje.
+	*/
     public void printMessage (String message, String usernameSrc, String usernameDst) {
         if ((message != null) && (usernameSrc != null) && (usernameDst != null))
         	this.txtChatText.setText(this.txtChatText.getText() + "\n" + usernameSrc + " to " + usernameDst + ": " + message);
