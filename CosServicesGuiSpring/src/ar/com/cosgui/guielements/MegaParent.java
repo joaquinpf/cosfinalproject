@@ -22,6 +22,12 @@ public class MegaParent {
 		initMockDatabase();
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+            	IChatServiceLocalImp chat = (IChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+            	chat.logout(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
+            }
+        });
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setSize(screenSize.width,screenSize.height-20);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
