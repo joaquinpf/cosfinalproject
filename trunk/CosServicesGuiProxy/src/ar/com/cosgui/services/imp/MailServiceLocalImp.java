@@ -2,7 +2,7 @@ package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
 
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IMailServiceLocalImp;
 import wsmail.MailServiceProxy;
 import wsmail.Auth;
 import wsmail.Mail;
@@ -11,7 +11,7 @@ import wsmail.Mail;
 *@Author Marcos Steimbach.
 *Esta clase es la encargada de abstraer a la aplicacion de la implementacion en si del servicio de mail.
 */
-public class MailServiceLocalImp implements IServiceLocalImp {
+public class MailServiceLocalImp implements IMailServiceLocalImp {
 	/** Conexion al servicio de mail */
 	private MailServiceProxy service = new MailServiceProxy();
 
@@ -77,7 +77,7 @@ public class MailServiceLocalImp implements IServiceLocalImp {
 	* @parameter user. Nombre de usuario que se quiere verificar.
 	* @return int. 0 si el nombre de usuario no existe, de lo contrario 1.
 	*/
-	public int validUserName(String user) throws java.rmi.RemoteException{
+	public int validUserName(String user){
 		try {
 			return service.validUserName (user);
 		} catch (RemoteException e) {

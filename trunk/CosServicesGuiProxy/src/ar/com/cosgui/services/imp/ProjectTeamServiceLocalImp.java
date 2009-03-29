@@ -5,13 +5,13 @@ import java.rmi.RemoteException;
 import wsprojectteam.Auth;
 import wsprojectteam.ProjectTeamServiceProxy;
 
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 
 /**
  * Implementacion via Proxys del servicio ProjectTeamService.
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
+public class ProjectTeamServiceLocalImp implements IProjectTeamServiceLocalImp {
 
 	ProjectTeamServiceProxy proxy = new ProjectTeamServiceProxy();
 

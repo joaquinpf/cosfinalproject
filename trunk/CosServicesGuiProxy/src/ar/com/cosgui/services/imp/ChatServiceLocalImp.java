@@ -2,7 +2,7 @@ package ar.com.cosgui.services.imp;
 
 import java.rmi.RemoteException;
 
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IChatServiceLocalImp;
 import wschat.Auth;
 import wschat.ChatServiceProxy;
 import wschat.TextMessage;
@@ -11,7 +11,7 @@ import wschat.TextMessage;
 *@Author Marcos Steimbach.
 *Esta clase es la encargada de abstraer a la aplicacion de la implementacion en si del servicio de chat.
 */
-public class ChatServiceLocalImp implements IServiceLocalImp {
+public class ChatServiceLocalImp implements IChatServiceLocalImp {
 	/** Conexion al servicio de chat. */
 	private ChatServiceProxy service = new ChatServiceProxy();
 

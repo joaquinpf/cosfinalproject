@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import wsbugtracker.Auth;
 import ar.com.cosgui.datamodel.Bug;
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IBugTrackerServiceLocalImp;
 
 /**
  * Implementacion via Spring del servicio de Bug Tracking.
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class BugTrackerServiceLocalImp implements IServiceLocalImp {
+public class BugTrackerServiceLocalImp implements IBugTrackerServiceLocalImp {
 
 	private BugTrackerIF wsbugtracker = null;
 
@@ -67,7 +67,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 		}
 	}
 
-	public int[] getBugsByType(String type) throws RemoteException {
+	public int[] getBugsByType(String type) {
 		try {
 			return toIntArray(wsbugtracker.getBugsByType(type));
 		} catch (RemoteException e) {

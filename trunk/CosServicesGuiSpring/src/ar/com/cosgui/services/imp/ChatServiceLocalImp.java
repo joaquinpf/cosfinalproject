@@ -5,11 +5,10 @@ import java.util.ArrayList;
 
 import wschat.Auth;
 import wschat.TextMessage;
+import ar.com.cosgui.services.IChatServiceLocalImp;
 
-import ar.com.cosgui.services.IServiceLocalImp;
 
-
-public class ChatServiceLocalImp implements IServiceLocalImp {
+public class ChatServiceLocalImp implements IChatServiceLocalImp {
 	private ChatIF service = null;
 
 	public ChatIF getService() {

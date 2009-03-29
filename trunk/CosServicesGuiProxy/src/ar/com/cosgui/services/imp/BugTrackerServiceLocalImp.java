@@ -5,13 +5,13 @@ import java.rmi.RemoteException;
 import wsbugtracker.Auth;
 import wsbugtracker.BugTrackerServiceProxy;
 import ar.com.cosgui.datamodel.Bug;
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IBugTrackerServiceLocalImp;
 
 /**
  * Implementacion via Proxys del servicio de Bug Tracking.
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class BugTrackerServiceLocalImp implements IServiceLocalImp {
+public class BugTrackerServiceLocalImp implements IBugTrackerServiceLocalImp {
 
 	/**
 	 * Proxy del servicio
@@ -62,7 +62,7 @@ public class BugTrackerServiceLocalImp implements IServiceLocalImp {
 		}
 	}
 
-	public int[] getBugsByType(String type) throws RemoteException {
+	public int[] getBugsByType(String type) {
 		try {
 			return proxy.getBugsByType(type);
 		} catch (RemoteException e) {

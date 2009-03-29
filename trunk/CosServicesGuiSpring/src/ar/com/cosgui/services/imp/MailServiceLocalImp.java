@@ -5,10 +5,9 @@ import java.util.ArrayList;
 
 import wsmail.Auth;
 import wsmail.Mail;
+import ar.com.cosgui.services.IMailServiceLocalImp;
 
-import ar.com.cosgui.services.IServiceLocalImp;
-
-public class MailServiceLocalImp implements IServiceLocalImp {
+public class MailServiceLocalImp implements IMailServiceLocalImp {
 	private MailIF service = null;
 
 	public MailIF getService() {

@@ -13,16 +13,14 @@ package ar.com.cosgui.guielements;
 
 import java.awt.Component;
 
-import javax.xml.crypto.Data;
-
 import ar.com.cosgui.datamodel.Bug;
 import ar.com.cosgui.datamodel.DataModel;
-import ar.com.cosgui.datamodel.Mail;
 import ar.com.cosgui.datamodel.Notificator;
+import ar.com.cosgui.services.IBugTrackerServiceLocalImp;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
-import ar.com.cosgui.services.imp.MailServiceLocalImp;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
 
 /**
@@ -152,7 +150,7 @@ public class SubmitBugForm extends javax.swing.JInternalFrame {
      * Inicializa los proyectos, sincronizando con ServicePoint
      */
     private void initProjects() {
-        ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        IProjectTeamServiceLocalImp proj = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] projects = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
         if(projects != null){
         	for(int i=0;i<projects.length;i++){
@@ -166,7 +164,7 @@ public class SubmitBugForm extends javax.swing.JInternalFrame {
      * @param evt
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+    	IBugTrackerServiceLocalImp bug = (IBugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
     	Bug b = bug.submitBug(jTextField1.getText(),jTextField2.getText(),(String)jComboBox1.getSelectedItem(),
     			DataModel.INSTANCE.getActiveUser());
     	if(b != null){

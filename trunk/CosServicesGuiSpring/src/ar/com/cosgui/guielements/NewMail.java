@@ -7,6 +7,7 @@
 package ar.com.cosgui.guielements;
 
 import ar.com.cosgui.datamodel.Mail;
+import ar.com.cosgui.services.IMailServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
@@ -19,14 +20,14 @@ import javax.swing.JInternalFrame;
 public class NewMail extends JInternalFrame {
 	private String username = null;
 	private String password = null;
-	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+	private IMailServiceLocalImp service = (IMailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
     
     /** Creates new form NewMail */
     public NewMail() {
         initComponents();
         this.setClosable(true);
         this.setIconifiable(true);
-        this.setLayer(0);
+        this.setLayer(1);
     }
     
     public NewMail (String username, String password, String subject, String to, String text) {
@@ -39,7 +40,7 @@ public class NewMail extends JInternalFrame {
         this.txtText.setText(text);
         this.setClosable(true);
         this.setIconifiable(true);
-        this.setLayer(0);
+        this.setLayer(1);
     }
     
     public NewMail (String username, String password) {
@@ -49,7 +50,7 @@ public class NewMail extends JInternalFrame {
         this.txtFrom.setText(this.username);
         this.setClosable(true);
         this.setIconifiable(true);
-        this.setLayer(0);
+        this.setLayer(1);
     }
 
     /** This method is called from within the constructor to

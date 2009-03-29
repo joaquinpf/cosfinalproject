@@ -4,13 +4,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import wsprojectteam.Auth;
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 
 /**
  * Implementacion via Spring del servicio ProjectTeamService.
  * @author Joaquin Alejandro Perez Fuentes
  */
-public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
+public class ProjectTeamServiceLocalImp implements IProjectTeamServiceLocalImp {
 
 	private ProjectTeamIF proxy = null;
 	
@@ -119,7 +119,7 @@ public class ProjectTeamServiceLocalImp implements IServiceLocalImp {
 
 	public String[] getUsersForProject(String project){
 		try {
-			return toStringArray(proxy.getGroupsForProject(project));
+			return toStringArray(proxy.getUsersForProject(project));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

@@ -8,7 +8,6 @@ package ar.com.cosgui.guielements;
 
 import java.awt.Component;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
 /**
@@ -31,7 +30,7 @@ public class ViewMessage extends JInternalFrame {
 		this.txtText.setText(text);
 		this.txtTo.setText(to);
         GuiUtils.centerOnParent(this, parent);
-        this.setLayer(0);
+        this.setLayer(1);
         this.toFront();
         this.setClosable(true);
         this.setIconifiable(true);

@@ -12,8 +12,8 @@
 package ar.com.cosgui.guielements;
 
 import java.awt.Component;
-import java.rmi.RemoteException;
 
+import ar.com.cosgui.services.IChatServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
@@ -26,7 +26,7 @@ import javax.swing.JInternalFrame;
 public class AddContact extends JInternalFrame {
 
 	/** Referencia a la implementacion del servicio.*/
-	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+	private IChatServiceLocalImp service = (IChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 
 	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;
