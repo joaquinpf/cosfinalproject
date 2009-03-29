@@ -13,8 +13,8 @@ package ar.com.cosgui.guielements;
 
 //import ar.com.cosgui.datamodel.DataModel;
 import java.awt.Component;
-import java.rmi.RemoteException;
 
+import ar.com.cosgui.services.IChatServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
@@ -25,7 +25,7 @@ import javax.swing.JInternalFrame;
  */
 public class ActiveChat extends JInternalFrame {
 	/** Referencia a la implementacion del servicio.*/
-	private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+	private IChatServiceLocalImp service = (IChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 
 	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;
@@ -44,6 +44,7 @@ public class ActiveChat extends JInternalFrame {
         this.lblUsername.setText(contactName);
         GuiUtils.centerOnParent(this, parent);
         this.toFront();
+        this.setLayer(1);
         this.setClosable(true);
         this.setIconifiable(true);
         this.setTitle("Chat with: " + contactName);

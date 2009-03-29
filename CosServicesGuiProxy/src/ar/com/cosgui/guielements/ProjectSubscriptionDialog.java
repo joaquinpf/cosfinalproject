@@ -13,6 +13,7 @@
 package ar.com.cosgui.guielements;
 
 import ar.com.cosgui.datamodel.DataModel;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
@@ -42,7 +43,7 @@ public class ProjectSubscriptionDialog extends JInternalFrame {
      * Inicializa la lista de proyectos.
      */
     private void initProjects() {
-        ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        IProjectTeamServiceLocalImp proj = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] projects = proj.getProjects();
         if(projects!=null){
         	for(int i=0;i<projects.length;i++){
@@ -147,7 +148,7 @@ public class ProjectSubscriptionDialog extends JInternalFrame {
      * @param evt
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        IProjectTeamServiceLocalImp project = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         project.addMemberToProject((String)jComboBox2.getSelectedItem(), (String)jComboBox1.getSelectedItem(),
                 DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass(), "Member");
         this.setVisible(false);
@@ -159,7 +160,7 @@ public class ProjectSubscriptionDialog extends JInternalFrame {
      * @param evt
      */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+        IProjectTeamServiceLocalImp project = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
         String[] groups = project.getGroupsForProject((String) jComboBox1.getSelectedItem());
           
         jComboBox2.removeAllItems();

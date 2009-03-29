@@ -11,17 +11,11 @@
 
 package ar.com.cosgui.guielements;
 
-/**
- *
- * @author Administrator
- */
-import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.swing.JDesktopPane;
-
 import ar.com.cosgui.datamodel.Mail;
+import ar.com.cosgui.services.IMailServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.MailServiceLocalImp;
@@ -39,7 +33,7 @@ public class MailPanel extends javax.swing.JPanel {
 	private Vector<Mail> userSavedMails = new Vector<Mail>();
 	
 	/** Referencia a la implementacion del servicio.*/
-	private MailServiceLocalImp service = (MailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+	private IMailServiceLocalImp service = (IMailServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
 	
 	/** Nombre del usuario que ha iniciado la sesion. */
 	private String username = null;

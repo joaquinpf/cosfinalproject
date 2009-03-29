@@ -2,20 +2,13 @@ package ar.com.cosgui.guielements;
 
 
 
-import java.rmi.RemoteException;
-
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import org.jvnet.substance.SubstanceLookAndFeel;
 
-import wsbugtracker.Auth;
 import ar.com.cosgui.datamodel.DataModel;
-import ar.com.cosgui.services.IServiceLocalImp;
+import ar.com.cosgui.services.IMailServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
-import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
-import ar.com.cosgui.services.imp.ProjectTeamServiceLocalImp;
+import ar.com.cosgui.services.imp.MailServiceLocalImp;
 
 /*
  * To change this template, choose Tools | Templates
@@ -178,8 +171,14 @@ public class Login extends javax.swing.JFrame {
         ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE).addUser(jTextField2.getText(), jTextField3.getText());
         ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE).addUser(jTextField2.getText(), jTextField3.getText());
         ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE).addUser(jTextField2.getText(), jTextField3.getText());
-        ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE).addUser(jTextField2.getText(), jTextField3.getText());
+        int result = ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE).addUser(jTextField2.getText(), jTextField3.getText());
       
+        if(result == 1){
+        	IMailServiceLocalImp m = (IMailServiceLocalImp)ServicePoint.INSTANCE.getService(ServicesConstants.MAIL_SERVICE);
+        	m.sendMail("Admin", "admin", "jTextField2.getText()", "Welcome to SSBS", "Welcome to Simple Social Bugtracking System. To start debugging with us " +
+        			"please suscribe to at least a project. \nThank you\nAdmin");
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

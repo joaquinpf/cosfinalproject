@@ -11,18 +11,13 @@
 
 package ar.com.cosgui.guielements;
 
-import java.awt.Component;
-import java.rmi.RemoteException;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.JDesktopPane;
-
 import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.datamodel.TextMessage;
+import ar.com.cosgui.services.IChatServiceLocalImp;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.ChatServiceLocalImp;
@@ -38,7 +33,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
     private Hashtable<String, ActiveChat> windows = new Hashtable <String, ActiveChat>();
 
 	/** Referencia a la implementacion del servicio.*/
-    private ChatServiceLocalImp service = (ChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
+    private IChatServiceLocalImp service = (IChatServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.CHAT_SERVICE);
 
 	/** Nombre del usuario que ha iniciado la sesion. */
     private String username = DataModel.INSTANCE.getActiveUser();
@@ -66,6 +61,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 		service.login(username, password);
         reader.start();
         this.setTitle("Chat window");
+        this.setLayer(1);
         this.setVisible(true);
         this.setIconifiable(true);
     }
@@ -360,7 +356,7 @@ public class MainChat extends javax.swing.JInternalFrame implements Runnable {
 
 	/** Carga los contactos del usuario pertenecientes a los proyectos a los cuales esta suscripto. */
 	private void refreshContact() {
-    	ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+    	IProjectTeamServiceLocalImp project = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
     	String[] projects = project.getProjectsForUser(DataModel.INSTANCE.getActiveUser(), DataModel.INSTANCE.getActiveUserPass());
     	if(projects != null){
     		for(int i=0;i<projects.length;i++){

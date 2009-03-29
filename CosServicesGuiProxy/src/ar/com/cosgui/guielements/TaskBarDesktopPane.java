@@ -22,12 +22,15 @@ public class TaskBarDesktopPane extends JPanel
 	/** Creates a new instance of TaskBarDesktopPane */
 	public TaskBarDesktopPane() {
 		desktopPane = createDesktopPane();   
-		/*	JLabel label = new JLabel();
+		JLabel label = new JLabel();
 		ImageIcon icon = new ImageIcon("resources/SSBS.png");
 		label.setIcon(icon);
 		label.setVisible(true);
 		label.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
-		this.add(label);*/
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setSize(screenSize.width,screenSize.height-20);
+		GuiUtils.centerOnParent(label, this);
+		desktopPane.add(label);
 
 		taskBar = createTaskBar();
 		invisiblePanel = createInvisiblePanel();

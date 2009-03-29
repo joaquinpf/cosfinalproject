@@ -14,6 +14,8 @@ package ar.com.cosgui.guielements;
 import ar.com.cosgui.datamodel.Bug;
 import ar.com.cosgui.datamodel.DataModel;
 import ar.com.cosgui.datamodel.Notificator;
+import ar.com.cosgui.services.IBugTrackerServiceLocalImp;
+import ar.com.cosgui.services.IProjectTeamServiceLocalImp;
 import ar.com.cosgui.services.ServicePoint;
 import ar.com.cosgui.services.ServicesConstants;
 import ar.com.cosgui.services.imp.BugTrackerServiceLocalImp;
@@ -41,7 +43,6 @@ public class MainBugMailForm extends javax.swing.JInternalFrame implements Runna
     public MainBugMailForm(TaskBarDesktopPane parent) {
     	this.parent = parent;
         initComponents();
-        initMockDatabase();
         initTable();
         createPopupMenu();
         reader = new Thread(this);
@@ -51,6 +52,7 @@ public class MainBugMailForm extends javax.swing.JInternalFrame implements Runna
         this.setVisible(true);
         this.setIconifiable(true);
         this.setTitle("Main window");
+        this.setLayer(1);
       }
 
         /**
@@ -62,7 +64,7 @@ public class MainBugMailForm extends javax.swing.JInternalFrame implements Runna
 		close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String oldstatus = (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2);
-				BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+				IBugTrackerServiceLocalImp bug = (IBugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
                 Bug b = bug.changeBugStatus(Integer.parseInt((String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0)),"Closed");
                 if(b != null){
             		Notificator.notifyStatusChange(b, oldstatus);
@@ -74,10 +76,10 @@ public class MainBugMailForm extends javax.swing.JInternalFrame implements Runna
 		mail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int bug = Integer.parseInt((String)jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
-				BugTrackerServiceLocalImp bugtracker = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+				IBugTrackerServiceLocalImp bugtracker = (IBugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
                 Bug b = bugtracker.getBug(bug);
 
-                ProjectTeamServiceLocalImp project = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+                IProjectTeamServiceLocalImp project = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
                 String[] users = project.getUsersForProject(b.getProject());
                 String to = "";
                 if(users != null && users.length >= 1 ){
@@ -102,27 +104,12 @@ public class MainBugMailForm extends javax.swing.JInternalFrame implements Runna
 	}
 
     /**
-     * Genera datos para el testeo de los servicios.
-     */
-    private void initMockDatabase() {
-    	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
-    	proj.addProject("Proyecto final de COS", "Cos Project");
-    	proj.addGroupToProject("Developers", "Cos Project", "Developers");
-    	proj.addGroupToProject("Testers", "Cos Project", "Testers");
-    	proj.addGroupToProject("Management", "Cos Project", "Management");
-    	proj.addProject("Proyecto final de Grid", "Grid Project");
-    	proj.addGroupToProject("Developers", "Grid Project", "Developers");
-    	proj.addGroupToProject("Testers", "Grid Project", "Testers");
-    	proj.addGroupToProject("Management", "Grid Project", "Management");
-    }
-
-    /**
      * Inicializa la tabla con los bugs provistos por ServicePoint para los proyectos
      * a los que el usuario actual esta suscripto
      */
 	private void initTable(){
-    	ProjectTeamServiceLocalImp proj = (ProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
-    	BugTrackerServiceLocalImp bug = (BugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
+    	IProjectTeamServiceLocalImp proj = (IProjectTeamServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.PROJECT_TEAM_SERVICE);
+    	IBugTrackerServiceLocalImp bug = (IBugTrackerServiceLocalImp) ServicePoint.INSTANCE.getService(ServicesConstants.BUG_TRACKING_SERVICE);
 
     	String[] projs = proj.getProjectsForUser(DataModel.INSTANCE.getActiveUser(),DataModel.INSTANCE.getActiveUserPass());
     	ArrayList<Bug> bugs = new ArrayList<Bug>();
